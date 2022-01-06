@@ -1,0 +1,127 @@
+.sparrow-nft-view {
+    >.gnb {
+        background-color: @brand-primary;
+        height          : 52px;
+        font-size       : 18px;
+        display         : flex;
+        align-items     : center;
+
+        >.inner-gnb {
+            display    : flex;
+            align-items: center;
+            max-width  : 1240px;
+            width      : 100%;
+            margin     : auto;
+            text-align : left;
+        }
+    }
+
+    >h2 {
+        margin-top: 16px;
+        font-size : 24px;
+    }
+
+    >.outline {
+        min-width            : 100px;
+        font-family          : 'ChosunGs';
+        padding              : 15px 0;
+        margin-top           : 11px;
+        -webkit-border-radius: 2px;
+        border-radius        : 2px;
+        text-align           : center;
+        padding              : 16px;
+        margin-top           : 16px;
+        margin-left          : 8px;
+        background-color     : transparent;
+    }
+
+    >button {
+        min-width            : 100px;
+        font-family          : 'ChosunGs';
+        padding              : 15px 0;
+        margin-top           : 11px;
+        -webkit-border-radius: 2px;
+        border-radius        : 2px;
+        text-align           : center;
+        padding              : 16px;
+        margin-top           : 16px;
+        margin-left          : 8px;
+    }
+
+    >button:hover {
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    >.nft-list {
+        max-width            : 1240px;
+        margin-top           : 20px;
+        display              : grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        margin               : auto;
+
+        @media @phone {
+            grid-template-columns: 50% 50%;
+        }
+
+        >.nft {
+            margin-top : 16px;
+            padding    : 4px;
+            line-height: 1.2em;
+
+            >.content {
+                background   : #fff;
+                padding      : 10px;
+                border       : 1px solid #e4e8eb;
+                border-radius: 4px;
+                word-break   : break-all;
+
+                >h3 {
+                    font-size: 24px;
+                    padding  : 8px;
+                }
+
+                >img {
+                    display        : block;
+                    width          : 100%;
+                    margin-top     : 10px;
+                    margin-bottom  : 10px;
+                    object-fit     : contain;
+                    object-position: 50% 50%;
+                    cursor         : pointer;
+                }
+
+                >.info {
+                    display        : flex;
+                    justify-content: space-around;
+                    padding-top    : 16px;
+
+                    >.minter {
+                        font-size: 12px;
+                    }
+
+                    >.totalSupply {
+                        font-size: 12px;
+                    }
+                }
+
+                >.description {
+                    margin-top: 8px;
+                }
+
+                >.reupload {
+                    margin-top: 16px;
+                    text-align: center;
+
+                    >h6 {
+                        font-size    : 14px;
+                        margin-bottom: 3px;
+                    }
+                }
+            }
+
+            >.content:hover {
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+}

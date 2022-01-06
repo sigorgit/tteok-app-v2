@@ -1,0 +1,68 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IInjeolmiPool",
+  "sourceName": "contracts/interfaces/IInjeolmiPool.sol",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "swapToIJM",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "swapToKlay",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "SwapToIJM",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "SwapToKlay",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

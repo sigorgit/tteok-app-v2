@@ -2,6 +2,7 @@ import { DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
 import { View, ViewParams } from "skyrouter";
 import Layout from "./Layout";
+import ViewUtil from "./ViewUtil";
 
 export default class Home implements View {
 
@@ -32,7 +33,7 @@ export default class Home implements View {
                 el(".gnb",
                     el(".item-container",
                         el("a.item", "인절미"),
-                        el("a.item", "참새 NFT"),
+                        el("a.item", "참새 NFT", { click: () => { ViewUtil.go("sparrow-nft") } }),
                         el("a.item", "밈 NFT"),
                         el("a.item", "팬 게임"),
                         el("a.item", "클래식"),
