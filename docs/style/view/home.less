@@ -32,7 +32,7 @@
 
         >.banner-image {
             background-image   : url("/images/banner.jpg");
-            width              : 604px;
+            max-width          : 604px;
             height             : 132px;
             background-position: center;
             background-repeat  : no-repeat;
@@ -46,6 +46,10 @@
                 top       : 50%;
                 left      : 50%;
                 transform : translate(-220%, -50%);
+
+                @media @phone {
+                    display: none;
+                }
             }
 
             >h1 {
@@ -55,6 +59,10 @@
                 left      : 50%;
                 transform : translate(-50%, -50%);
                 font-size : 48px;
+
+                @media @phone {
+                    font-size: 32px;
+                }
             }
 
             >h2 {
@@ -64,6 +72,11 @@
                 left      : 50%;
                 transform : translate(-50%, -50%);
                 font-size : 20px;
+
+
+                @media @phone {
+                    font-size: 16px;
+                }
             }
         }
 
@@ -71,6 +84,10 @@
             width          : 100%;
             display        : flex;
             justify-content: space-around;
+
+            @media @phone {
+                flex-direction: column;
+            }
 
             >.left-container {
                 display       : flex;
