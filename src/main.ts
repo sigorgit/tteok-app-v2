@@ -2,6 +2,7 @@ import { SkyRouter } from "skyrouter";
 import Layout from "./view/Layout";
 import Wallet from "./klaytn/Wallet";
 import Home from "./view/Home";
+import Introduce from "./view/Introduce";
 import SparrowNFT from "./view/sparrowNFT/SparrowNFT";
 import AddSparrowNFT from "./view/sparrowNFT/AddSparrowNFT";
 
@@ -9,6 +10,8 @@ import AddSparrowNFT from "./view/sparrowNFT/AddSparrowNFT";
 
     SkyRouter.route("**", Layout);
     SkyRouter.route("", Home);
+
+    SkyRouter.route("introduce", Introduce);
 
     SkyRouter.route("sparrow-nft", SparrowNFT);
     SkyRouter.route("sparrow-nft/add", AddSparrowNFT);

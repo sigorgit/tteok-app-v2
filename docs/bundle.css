@@ -382,6 +382,64 @@ body {
 .home-view > section > .content-container > .right-container > .community > a:hover {
   color: #0000FF;
 }
+.introduce-view {
+  line-height: 1.5em;
+  background: url("/images/banner.jpg");
+}
+.introduce-view > .gnb {
+  background-color: #F7DEA5;
+  height: 52px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+.introduce-view > .gnb > .inner-gnb {
+  display: flex;
+  align-items: center;
+  max-width: 1240px;
+  width: 100%;
+  margin: auto;
+  text-align: left;
+}
+.introduce-view > section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.introduce-view > section > h2 {
+  font-size: 50px;
+  padding: 32px;
+}
+.introduce-view > section > h3 {
+  font-size: 48px;
+  padding-top: 64px;
+  padding-bottom: 32px;
+}
+.introduce-view > section .injeolmi:hover {
+  animation: rotate_image 3s linear infinite;
+  transform-origin: 50% 50%;
+}
+.introduce-view > section > button {
+  min-width: 100px;
+  font-family: 'ChosunGs';
+  display: block;
+  padding: 15px 0;
+  margin-top: 11px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  padding: 16px;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+.introduce-view > section > button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .sparrow-nft-view > .gnb {
   background-color: #F7DEA5;
   height: 52px;
