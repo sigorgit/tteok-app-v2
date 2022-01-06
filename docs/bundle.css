@@ -440,6 +440,75 @@ body {
     transform: rotate(360deg);
   }
 }
+.junior-view {
+  line-height: 1.5em;
+}
+.junior-view > .gnb {
+  height: 52px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  background-color: #F7DEA5;
+}
+.junior-view > .gnb > .inner-gnb {
+  display: flex;
+  align-items: center;
+  max-width: 1240px;
+  width: 100%;
+  margin: auto;
+  text-align: left;
+}
+.junior-view > section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.junior-view > section > h2 {
+  margin-top: 16px;
+  font-size: 24px;
+}
+.junior-view > section > .pangame-list {
+  max-width: 1240px;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: auto;
+}
+.junior-view > section > .pangame-list > a {
+  text-decoration: none;
+  color: black;
+}
+.junior-view > section > .pangame-list > a > .card {
+  margin-top: 16px;
+  padding: 4px;
+  line-height: 1.2em;
+}
+.junior-view > section > .pangame-list > a > .card > .content {
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #e4e8eb;
+  border-radius: 4px;
+  word-break: break-all;
+}
+.junior-view > section > .pangame-list > a > .card > .content > h3 {
+  font-size: 24px;
+  padding: 8px;
+}
+.junior-view > section > .pangame-list > a > .card > .content > img {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  object-fit: contain;
+  object-position: 50% 50%;
+  cursor: pointer;
+}
+.junior-view > section > .pangame-list > a > .card > .content > .description {
+  margin-top: 8px;
+}
+.junior-view > section > .pangame-list > a > .card > .content:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
 .sparrow-nft-view > .gnb {
   background-color: #F7DEA5;
   height: 52px;

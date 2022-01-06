@@ -35,7 +35,7 @@ export default class Home implements View {
                         el("a.item", "소개", { click: () => { ViewUtil.go("introduce") } }),
                         el("a.item", "참새 NFT", { click: () => { ViewUtil.go("sparrow-nft") } }),
                         el("a.item", "밈 NFT"),
-                        el("a.item", "팬 게임"),
+                        el("a.item", "쥬니어"),
                         el("a.item", "클래식"),
                     )
                 ),
