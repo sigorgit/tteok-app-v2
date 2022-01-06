@@ -11,7 +11,7 @@ export default class Junior implements View {
     private container: DomNode;
 
     constructor() {
-        Layout.current.title = "인절미 쥬니어";
+        Layout.current.title = "쥬니어";
         Layout.current.content.append(this.container = el(".junior-view",
             el(".gnb",
                 el(".inner-gnb",

@@ -1,0 +1,202 @@
+.classic-view {
+    background: url("/images/banner.jpg");
+
+    >section {
+        display       : flex;
+        flex-direction: column;
+        align-items   : center;
+        padding       : 20px;
+
+        >h1 {
+            font-size          : 6rem;
+            text-align         : center;
+            font-weight        : bold;
+            color              : @brand-primary;
+            -webkit-text-stroke: 0.2px @shadow;
+        }
+
+        >h2 {
+            font-size          : 4.125rem;
+            margin-top         : 48px;
+            text-align         : center;
+            font-weight        : bold;
+            color              : @brand-primary;
+            -webkit-text-stroke: 0.2px @shadow;
+        }
+
+        >h3 {
+            font-size          : 3rem;
+            margin-top         : 48px;
+            text-align         : center;
+            font-weight        : bold;
+            color              : @brand-secondary;
+            -webkit-text-stroke: 0.2px @shadow;
+        }
+
+        h4 {
+            margin-top : 16px;
+            font-size  : 2.125rem;
+            padding    : 0px;
+            text-align : center;
+            font-weight: bold;
+        }
+
+        h5 {
+            margin     : 24px;
+            font-size  : 1.5rem;
+            padding    : 0px;
+            text-align : center;
+            font-weight: bold;
+        }
+
+        h6 {
+            margin-bottom: 20px;
+            font-size    : 1.25rem;
+            padding      : 0px;
+            text-align   : center;
+            font-weight  : bold;
+        }
+
+        img {
+            display  : block;
+            margin   : auto;
+            max-width: 100%;
+        }
+
+        >p {
+            padding    : 20px 0;
+            text-align : center;
+            line-height: 1.5em;
+        }
+
+        .injeolmi:hover {
+            animation       : rotate_image 3s linear infinite;
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes rotate_image {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .links {
+            line-height: 1.5em;
+
+            .danger {
+                font-size: 0.875rem;
+                color    : @danger;
+            }
+        }
+
+        a:hover,
+        a:focus {
+            animation-duration       : 3s;
+            animation-name           : rainbowLink;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes rainbowLink {
+            0% {
+                color: red;
+            }
+
+            15% {
+                color: orange;
+            }
+
+            30% {
+                color: yellow;
+            }
+
+            45% {
+                color: green;
+            }
+
+            60% {
+                color: blue;
+            }
+
+            75% {
+                color: navy;
+            }
+
+            90% {
+                color: purple;
+            }
+
+            100% {
+                color: pink;
+            }
+        }
+
+        .card {
+            min-width       : 600px;
+            margin          : 16px;
+            padding         : 8px;
+            background-color: rgba(253, 218, 151, 0.5);
+            box-shadow      : 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition      : 0.3s;
+            color           : black;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .price:hover {
+            animation-duration       : 3s;
+            animation-name           : rainbowLink;
+            animation-iteration-count: infinite;
+        }
+
+        .form {
+
+            >input {
+                min-width       : 600px;
+                padding         : 4px;
+                width           : 100%;
+                height          : 48px;
+                font-size       : 14px;
+                background-color: @brand-primary;
+                ;
+                border-radius: 8px;
+                border       : 2px solid black;
+            }
+
+            >input:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            >button {
+                font-size       : 0.875rem;
+                width           : 100%;
+                margin-top      : 8px;
+                height          : 32px;
+                border          : 2px solid black;
+                background-color: @brand-secondary;
+                display         : flex;
+                justify-content : center;
+                text-align      : center;
+                align-items     : center;
+                padding         : 4px;
+                border-radius   : 8px;
+            }
+        }
+
+        .warning {
+            color: red;
+        }
+
+        .result {
+            font-size : 0.875rem;
+            margin-top: 8px;
+        }
+
+        .result:hover {
+            animation-duration       : 3s;
+            animation-name           : rainbowLink;
+            animation-iteration-count: infinite;
+        }
+    }
+}

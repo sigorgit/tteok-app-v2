@@ -509,6 +509,173 @@ body {
 .junior-view > section > .pangame-list > a > .card > .content:hover {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
+.classic-view {
+  background: url("/images/banner.jpg");
+}
+.classic-view > section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.classic-view > section > h1 {
+  font-size: 6rem;
+  text-align: center;
+  font-weight: bold;
+  color: #F7DEA5;
+  -webkit-text-stroke: 0.2px #1f1f1f;
+}
+.classic-view > section > h2 {
+  font-size: 4.125rem;
+  margin-top: 48px;
+  text-align: center;
+  font-weight: bold;
+  color: #F7DEA5;
+  -webkit-text-stroke: 0.2px #1f1f1f;
+}
+.classic-view > section > h3 {
+  font-size: 3rem;
+  margin-top: 48px;
+  text-align: center;
+  font-weight: bold;
+  color: #be9f64;
+  -webkit-text-stroke: 0.2px #1f1f1f;
+}
+.classic-view > section h4 {
+  margin-top: 16px;
+  font-size: 2.125rem;
+  padding: 0px;
+  text-align: center;
+  font-weight: bold;
+}
+.classic-view > section h5 {
+  margin: 24px;
+  font-size: 1.5rem;
+  padding: 0px;
+  text-align: center;
+  font-weight: bold;
+}
+.classic-view > section h6 {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  padding: 0px;
+  text-align: center;
+  font-weight: bold;
+}
+.classic-view > section img {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+.classic-view > section > p {
+  padding: 20px 0;
+  text-align: center;
+  line-height: 1.5em;
+}
+.classic-view > section .injeolmi:hover {
+  animation: rotate_image 3s linear infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.classic-view > section .links {
+  line-height: 1.5em;
+}
+.classic-view > section .links .danger {
+  font-size: 0.875rem;
+  color: #ff3b30;
+}
+.classic-view > section a:hover,
+.classic-view > section a:focus {
+  animation-duration: 3s;
+  animation-name: rainbowLink;
+  animation-iteration-count: infinite;
+}
+@keyframes rainbowLink {
+  0% {
+    color: red;
+  }
+  15% {
+    color: orange;
+  }
+  30% {
+    color: yellow;
+  }
+  45% {
+    color: green;
+  }
+  60% {
+    color: blue;
+  }
+  75% {
+    color: navy;
+  }
+  90% {
+    color: purple;
+  }
+  100% {
+    color: pink;
+  }
+}
+.classic-view > section .card {
+  min-width: 600px;
+  margin: 16px;
+  padding: 8px;
+  background-color: rgba(253, 218, 151, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  color: black;
+}
+.classic-view > section .card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.classic-view > section .price:hover {
+  animation-duration: 3s;
+  animation-name: rainbowLink;
+  animation-iteration-count: infinite;
+}
+.classic-view > section .form > input {
+  min-width: 600px;
+  padding: 4px;
+  width: 100%;
+  height: 48px;
+  font-size: 14px;
+  background-color: #F7DEA5;
+  border-radius: 8px;
+  border: 2px solid black;
+}
+.classic-view > section .form > input:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.classic-view > section .form > button {
+  font-size: 0.875rem;
+  width: 100%;
+  margin-top: 8px;
+  height: 32px;
+  border: 2px solid black;
+  background-color: #be9f64;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 4px;
+  border-radius: 8px;
+}
+.classic-view > section .warning {
+  color: red;
+}
+.classic-view > section .result {
+  font-size: 0.875rem;
+  margin-top: 8px;
+}
+.classic-view > section .result:hover {
+  animation-duration: 3s;
+  animation-name: rainbowLink;
+  animation-iteration-count: infinite;
+}
 .sparrow-nft-view > .gnb {
   background-color: #F7DEA5;
   height: 52px;
