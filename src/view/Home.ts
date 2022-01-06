@@ -1,6 +1,7 @@
 import { DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
 import { View, ViewParams } from "skyrouter";
+import Alert from "../component/dialogue/Alert";
 import Layout from "./Layout";
 import ViewUtil from "./ViewUtil";
 
@@ -34,7 +35,7 @@ export default class Home implements View {
                     el(".item-container",
                         el("a.item", "소개", { click: () => { ViewUtil.go("introduce") } }),
                         el("a.item", "참새 NFT", { click: () => { ViewUtil.go("sparrow-nft") } }),
-                        el("a.item", "밈 NFT"),
+                        el("a.item", "밈 NFT", { click: () => { new Alert("준비중", "아직 준비중이야"); }}),
                         el("a.item", "쥬니어", { click: () => { ViewUtil.go("junior") } }),
                         el("a.item", "클래식", { click: () => { ViewUtil.go("classic") } }),
                     )
