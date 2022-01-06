@@ -1,8 +1,10 @@
 import { SkyRouter } from "skyrouter";
+import Layout from "./view/Layout";
 import Home from "./view/Home";
 
 (async () => {
 
+    SkyRouter.route("**", Layout);
     SkyRouter.route("", Home);
 
     if (sessionStorage.__spa_path) {
