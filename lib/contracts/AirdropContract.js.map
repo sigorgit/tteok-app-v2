@@ -1,0 +1,1 @@
+{"version":3,"file":"AirdropContract.js","sourceRoot":"","sources":["../../src/contracts/AirdropContract.ts"],"names":[],"mappings":";;;;;AAAA,+GAA0F;AAC1F,0DAAkC;AAElC,MAAM,eAAgB,SAAQ,kBAAQ;IAElC;QACI,KAAK,CAAC,4CAA4C,EAAE,sBAAe,CAAC,GAAG,CAAC,CAAC;IAC7E,CAAC;CACJ;AAED,kBAAe,IAAI,eAAe,EAAE,CAAC"}

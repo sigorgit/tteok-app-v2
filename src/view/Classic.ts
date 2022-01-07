@@ -1,12 +1,10 @@
-import { DomNode, el } from "@hanul/skynode";
+import { BodyNode, DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
-import msg from "msg.js";
 import { View, ViewParams } from "skyrouter";
 import InjeolmiContract from "../contracts/InjeolmiContract";
 import InjeolmiPoolContract from "../contracts/InjeolmiPoolContract";
 import InjeolmiPriceContract from "../contracts/InjeolmiPriceContract";
 import Wallet from "../klaytn/Wallet";
-import Layout from "./Layout";
 
 export default class Classic implements View {
 
@@ -23,8 +21,7 @@ export default class Classic implements View {
     private sellResult: DomNode;
 
     constructor() {
-        Layout.current.title = "인절미 클래식";
-        Layout.current.content.append(this.container = el(".classic-view",
+        this.container = el(".classic-view",
             el("section",
                 el("h1", "떡방앗간.닷컴\n클래식"),
                 el("p", `한국인의 정과 훈훈한 인심. 따뜻한 코인 커뮤니티 떡방앗간 코인 이야기.\nhttp://tteok.org으로도 접속하실 수 있습니다.\n떡방앗간 회원들은 "참새"로 불리웁니다.`),
@@ -122,9 +119,7 @@ export default class Classic implements View {
                     el("img", { src: "/images/thankyou.gif", height: "107.5" })
                 ),
             ),
-        )
-        );
-
+        ).appendTo(BodyNode);
 
         this.refresh();
         this.interval = setInterval(() => this.refresh(), 2000);

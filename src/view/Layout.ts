@@ -12,7 +12,7 @@ export default class Layout implements View {
         BodyNode.append(
             (this.container = el(".layout",
                 el("main", (this.content = el(".content"))),
-                el("footer", el("", "ⓒ 영재와 떡방앗간 참새들"))
+                el("footer", el("", "ⓒ 떡방앗간 참새들"))
             ))
         );
     }

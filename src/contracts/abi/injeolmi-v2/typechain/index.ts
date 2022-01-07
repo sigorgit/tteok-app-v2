@@ -70,6 +70,7 @@ export type { KIP7Mintable } from "./KIP7Mintable";
 export type { KIP7Pausable } from "./KIP7Pausable";
 export type { KIP7Token } from "./KIP7Token";
 export type { KIP7TokenFull } from "./KIP7TokenFull";
+export type { YearendAirdrop } from "./YearendAirdrop";
 
 export { Ark__factory } from "./factories/Ark__factory";
 export { InitialSale__factory } from "./factories/InitialSale__factory";
@@ -140,3 +141,4 @@ export { KIP7Mintable__factory } from "./factories/KIP7Mintable__factory";
 export { KIP7Pausable__factory } from "./factories/KIP7Pausable__factory";
 export { KIP7Token__factory } from "./factories/KIP7Token__factory";
 export { KIP7TokenFull__factory } from "./factories/KIP7TokenFull__factory";
+export { YearendAirdrop__factory } from "./factories/YearendAirdrop__factory";

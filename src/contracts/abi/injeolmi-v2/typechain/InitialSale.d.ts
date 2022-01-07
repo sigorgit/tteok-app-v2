@@ -23,66 +23,96 @@ import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
 interface InitialSaleInterface extends ethers.utils.Interface {
   functions: {
-    "ijm()": FunctionFragment;
+    "setMax(uint256)": FunctionFragment;
+    "receiveNew()": FunctionFragment;
+    "total()": FunctionFragment;
     "withdrawIjm()": FunctionFragment;
+    "newIjm()": FunctionFragment;
+    "bought(address)": FunctionFragment;
+    "max()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "owner()": FunctionFragment;
     "isOwner()": FunctionFragment;
-    "setPrice(uint256)": FunctionFragment;
     "price()": FunctionFragment;
+    "limit()": FunctionFragment;
+    "setNewIjm(address)": FunctionFragment;
     "buy(uint256)": FunctionFragment;
     "withdrawKlay()": FunctionFragment;
+    "step()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "setStep(uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "ijm", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "setMax",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "receiveNew",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "total", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "withdrawIjm",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "newIjm", values?: undefined): string;
+  encodeFunctionData(functionFragment: "bought", values: [string]): string;
+  encodeFunctionData(functionFragment: "max", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "isOwner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "setPrice",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(functionFragment: "price", values?: undefined): string;
+  encodeFunctionData(functionFragment: "limit", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setNewIjm", values: [string]): string;
   encodeFunctionData(functionFragment: "buy", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "withdrawKlay",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "step", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "setStep",
+    values: [BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "ijm", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setMax", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "receiveNew", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "total", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "withdrawIjm",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "newIjm", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "bought", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "max", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isOwner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setPrice", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "price", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "limit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setNewIjm", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "buy", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "withdrawKlay",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "step", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setStep", data: BytesLike): Result;
 
   events: {
     "OwnershipTransferred(address,address)": EventFragment;
@@ -105,13 +135,42 @@ export class InitialSale extends Contract {
   interface: InitialSaleInterface;
 
   functions: {
-    ijm(overrides?: CallOverrides): Promise<[string]>;
+    setMax(
+      _max: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
-    "ijm()"(overrides?: CallOverrides): Promise<[string]>;
+    "setMax(uint256)"(
+      _max: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    receiveNew(overrides?: Overrides): Promise<ContractTransaction>;
+
+    "receiveNew()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+    total(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "total()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     withdrawIjm(overrides?: Overrides): Promise<ContractTransaction>;
 
     "withdrawIjm()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+    newIjm(overrides?: CallOverrides): Promise<[string]>;
+
+    "newIjm()"(overrides?: CallOverrides): Promise<[string]>;
+
+    bought(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "bought(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    max(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "max()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
 
@@ -125,19 +184,23 @@ export class InitialSale extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<[boolean]>;
 
-    setPrice(
-      _price: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "setPrice(uint256)"(
-      _price: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
     price(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "price()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    limit(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "limit()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    setNewIjm(
+      _newIjm: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "setNewIjm(address)"(
+      _newIjm: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     buy(
       amount: BigNumberish,
@@ -153,6 +216,10 @@ export class InitialSale extends Contract {
 
     "withdrawKlay()"(overrides?: Overrides): Promise<ContractTransaction>;
 
+    step(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "step()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides
@@ -162,15 +229,54 @@ export class InitialSale extends Contract {
       newOwner: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
+
+    setStep(
+      _step: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "setStep(uint256)"(
+      _step: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
   };
 
-  ijm(overrides?: CallOverrides): Promise<string>;
+  setMax(
+    _max: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-  "ijm()"(overrides?: CallOverrides): Promise<string>;
+  "setMax(uint256)"(
+    _max: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  receiveNew(overrides?: Overrides): Promise<ContractTransaction>;
+
+  "receiveNew()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+  total(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "total()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   withdrawIjm(overrides?: Overrides): Promise<ContractTransaction>;
 
   "withdrawIjm()"(overrides?: Overrides): Promise<ContractTransaction>;
+
+  newIjm(overrides?: CallOverrides): Promise<string>;
+
+  "newIjm()"(overrides?: CallOverrides): Promise<string>;
+
+  bought(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+  "bought(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  max(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "max()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
 
@@ -184,19 +290,23 @@ export class InitialSale extends Contract {
 
   "isOwner()"(overrides?: CallOverrides): Promise<boolean>;
 
-  setPrice(
-    _price: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "setPrice(uint256)"(
-    _price: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
   price(overrides?: CallOverrides): Promise<BigNumber>;
 
   "price()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  limit(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "limit()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  setNewIjm(
+    _newIjm: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "setNewIjm(address)"(
+    _newIjm: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
   buy(
     amount: BigNumberish,
@@ -212,6 +322,10 @@ export class InitialSale extends Contract {
 
   "withdrawKlay()"(overrides?: Overrides): Promise<ContractTransaction>;
 
+  step(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "step()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   transferOwnership(
     newOwner: string,
     overrides?: Overrides
@@ -222,14 +336,50 @@ export class InitialSale extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  callStatic: {
-    ijm(overrides?: CallOverrides): Promise<string>;
+  setStep(
+    _step: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
 
-    "ijm()"(overrides?: CallOverrides): Promise<string>;
+  "setStep(uint256)"(
+    _step: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  callStatic: {
+    setMax(_max: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    "setMax(uint256)"(
+      _max: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    receiveNew(overrides?: CallOverrides): Promise<void>;
+
+    "receiveNew()"(overrides?: CallOverrides): Promise<void>;
+
+    total(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "total()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawIjm(overrides?: CallOverrides): Promise<void>;
 
     "withdrawIjm()"(overrides?: CallOverrides): Promise<void>;
+
+    newIjm(overrides?: CallOverrides): Promise<string>;
+
+    "newIjm()"(overrides?: CallOverrides): Promise<string>;
+
+    bought(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "bought(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    max(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "max()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -243,16 +393,20 @@ export class InitialSale extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<boolean>;
 
-    setPrice(_price: BigNumberish, overrides?: CallOverrides): Promise<void>;
-
-    "setPrice(uint256)"(
-      _price: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     price(overrides?: CallOverrides): Promise<BigNumber>;
 
     "price()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    limit(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "limit()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setNewIjm(_newIjm: string, overrides?: CallOverrides): Promise<void>;
+
+    "setNewIjm(address)"(
+      _newIjm: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     buy(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
@@ -265,6 +419,10 @@ export class InitialSale extends Contract {
 
     "withdrawKlay()"(overrides?: CallOverrides): Promise<void>;
 
+    step(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "step()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: CallOverrides
@@ -272,6 +430,13 @@ export class InitialSale extends Contract {
 
     "transferOwnership(address)"(
       newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setStep(_step: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    "setStep(uint256)"(
+      _step: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -284,13 +449,39 @@ export class InitialSale extends Contract {
   };
 
   estimateGas: {
-    ijm(overrides?: CallOverrides): Promise<BigNumber>;
+    setMax(_max: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
 
-    "ijm()"(overrides?: CallOverrides): Promise<BigNumber>;
+    "setMax(uint256)"(
+      _max: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    receiveNew(overrides?: Overrides): Promise<BigNumber>;
+
+    "receiveNew()"(overrides?: Overrides): Promise<BigNumber>;
+
+    total(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "total()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdrawIjm(overrides?: Overrides): Promise<BigNumber>;
 
     "withdrawIjm()"(overrides?: Overrides): Promise<BigNumber>;
+
+    newIjm(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "newIjm()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    bought(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "bought(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    max(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "max()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(overrides?: Overrides): Promise<BigNumber>;
 
@@ -304,16 +495,20 @@ export class InitialSale extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    setPrice(_price: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
-
-    "setPrice(uint256)"(
-      _price: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
     price(overrides?: CallOverrides): Promise<BigNumber>;
 
     "price()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    limit(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "limit()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setNewIjm(_newIjm: string, overrides?: Overrides): Promise<BigNumber>;
+
+    "setNewIjm(address)"(
+      _newIjm: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
 
     buy(amount: BigNumberish, overrides?: PayableOverrides): Promise<BigNumber>;
 
@@ -326,6 +521,10 @@ export class InitialSale extends Contract {
 
     "withdrawKlay()"(overrides?: Overrides): Promise<BigNumber>;
 
+    step(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "step()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides
@@ -335,16 +534,55 @@ export class InitialSale extends Contract {
       newOwner: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
+
+    setStep(_step: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+
+    "setStep(uint256)"(
+      _step: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    ijm(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    setMax(
+      _max: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
-    "ijm()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    "setMax(uint256)"(
+      _max: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    receiveNew(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    "receiveNew()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    total(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "total()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     withdrawIjm(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     "withdrawIjm()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+
+    newIjm(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "newIjm()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    bought(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "bought(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    max(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "max()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>;
 
@@ -358,19 +596,23 @@ export class InitialSale extends Contract {
 
     "isOwner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    setPrice(
-      _price: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "setPrice(uint256)"(
-      _price: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
     price(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "price()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    limit(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "limit()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    setNewIjm(
+      _newIjm: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "setNewIjm(address)"(
+      _newIjm: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
 
     buy(
       amount: BigNumberish,
@@ -386,6 +628,10 @@ export class InitialSale extends Contract {
 
     "withdrawKlay()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
+    step(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "step()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides
@@ -393,6 +639,16 @@ export class InitialSale extends Contract {
 
     "transferOwnership(address)"(
       newOwner: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    setStep(
+      _step: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "setStep(uint256)"(
+      _step: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
   };

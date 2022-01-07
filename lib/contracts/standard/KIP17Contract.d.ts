@@ -1,0 +1,1 @@
+//# sourceMappingURL=KIP17Contract.d.ts.map

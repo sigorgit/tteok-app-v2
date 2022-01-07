@@ -10,7 +10,7 @@ import AddSparrowNFT from "./view/sparrowNFT/AddSparrowNFT";
 
 (async () => {
 
-    SkyRouter.route("**", Layout);
+    SkyRouter.route("**", Layout, ["classic"]);
     SkyRouter.route("", Home);
 
     SkyRouter.route("introduce", Introduce);
