@@ -164,6 +164,7 @@ export default class Home implements View {
                                 el("h3", "떡방앗간 커뮤니티"),
                                 el("a", "오카방\n(오픈 카카오톡 방)", { href: "https://open.kakao.com/o/g1nYzIHd", target: "_blank" }),
                                 el("a", "디스코드", { href: "https://discord.gg/YgdruRMFtJ", target: "_blank" }),
+                                el("a", "텔레그램", { href: "https://t.me/ricecakemill3", target: "_blank" }),
                                 el("a", "트위터", { href: "https://twitter.com/tteokmill", target: "_blank" }),
                                 el("a", "미디엄", { href: "https://medium.com/tteok", target: "_blank" }),
                                 el("a", "깃허브", { href: "https://github.com/tteokmill", target: "_blank" }),
