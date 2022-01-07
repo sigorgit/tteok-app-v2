@@ -415,16 +415,31 @@ body {
   width: 100%;
   margin: auto;
 }
-.home-view > section > .banner-image {
-  background-image: url("/images/banner.jpg");
-  max-width: 604px;
+.home-view > section > .top-banner {
+  display: flex;
+  justify-content: space-around;
+}
+.home-view > section > .top-banner > .banner-image0 {
+  background-image: url("/images/banner0.png");
+  max-width: 286px;
+  width: 100%;
   height: 132px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
 }
-.home-view > section > .banner-image > img {
+.home-view > section > .top-banner > .banner-image1 {
+  background-image: url("/images/banner1.jpg");
+  max-width: 604px;
+  width: 100%;
+  height: 132px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.home-view > section > .top-banner > .banner-image1 > img {
   width: 132px;
   text-align: center;
   position: absolute;
@@ -433,11 +448,11 @@ body {
   transform: translate(-220%, -50%);
 }
 @media only screen and (max-width: 719px) {
-  .home-view > section > .banner-image > img {
+  .home-view > section > .top-banner > .banner-image1 > img {
     display: none;
   }
 }
-.home-view > section > .banner-image > h1 {
+.home-view > section > .top-banner > .banner-image1 > h1 {
   text-align: center;
   position: absolute;
   top: 70%;
@@ -446,11 +461,11 @@ body {
   font-size: 48px;
 }
 @media only screen and (max-width: 719px) {
-  .home-view > section > .banner-image > h1 {
+  .home-view > section > .top-banner > .banner-image1 > h1 {
     font-size: 32px;
   }
 }
-.home-view > section > .banner-image > h2 {
+.home-view > section > .top-banner > .banner-image1 > h2 {
   text-align: center;
   position: absolute;
   top: 30%;
@@ -459,9 +474,20 @@ body {
   font-size: 20px;
 }
 @media only screen and (max-width: 719px) {
-  .home-view > section > .banner-image > h2 {
+  .home-view > section > .top-banner > .banner-image1 > h2 {
     font-size: 16px;
   }
+}
+.home-view > section > .top-banner > .banner-image2 {
+  background-image: url("/images/banner2.png");
+  max-width: 286px;
+  width: 100%;
+  height: 132px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  cursor: pointer;
 }
 .home-view > section > .content-container {
   width: 100%;
@@ -532,6 +558,9 @@ body {
 .home-view > section > .content-container > .left-container > .form .input-container > button:hover {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
+.home-view > section > .content-container > .left-container > .form .result {
+  margin-top: 8px;
+}
 .home-view > section > .content-container > .right-container {
   padding-left: 32px;
 }
@@ -594,7 +623,7 @@ body {
 }
 .introduce-view {
   line-height: 1.5em;
-  background: url("/images/banner.jpg");
+  background: url("/images/banner1.jpg");
 }
 .introduce-view > .gnb {
   background-color: #F7DEA5;
@@ -725,7 +754,7 @@ body {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 .classic-view {
-  background: url("/images/banner.jpg");
+  background: url("/images/banner1.jpg");
 }
 .classic-view > section {
   display: flex;
