@@ -1,7 +1,9 @@
 import { DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
 import { View, ViewParams } from "skyrouter";
+import CommonUtil from "../CommonUtil";
 import Alert from "../component/dialogue/Alert";
+import UserInfo from "../component/UserInfo";
 import ArkContract from "../contracts/ArkContract";
 import InitialSaleContract from "../contracts/InitialSaleContract";
 import YearendAirdropContract from "../contracts/YearendAirdropContract";
@@ -44,7 +46,7 @@ export default class Home implements View {
                         el("a.item", "소개", { click: () => { ViewUtil.go("introduce") } }),
                         el("a.item", "시고르", { click: () => { new Alert("준비중", "아직 페이지 준비중이야"); } }),
                         el("a.item", "참새 NFT", { click: () => { new Alert("준비중", "이것도 아직 페이지 준비중이야"); } }),
-                        el("a.item", "밈 NFT", { click: () => { new Alert("준비중", "이것조차 아직 페이지 준비중이야"); } }),
+                        el("a.item", "밈 NFT", { click: () => { ViewUtil.go("meme-nft") } }),
                         el("a.item", "쥬니어", { click: () => { ViewUtil.go("junior") } }),
                         el("a.item", "클래식", { click: () => { ViewUtil.go("classic") } }),
                     )
@@ -59,7 +61,7 @@ export default class Home implements View {
                                 ),
                                 el(".content",
                                     el("h3", "너의 인절미"),
-                                    el(".price", (this.balanceDisplay = el("span.price", "...")), " KLAY"),
+                                    el(".price", (this.balanceDisplay = el("span.price", "...")), " IJM"),
                                 ),
                             ),
                             el(".price-container",
@@ -129,9 +131,7 @@ export default class Home implements View {
                         el(".right-container",
                             el(".connect-wallet",
                                 el(".caption", "정과 훈훈한 인심의 세계로"),
-                                el("button", "지갑 연결", {
-                                    click: () => Wallet.connect(),
-                                }),
+                                new UserInfo()
                             ),
                             el(".banner",
                                 el("img", {
@@ -152,7 +152,12 @@ export default class Home implements View {
             )),
         );
 
-        this.load();
+        this.refresh();
+        this.interval = setInterval(() => this.refresh(), 2000);
+    }
+
+    private async refresh() {
+        this.load()
     }
 
     private async load() {

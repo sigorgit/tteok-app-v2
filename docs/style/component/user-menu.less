@@ -1,0 +1,58 @@
+.user-menu {
+
+    >.connect-wallet,
+    >.wallet-address {
+        width                : 100%;
+        background-color     : @brand-primary;
+        font-family          : 'ChosunGs';
+        display              : block;
+        padding              : 15px 0;
+        margin-top           : 11px;
+        -webkit-border-radius: 2px;
+        border-radius        : 2px;
+        text-align           : center;
+    }
+
+    >.connect-wallet,
+    >.wallet-address:hover {
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    >.wallet-address {
+        position: relative;
+        cursor  : pointer;
+
+        >ul {
+            position        : absolute;
+            left            : 0;
+            top             : 30px;
+            width           : 100px;
+            display         : none;
+            background-color: #222;
+            padding         : 10px 0;
+
+            >li {
+                >a {
+                    display   : block;
+                    text-align: center;
+                    padding   : 10px;
+                    color     : #fff;
+
+                    &:hover {
+                        color: @brand-primary
+                    }
+
+                    &:active {
+                        color: @brand-primary
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            >ul {
+                display: block;
+            }
+        }
+    }
+}

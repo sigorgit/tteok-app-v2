@@ -6,27 +6,27 @@ import SparrowNFTsContract from "../../contracts/SparrowNFTsContract";
 import Wallet from "../../klaytn/Wallet";
 import ViewUtil from "../ViewUtil";
 
-export default class SparrowNFT implements View {
+export default class MemeNFT implements View {
 
     private container: DomNode;
     private nftList: DomNode;
 
     constructor() {
-        Layout.current.title = "참새 NFT";
+        Layout.current.title = "밈 NFT";
         Layout.current.content.append(this.container = el(".sparrow-nft-view",
             el(".gnb",
                 el(".inner-gnb",
                     el("a", { click: () => ViewUtil.go("/") },
                         el("img", { src: "/images/injeolmi.png", height: "40px" })
                     ),
-                    el("h1", "참새 NFT"),
+                    el("h1", "밈 NFT"),
                 )
             ),
-            el("h2", "참새 NFT 목록"),
+            el("h2", "밈 NFT 목록"),
             el("button", "NFT 만들기", {
-                click: () => ViewUtil.go("/sparrow-nft/add")
+                click: () => ViewUtil.go("/meme-nft/add")
             }),
-            el("button.outline", "참새 NFT 주소", {
+            el("button.outline", "밈 NFT 주소", {
                 click: () => window.open("https://opensea.io/collection/sparrow-nfts")
             }),
             this.nftList = el("ul.nft-list"),

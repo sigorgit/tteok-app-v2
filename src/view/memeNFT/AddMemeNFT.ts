@@ -6,7 +6,7 @@ import SparrowNFTsContract from "../../contracts/SparrowNFTsContract";
 import Wallet from "../../klaytn/Wallet";
 import ViewUtil from "../ViewUtil";
 
-export default class AddSparrowNFT implements View {
+export default class AddMemeNFT implements View {
 
     private container: DomNode;
 

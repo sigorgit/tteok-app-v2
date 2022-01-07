@@ -5,8 +5,8 @@ import Home from "./view/Home";
 import Introduce from "./view/Introduce";
 import Junior from "./view/Junior";
 import Classic from "./view/Classic";
-import SparrowNFT from "./view/sparrowNFT/SparrowNFT";
-import AddSparrowNFT from "./view/sparrowNFT/AddSparrowNFT";
+import MemeNFT from "./view/memeNFT/MemeNFT";
+import AddMemeNFT from "./view/memeNFT/AddMemeNFT";
 
 (async () => {
 
@@ -17,8 +17,8 @@ import AddSparrowNFT from "./view/sparrowNFT/AddSparrowNFT";
     SkyRouter.route("junior", Junior);
     SkyRouter.route("classic", Classic);
 
-    SkyRouter.route("sparrow-nft", SparrowNFT);
-    SkyRouter.route("sparrow-nft/add", AddSparrowNFT);
+    SkyRouter.route("meme-nft", MemeNFT);
+    SkyRouter.route("meme-nft/add", AddMemeNFT);
 
     if (sessionStorage.__spa_path) {
         SkyRouter.go(sessionStorage.__spa_path);

@@ -175,6 +175,50 @@ body {
   font-family: ChosunGs;
   text-align: center;
 }
+.user-menu > .connect-wallet,
+.user-menu > .wallet-address {
+  width: 100%;
+  background-color: #F7DEA5;
+  font-family: 'ChosunGs';
+  display: block;
+  padding: 15px 0;
+  margin-top: 11px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+}
+.user-menu > .connect-wallet,
+.user-menu > .wallet-address:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.user-menu > .wallet-address {
+  position: relative;
+  cursor: pointer;
+}
+.user-menu > .wallet-address > ul {
+  position: absolute;
+  left: 0;
+  top: 30px;
+  width: 100px;
+  display: none;
+  background-color: #222;
+  padding: 10px 0;
+}
+.user-menu > .wallet-address > ul > li > a {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  color: #fff;
+}
+.user-menu > .wallet-address > ul > li > a:hover {
+  color: #F7DEA5;
+}
+.user-menu > .wallet-address > ul > li > a:active {
+  color: #F7DEA5;
+}
+.user-menu > .wallet-address:hover > ul {
+  display: block;
+}
 .popup-background {
   position: fixed;
   left: 0;
@@ -215,17 +259,15 @@ body {
 }
 .dialogue.alert > .button-container > button {
   background-color: transparent;
-  color: #F7DEA5;
+  color: black;
   padding: 8px 16px;
   font-size: 0.75rem;
   border-radius: 4px;
 }
 .dialogue.alert > .button-container > button:hover {
-  color: white;
   background-color: rgba(247, 222, 165, 0.8);
 }
 .dialogue.alert > .button-container > button:active {
-  color: white;
   background-color: #F7DEA5;
 }
 .dialogue.confirm {
@@ -255,17 +297,15 @@ body {
 }
 .dialogue.confirm > .button-container > button {
   background-color: transparent;
-  color: #F7DEA5;
+  color: black;
   padding: 8px 16px;
   font-size: 0.75rem;
   border-radius: 4px;
 }
 .dialogue.confirm > .button-container > button:hover {
-  color: white;
   background-color: rgba(247, 222, 165, 0.8);
 }
 .dialogue.confirm > .button-container > button:active {
-  color: white;
   background-color: #F7DEA5;
 }
 .dialogue.prompt {
@@ -313,17 +353,15 @@ body {
 }
 .dialogue.prompt > .button-container > button {
   background-color: transparent;
-  color: #F7DEA5;
+  color: black;
   padding: 8px 16px;
   font-size: 0.75rem;
   border-radius: 4px;
 }
 .dialogue.prompt > .button-container > button:hover {
-  color: white;
   background-color: rgba(247, 222, 165, 0.8);
 }
 .dialogue.prompt > .button-container > button:active {
-  color: white;
   background-color: #F7DEA5;
 }
 .layout {
@@ -459,6 +497,7 @@ body {
 }
 .home-view > section > .content-container > .left-container > .form {
   margin-top: 32px;
+  line-height: 1.5rem;
 }
 .home-view > section > .content-container > .left-container > .form > h3 {
   font-size: 24px;
