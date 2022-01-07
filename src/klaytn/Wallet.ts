@@ -7,6 +7,8 @@ class Wallet extends EventContainer {
     constructor() {
         super();
         this.checkConnected();
+
+        ExtWallet.toss("connect", this);
     }
 
     private async checkConnected() {
