@@ -429,6 +429,11 @@ body {
   background-size: cover;
   position: relative;
 }
+@media only screen and (max-width: 719px) {
+  .home-view > section > .top-banner > .banner-image0 {
+    display: none;
+  }
+}
 .home-view > section > .top-banner > .banner-image1 {
   background-image: url("/images/banner1.jpg");
   max-width: 604px;
@@ -489,6 +494,11 @@ body {
   position: relative;
   cursor: pointer;
 }
+@media only screen and (max-width: 719px) {
+  .home-view > section > .top-banner > .banner-image2 {
+    display: none;
+  }
+}
 .home-view > section > .content-container {
   width: 100%;
   display: flex;
@@ -497,6 +507,7 @@ body {
 @media only screen and (max-width: 719px) {
   .home-view > section > .content-container {
     flex-direction: column;
+    margin: 8px;
   }
 }
 .home-view > section > .content-container > .left-container {
@@ -551,6 +562,11 @@ body {
   display: flex;
   margin-top: 8px;
 }
+@media only screen and (max-width: 719px) {
+  .home-view > section > .content-container > .left-container > .form .input-container {
+    flex-direction: column;
+  }
+}
 .home-view > section > .content-container > .left-container > .form .input-container > input {
   width: 100%;
   border: 1px solid #e4e8eb;
@@ -564,7 +580,6 @@ body {
   min-width: 100px;
   font-family: 'ChosunGs';
   display: block;
-  padding: 15px 0;
   margin-top: 11px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -572,6 +587,11 @@ body {
   padding: 16px;
   margin-top: 8px;
   margin-left: 8px;
+}
+@media only screen and (max-width: 719px) {
+  .home-view > section > .content-container > .left-container > .form .input-container > button {
+    margin-left: 0px;
+  }
 }
 .home-view > section > .content-container > .left-container > .form .input-container > button:hover {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
@@ -581,6 +601,12 @@ body {
 }
 .home-view > section > .content-container > .right-container {
   padding-left: 32px;
+}
+@media only screen and (max-width: 719px) {
+  .home-view > section > .content-container > .right-container {
+    padding-left: 0px;
+    margin: 8px;
+  }
 }
 .home-view > section > .content-container > .right-container > .connect-wallet {
   display: flex;

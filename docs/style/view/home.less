@@ -43,6 +43,10 @@
                 background-repeat  : no-repeat;
                 background-size    : cover;
                 position           : relative;
+
+                @media @phone {
+                    display: none;
+                }
             }
 
             >.banner-image1 {
@@ -106,6 +110,10 @@
                 background-size    : cover;
                 position           : relative;
                 cursor             : pointer;
+
+                @media @phone {
+                    display: none;
+                }
             }
         }
 
@@ -116,6 +124,7 @@
 
             @media @phone {
                 flex-direction: column;
+                margin        : 8px;
             }
 
             >.left-container {
@@ -179,6 +188,10 @@
                         display   : flex;
                         margin-top: 8px;
 
+                        @media @phone {
+                            flex-direction: column;
+                        }
+
                         >input {
                             width     : 100%;
                             border    : 1px solid #e4e8eb;
@@ -194,7 +207,6 @@
                             min-width            : 100px;
                             font-family          : 'ChosunGs';
                             display              : block;
-                            padding              : 15px 0;
                             margin-top           : 11px;
                             -webkit-border-radius: 2px;
                             border-radius        : 2px;
@@ -202,6 +214,10 @@
                             padding              : 16px;
                             margin-top           : 8px;
                             margin-left          : 8px;
+
+                            @media @phone {
+                                margin-left: 0px;
+                            }
                         }
 
                         >button:hover {
@@ -217,6 +233,11 @@
 
             >.right-container {
                 padding-left: 32px;
+
+                @media @phone {
+                    padding-left: 0px;
+                    margin      : 8px;
+                }
 
                 >.connect-wallet {
                     display         : flex;
