@@ -149,6 +149,11 @@ export default class Home implements View {
                                     })
                                 )
                             )*/
+                            el(".banner",
+                                el("img", {
+                                    src: "/images/thankyou.gif"
+                                })
+                            ),
                         ),
                         el(".right-container",
                             el(".connect-wallet",
@@ -158,11 +163,6 @@ export default class Home implements View {
                             el("a.ad-banner", { href: "https://klayfox.com", target: "_blank" },
                                 el("img", {
                                     src: "/images/ad-banner/klayfox.jpeg"
-                                })
-                            ),
-                            el(".banner",
-                                el("img", {
-                                    src: "/images/thankyou.gif"
                                 })
                             ),
                             el(".community",
