@@ -160,6 +160,11 @@ export default class Home implements View {
                                     src: "/images/ad-banner/klayfox.jpeg"
                                 })
                             ),
+                            el(".banner",
+                                el("img", {
+                                    src: "/images/thankyou.gif"
+                                })
+                            ),
                             el(".community",
                                 el("h3", "떡방앗간 커뮤니티"),
                                 el("a", "오카방\n(오픈 카카오톡 방)", { href: "https://open.kakao.com/o/g1nYzIHd", target: "_blank" }),

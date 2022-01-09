@@ -641,6 +641,12 @@ body {
   max-height: 200px;
   border: 1px solid #e4e8eb;
 }
+.home-view > section > .content-container > .right-container > .banner > img {
+  margin-top: 16px;
+  max-width: 350px;
+  max-height: 200px;
+  border: 1px solid #e4e8eb;
+}
 .home-view > section > .content-container > .right-container > .community {
   display: flex;
   flex-direction: column;
