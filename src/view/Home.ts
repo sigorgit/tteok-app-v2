@@ -155,9 +155,9 @@ export default class Home implements View {
                                 el(".caption", "정과 훈훈한 인심의 세계로"),
                                 new UserInfo()
                             ),
-                            el(".banner",
+                            el("a.ad-banner", { href: "https://klayfox.com", target: "_blank" },
                                 el("img", {
-                                    src: "/images/thankyou.gif"
+                                    src: "/images/ad-banner/klayfox.jpeg"
                                 })
                             ),
                             el(".community",

@@ -635,14 +635,11 @@ body {
 .home-view > section > .content-container > .right-container > .connect-wallet > button:hover {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
-.home-view > section > .content-container > .right-container > .banner {
-  margin-top: 32px;
-  padding: 8px;
+.home-view > section > .content-container > .right-container > .ad-banner > img {
+  margin-top: 16px;
   max-width: 350px;
+  max-height: 200px;
   border: 1px solid #e4e8eb;
-}
-.home-view > section > .content-container > .right-container > .banner > img {
-  max-width: 350px;
 }
 .home-view > section > .content-container > .right-container > .community {
   display: flex;
@@ -668,21 +665,6 @@ body {
 .introduce-view {
   line-height: 1.5em;
   background: url("/images/banner1.jpg");
-}
-.introduce-view > .gnb {
-  background-color: #F7DEA5;
-  height: 52px;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-}
-.introduce-view > .gnb > .inner-gnb {
-  display: flex;
-  align-items: center;
-  max-width: 1240px;
-  width: 100%;
-  margin: auto;
-  text-align: left;
 }
 .introduce-view > section {
   display: flex;
