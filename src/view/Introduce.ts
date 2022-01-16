@@ -13,14 +13,6 @@ export default class Introduce implements View {
     constructor() {
         Layout.current.title = "소개";
         Layout.current.content.append(this.container = el(".introduce-view",
-            el(".gnb",
-                el(".inner-gnb",
-                    el("a", { click: () => ViewUtil.go("/") },
-                        el("img", { src: "/images/injeolmi.png", height: "40px" })
-                    ),
-                    el("h1", "떡방앗간.닷컴"),
-                )
-            ),
             el("section",
                 el("h2", "떡방앗간.닷컴"),
                 el("p", `한국인의 정과 훈훈한 인심. 따뜻한 코인 커뮤니티 떡방앗간 코인 이야기.\nhttp://tteok.org으로도 접속하실 수 있습니다.\n떡방앗간 회원들은 "참새"로 불리웁니다.`),
@@ -35,6 +27,9 @@ export default class Introduce implements View {
                     click: () => {
                         window.open("https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi")
                     },
+                }),
+                el("img", {
+                    src: "/images/thankyou.gif"
                 })
             )
         ));
