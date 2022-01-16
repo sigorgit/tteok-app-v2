@@ -10,6 +10,8 @@ export default class Home implements View {
     private ijmPrice;
     private buyInput;
     private buyResult;
+    private sellInput;
+    private sellResult;
     constructor();
     private refresh;
     private load;

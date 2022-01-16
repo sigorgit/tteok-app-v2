@@ -1,0 +1,928 @@
+{
+  "id": "be37c6a55174c1e88c5c3c081e1a7b56",
+  "_format": "hh-sol-build-info-1",
+  "solcVersion": "0.5.6",
+  "solcLongVersion": "0.5.6+commit.b259423e",
+  "input": {
+    "language": "Solidity",
+    "sources": {
+      "contracts/InjeolmiPriceEstimator.sol": {
+        "content": "pragma solidity 0.5.6;\r\n\r\ninterface IFactory {\r\n    function tokenToPool(address tokenA, address tokenB) external view returns (address);\r\n}\r\n\r\ninterface IExchange {\r\n    function estimatePos(address tokenIn, uint amountIn) external view returns (uint);\r\n}\r\n\r\ncontract InjeolmiPriceEstimator {\r\n    IFactory factory = IFactory(0xC6a2Ad8cC6e4A7E08FC37cC5954be07d499E7654);\r\n    function estimatePos(uint amountIn) public view returns (uint amountOut) {\r\n        IExchange exchange = IExchange(factory.tokenToPool(0x0268dbed3832b87582B1FA508aCF5958cbb1cd74, 0x0000000000000000000000000000000000000000));\r\n        amountOut = exchange.estimatePos(0x0268dbed3832b87582B1FA508aCF5958cbb1cd74, amountIn);\r\n    }\r\n}\r\n"
+      }
+    },
+    "settings": {
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ],
+          "": [
+            "ast"
+          ]
+        }
+      }
+    }
+  },
+  "output": {
+    "contracts": {
+      "contracts/InjeolmiPriceEstimator.sol": {
+        "IExchange": {
+          "abi": [
+            {
+              "constant": true,
+              "inputs": [
+                {
+                  "name": "tokenIn",
+                  "type": "address"
+                },
+                {
+                  "name": "amountIn",
+                  "type": "uint256"
+                }
+              ],
+              "name": "estimatePos",
+              "outputs": [
+                {
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "payable": false,
+              "stateMutability": "view",
+              "type": "function"
+            }
+          ],
+          "evm": {
+            "bytecode": {
+              "linkReferences": {},
+              "object": "",
+              "opcodes": "",
+              "sourceMap": ""
+            },
+            "deployedBytecode": {
+              "linkReferences": {},
+              "object": "",
+              "opcodes": "",
+              "sourceMap": ""
+            },
+            "methodIdentifiers": {
+              "estimatePos(address,uint256)": "e4161181"
+            }
+          },
+          "metadata": "{\"compiler\":{\"version\":\"0.5.6+commit.b259423e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"tokenIn\",\"type\":\"address\"},{\"name\":\"amountIn\",\"type\":\"uint256\"}],\"name\":\"estimatePos\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"contracts/InjeolmiPriceEstimator.sol\":\"IExchange\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/InjeolmiPriceEstimator.sol\":{\"keccak256\":\"0x3eab1429ff637b3bbf70963943adfcb082ee9e712151ffd3981ee31b3a1c5300\",\"urls\":[\"bzzr://701dccf396da772b20f4990e0f104658b561cbc7db7b80fb0ffca2f2fffe33f8\"]}},\"version\":1}"
+        },
+        "IFactory": {
+          "abi": [
+            {
+              "constant": true,
+              "inputs": [
+                {
+                  "name": "tokenA",
+                  "type": "address"
+                },
+                {
+                  "name": "tokenB",
+                  "type": "address"
+                }
+              ],
+              "name": "tokenToPool",
+              "outputs": [
+                {
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "payable": false,
+              "stateMutability": "view",
+              "type": "function"
+            }
+          ],
+          "evm": {
+            "bytecode": {
+              "linkReferences": {},
+              "object": "",
+              "opcodes": "",
+              "sourceMap": ""
+            },
+            "deployedBytecode": {
+              "linkReferences": {},
+              "object": "",
+              "opcodes": "",
+              "sourceMap": ""
+            },
+            "methodIdentifiers": {
+              "tokenToPool(address,address)": "fd435cb9"
+            }
+          },
+          "metadata": "{\"compiler\":{\"version\":\"0.5.6+commit.b259423e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"tokenA\",\"type\":\"address\"},{\"name\":\"tokenB\",\"type\":\"address\"}],\"name\":\"tokenToPool\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"contracts/InjeolmiPriceEstimator.sol\":\"IFactory\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/InjeolmiPriceEstimator.sol\":{\"keccak256\":\"0x3eab1429ff637b3bbf70963943adfcb082ee9e712151ffd3981ee31b3a1c5300\",\"urls\":[\"bzzr://701dccf396da772b20f4990e0f104658b561cbc7db7b80fb0ffca2f2fffe33f8\"]}},\"version\":1}"
+        },
+        "InjeolmiPriceEstimator": {
+          "abi": [
+            {
+              "constant": true,
+              "inputs": [
+                {
+                  "name": "amountIn",
+                  "type": "uint256"
+                }
+              ],
+              "name": "estimatePos",
+              "outputs": [
+                {
+                  "name": "amountOut",
+                  "type": "uint256"
+                }
+              ],
+              "payable": false,
+              "stateMutability": "view",
+              "type": "function"
+            }
+          ],
+          "evm": {
+            "bytecode": {
+              "linkReferences": {},
+              "object": "6080604052600080546001600160a01b03191673c6a2ad8cc6e4a7e08fc37cc5954be07d499e765417905534801561003657600080fd5b506101bb806100466000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c806321d9589114610030575b600080fd5b61004d6004803603602081101561004657600080fd5b503561005f565b60408051918252519081900360200190f35b6000805460408051600160e01b63fd435cb9028152730268dbed3832b87582b1fa508acf5958cbb1cd74600482015260248101849052905183926001600160a01b03169163fd435cb9916044808301926020929190829003018186803b1580156100c857600080fd5b505afa1580156100dc573d6000803e3d6000fd5b505050506040513d60208110156100f257600080fd5b505160408051600160e01b63e4161181028152730268dbed3832b87582b1fa508acf5958cbb1cd7460048201526024810186905290519192506001600160a01b0383169163e416118191604480820192602092909190829003018186803b15801561015c57600080fd5b505afa158015610170573d6000803e3d6000fd5b505050506040513d602081101561018657600080fd5b5051939250505056fea165627a7a72305820b2492f4d0d802ef26d4dd9144f929bc16e8af5d3855ce978ae8271c156e5577d0029",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT AND PUSH20 0xC6A2AD8CC6E4A7E08FC37CC5954BE07D499E7654 OR SWAP1 SSTORE CALLVALUE DUP1 ISZERO PUSH2 0x36 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x1BB DUP1 PUSH2 0x46 PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x2B JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x21D95891 EQ PUSH2 0x30 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x4D PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x46 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP CALLDATALOAD PUSH2 0x5F JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD SWAP2 DUP3 MSTORE MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 RETURN JUMPDEST PUSH1 0x0 DUP1 SLOAD PUSH1 0x40 DUP1 MLOAD PUSH1 0x1 PUSH1 0xE0 SHL PUSH4 0xFD435CB9 MUL DUP2 MSTORE PUSH20 0x268DBED3832B87582B1FA508ACF5958CBB1CD74 PUSH1 0x4 DUP3 ADD MSTORE PUSH1 0x24 DUP2 ADD DUP5 SWAP1 MSTORE SWAP1 MLOAD DUP4 SWAP3 PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND SWAP2 PUSH4 0xFD435CB9 SWAP2 PUSH1 0x44 DUP1 DUP4 ADD SWAP3 PUSH1 0x20 SWAP3 SWAP2 SWAP1 DUP3 SWAP1 SUB ADD DUP2 DUP7 DUP1 EXTCODESIZE ISZERO DUP1 ISZERO PUSH2 0xC8 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP GAS STATICCALL ISZERO DUP1 ISZERO PUSH2 0xDC JUMPI RETURNDATASIZE PUSH1 0x0 DUP1 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST POP POP POP POP PUSH1 0x40 MLOAD RETURNDATASIZE PUSH1 0x20 DUP2 LT ISZERO PUSH2 0xF2 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP MLOAD PUSH1 0x40 DUP1 MLOAD PUSH1 0x1 PUSH1 0xE0 SHL PUSH4 0xE4161181 MUL DUP2 MSTORE PUSH20 0x268DBED3832B87582B1FA508ACF5958CBB1CD74 PUSH1 0x4 DUP3 ADD MSTORE PUSH1 0x24 DUP2 ADD DUP7 SWAP1 MSTORE SWAP1 MLOAD SWAP2 SWAP3 POP PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP4 AND SWAP2 PUSH4 0xE4161181 SWAP2 PUSH1 0x44 DUP1 DUP3 ADD SWAP3 PUSH1 0x20 SWAP3 SWAP1 SWAP2 SWAP1 DUP3 SWAP1 SUB ADD DUP2 DUP7 DUP1 EXTCODESIZE ISZERO DUP1 ISZERO PUSH2 0x15C JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP GAS STATICCALL ISZERO DUP1 ISZERO PUSH2 0x170 JUMPI RETURNDATASIZE PUSH1 0x0 DUP1 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST POP POP POP POP PUSH1 0x40 MLOAD RETURNDATASIZE PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x186 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP MLOAD SWAP4 SWAP3 POP POP POP JUMP INVALID LOG1 PUSH6 0x627A7A723058 KECCAK256 0xb2 0x49 0x2f 0x4d 0xd DUP1 0x2e CALLCODE PUSH14 0x4DD9144F929BC16E8AF5D3855CE9 PUSH25 0xAE8271C156E5577D0029000000000000000000000000000000 ",
+              "sourceMap": "260:448:0:-;;;299:71;;;-1:-1:-1;;;;;;299:71:0;327:42;299:71;;;260:448;5:2:-1;;;;30:1;27;20:12;5:2;260:448:0;;;;;;;"
+            },
+            "deployedBytecode": {
+              "linkReferences": {},
+              "object": "608060405234801561001057600080fd5b506004361061002b5760003560e01c806321d9589114610030575b600080fd5b61004d6004803603602081101561004657600080fd5b503561005f565b60408051918252519081900360200190f35b6000805460408051600160e01b63fd435cb9028152730268dbed3832b87582b1fa508acf5958cbb1cd74600482015260248101849052905183926001600160a01b03169163fd435cb9916044808301926020929190829003018186803b1580156100c857600080fd5b505afa1580156100dc573d6000803e3d6000fd5b505050506040513d60208110156100f257600080fd5b505160408051600160e01b63e4161181028152730268dbed3832b87582b1fa508acf5958cbb1cd7460048201526024810186905290519192506001600160a01b0383169163e416118191604480820192602092909190829003018186803b15801561015c57600080fd5b505afa158015610170573d6000803e3d6000fd5b505050506040513d602081101561018657600080fd5b5051939250505056fea165627a7a72305820b2492f4d0d802ef26d4dd9144f929bc16e8af5d3855ce978ae8271c156e5577d0029",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x2B JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x21D95891 EQ PUSH2 0x30 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x4D PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x46 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP CALLDATALOAD PUSH2 0x5F JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD SWAP2 DUP3 MSTORE MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 RETURN JUMPDEST PUSH1 0x0 DUP1 SLOAD PUSH1 0x40 DUP1 MLOAD PUSH1 0x1 PUSH1 0xE0 SHL PUSH4 0xFD435CB9 MUL DUP2 MSTORE PUSH20 0x268DBED3832B87582B1FA508ACF5958CBB1CD74 PUSH1 0x4 DUP3 ADD MSTORE PUSH1 0x24 DUP2 ADD DUP5 SWAP1 MSTORE SWAP1 MLOAD DUP4 SWAP3 PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND SWAP2 PUSH4 0xFD435CB9 SWAP2 PUSH1 0x44 DUP1 DUP4 ADD SWAP3 PUSH1 0x20 SWAP3 SWAP2 SWAP1 DUP3 SWAP1 SUB ADD DUP2 DUP7 DUP1 EXTCODESIZE ISZERO DUP1 ISZERO PUSH2 0xC8 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP GAS STATICCALL ISZERO DUP1 ISZERO PUSH2 0xDC JUMPI RETURNDATASIZE PUSH1 0x0 DUP1 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST POP POP POP POP PUSH1 0x40 MLOAD RETURNDATASIZE PUSH1 0x20 DUP2 LT ISZERO PUSH2 0xF2 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP MLOAD PUSH1 0x40 DUP1 MLOAD PUSH1 0x1 PUSH1 0xE0 SHL PUSH4 0xE4161181 MUL DUP2 MSTORE PUSH20 0x268DBED3832B87582B1FA508ACF5958CBB1CD74 PUSH1 0x4 DUP3 ADD MSTORE PUSH1 0x24 DUP2 ADD DUP7 SWAP1 MSTORE SWAP1 MLOAD SWAP2 SWAP3 POP PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP4 AND SWAP2 PUSH4 0xE4161181 SWAP2 PUSH1 0x44 DUP1 DUP3 ADD SWAP3 PUSH1 0x20 SWAP3 SWAP1 SWAP2 SWAP1 DUP3 SWAP1 SUB ADD DUP2 DUP7 DUP1 EXTCODESIZE ISZERO DUP1 ISZERO PUSH2 0x15C JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP GAS STATICCALL ISZERO DUP1 ISZERO PUSH2 0x170 JUMPI RETURNDATASIZE PUSH1 0x0 DUP1 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST POP POP POP POP PUSH1 0x40 MLOAD RETURNDATASIZE PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x186 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP MLOAD SWAP4 SWAP3 POP POP POP JUMP INVALID LOG1 PUSH6 0x627A7A723058 KECCAK256 0xb2 0x49 0x2f 0x4d 0xd DUP1 0x2e CALLCODE PUSH14 0x4DD9144F929BC16E8AF5D3855CE9 PUSH25 0xAE8271C156E5577D0029000000000000000000000000000000 ",
+              "sourceMap": "260:448:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;260:448:0;;;;;;;;;;;;;;;;;;;377:328;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;377:328:0;;:::i;:::-;;;;;;;;;;;;;;;;;434:14;492:7;;:107;;;-1:-1:-1;;;;;492:107:0;;512:42;492:107;;;;;;;;;;;;434:14;;-1:-1:-1;;;;;492:7:0;;:19;;:107;;;;;;;;;;;;;;:7;:107;;;5:2:-1;;;;30:1;27;20:12;5:2;492:107:0;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;492:107:0;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;492:107:0;623:74;;;-1:-1:-1;;;;;623:74:0;;644:42;623:74;;;;;;;;;;;;492:107;;-1:-1:-1;;;;;;623:20:0;;;;;:74;;;;;492:107;;623:74;;;;;;;;:20;:74;;;5:2:-1;;;;30:1;27;20:12;5:2;623:74:0;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;623:74:0;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;623:74:0;;377:328;-1:-1:-1;;;377:328:0:o"
+            },
+            "methodIdentifiers": {
+              "estimatePos(uint256)": "21d95891"
+            }
+          },
+          "metadata": "{\"compiler\":{\"version\":\"0.5.6+commit.b259423e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"amountIn\",\"type\":\"uint256\"}],\"name\":\"estimatePos\",\"outputs\":[{\"name\":\"amountOut\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"contracts/InjeolmiPriceEstimator.sol\":\"InjeolmiPriceEstimator\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/InjeolmiPriceEstimator.sol\":{\"keccak256\":\"0x3eab1429ff637b3bbf70963943adfcb082ee9e712151ffd3981ee31b3a1c5300\",\"urls\":[\"bzzr://701dccf396da772b20f4990e0f104658b561cbc7db7b80fb0ffca2f2fffe33f8\"]}},\"version\":1}"
+        }
+      }
+    },
+    "sources": {
+      "contracts/InjeolmiPriceEstimator.sol": {
+        "ast": {
+          "absolutePath": "contracts/InjeolmiPriceEstimator.sol",
+          "exportedSymbols": {
+            "IExchange": [
+              21
+            ],
+            "IFactory": [
+              11
+            ],
+            "InjeolmiPriceEstimator": [
+              53
+            ]
+          },
+          "id": 54,
+          "nodeType": "SourceUnit",
+          "nodes": [
+            {
+              "id": 1,
+              "literals": [
+                "solidity",
+                "0.5",
+                ".6"
+              ],
+              "nodeType": "PragmaDirective",
+              "src": "0:22:0"
+            },
+            {
+              "baseContracts": [],
+              "contractDependencies": [],
+              "contractKind": "interface",
+              "documentation": null,
+              "fullyImplemented": false,
+              "id": 11,
+              "linearizedBaseContracts": [
+                11
+              ],
+              "name": "IFactory",
+              "nodeType": "ContractDefinition",
+              "nodes": [
+                {
+                  "body": null,
+                  "documentation": null,
+                  "id": 10,
+                  "implemented": false,
+                  "kind": "function",
+                  "modifiers": [],
+                  "name": "tokenToPool",
+                  "nodeType": "FunctionDefinition",
+                  "parameters": {
+                    "id": 6,
+                    "nodeType": "ParameterList",
+                    "parameters": [
+                      {
+                        "constant": false,
+                        "id": 3,
+                        "name": "tokenA",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 10,
+                        "src": "73:14:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "typeName": {
+                          "id": 2,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "73:7:0",
+                          "stateMutability": "nonpayable",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      },
+                      {
+                        "constant": false,
+                        "id": 5,
+                        "name": "tokenB",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 10,
+                        "src": "89:14:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "typeName": {
+                          "id": 4,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "89:7:0",
+                          "stateMutability": "nonpayable",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "src": "72:32:0"
+                  },
+                  "returnParameters": {
+                    "id": 9,
+                    "nodeType": "ParameterList",
+                    "parameters": [
+                      {
+                        "constant": false,
+                        "id": 8,
+                        "name": "",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 10,
+                        "src": "128:7:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "typeName": {
+                          "id": 7,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "128:7:0",
+                          "stateMutability": "nonpayable",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "src": "127:9:0"
+                  },
+                  "scope": 11,
+                  "src": "52:85:0",
+                  "stateMutability": "view",
+                  "superFunction": null,
+                  "visibility": "external"
+                }
+              ],
+              "scope": 54,
+              "src": "26:114:0"
+            },
+            {
+              "baseContracts": [],
+              "contractDependencies": [],
+              "contractKind": "interface",
+              "documentation": null,
+              "fullyImplemented": false,
+              "id": 21,
+              "linearizedBaseContracts": [
+                21
+              ],
+              "name": "IExchange",
+              "nodeType": "ContractDefinition",
+              "nodes": [
+                {
+                  "body": null,
+                  "documentation": null,
+                  "id": 20,
+                  "implemented": false,
+                  "kind": "function",
+                  "modifiers": [],
+                  "name": "estimatePos",
+                  "nodeType": "FunctionDefinition",
+                  "parameters": {
+                    "id": 16,
+                    "nodeType": "ParameterList",
+                    "parameters": [
+                      {
+                        "constant": false,
+                        "id": 13,
+                        "name": "tokenIn",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 20,
+                        "src": "192:15:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "typeName": {
+                          "id": 12,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "192:7:0",
+                          "stateMutability": "nonpayable",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      },
+                      {
+                        "constant": false,
+                        "id": 15,
+                        "name": "amountIn",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 20,
+                        "src": "209:13:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "typeName": {
+                          "id": 14,
+                          "name": "uint",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "209:4:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "src": "191:32:0"
+                  },
+                  "returnParameters": {
+                    "id": 19,
+                    "nodeType": "ParameterList",
+                    "parameters": [
+                      {
+                        "constant": false,
+                        "id": 18,
+                        "name": "",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 20,
+                        "src": "247:4:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "typeName": {
+                          "id": 17,
+                          "name": "uint",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "247:4:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "src": "246:6:0"
+                  },
+                  "scope": 21,
+                  "src": "171:82:0",
+                  "stateMutability": "view",
+                  "superFunction": null,
+                  "visibility": "external"
+                }
+              ],
+              "scope": 54,
+              "src": "144:112:0"
+            },
+            {
+              "baseContracts": [],
+              "contractDependencies": [],
+              "contractKind": "contract",
+              "documentation": null,
+              "fullyImplemented": true,
+              "id": 53,
+              "linearizedBaseContracts": [
+                53
+              ],
+              "name": "InjeolmiPriceEstimator",
+              "nodeType": "ContractDefinition",
+              "nodes": [
+                {
+                  "constant": false,
+                  "id": 26,
+                  "name": "factory",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 53,
+                  "src": "299:71:0",
+                  "stateVariable": true,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IFactory_$11",
+                    "typeString": "contract IFactory"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 22,
+                    "name": "IFactory",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 11,
+                    "src": "299:8:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IFactory_$11",
+                      "typeString": "contract IFactory"
+                    }
+                  },
+                  "value": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "307843366132416438634336653441374530384643333763433539353462653037643439394537363534",
+                        "id": 24,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "327:42:0",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        "value": "0xC6a2Ad8cC6e4A7E08FC37cC5954be07d499E7654"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 23,
+                      "name": "IFactory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 11,
+                      "src": "318:8:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_IFactory_$11_$",
+                        "typeString": "type(contract IFactory)"
+                      }
+                    },
+                    "id": 25,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "318:52:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IFactory_$11",
+                      "typeString": "contract IFactory"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "body": {
+                    "id": 51,
+                    "nodeType": "Block",
+                    "src": "450:255:0",
+                    "statements": [
+                      {
+                        "assignments": [
+                          34
+                        ],
+                        "declarations": [
+                          {
+                            "constant": false,
+                            "id": 34,
+                            "name": "exchange",
+                            "nodeType": "VariableDeclaration",
+                            "scope": 51,
+                            "src": "461:18:0",
+                            "stateVariable": false,
+                            "storageLocation": "default",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IExchange_$21",
+                              "typeString": "contract IExchange"
+                            },
+                            "typeName": {
+                              "contractScope": null,
+                              "id": 33,
+                              "name": "IExchange",
+                              "nodeType": "UserDefinedTypeName",
+                              "referencedDeclaration": 21,
+                              "src": "461:9:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IExchange_$21",
+                                "typeString": "contract IExchange"
+                              }
+                            },
+                            "value": null,
+                            "visibility": "internal"
+                          }
+                        ],
+                        "id": 42,
+                        "initialValue": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "arguments": [
+                                {
+                                  "argumentTypes": null,
+                                  "hexValue": "307830323638646265643338333262383735383242314641353038614346353935386362623163643734",
+                                  "id": 38,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "kind": "number",
+                                  "lValueRequested": false,
+                                  "nodeType": "Literal",
+                                  "src": "512:42:0",
+                                  "subdenomination": null,
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_address_payable",
+                                    "typeString": "address payable"
+                                  },
+                                  "value": "0x0268dbed3832b87582B1FA508aCF5958cbb1cd74"
+                                },
+                                {
+                                  "argumentTypes": null,
+                                  "hexValue": "307830303030303030303030303030303030303030303030303030303030303030303030303030303030",
+                                  "id": 39,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "kind": "number",
+                                  "lValueRequested": false,
+                                  "nodeType": "Literal",
+                                  "src": "556:42:0",
+                                  "subdenomination": null,
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_address_payable",
+                                    "typeString": "address payable"
+                                  },
+                                  "value": "0x0000000000000000000000000000000000000000"
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": [
+                                  {
+                                    "typeIdentifier": "t_address_payable",
+                                    "typeString": "address payable"
+                                  },
+                                  {
+                                    "typeIdentifier": "t_address_payable",
+                                    "typeString": "address payable"
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": null,
+                                  "id": 36,
+                                  "name": "factory",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 26,
+                                  "src": "492:7:0",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_contract$_IFactory_$11",
+                                    "typeString": "contract IFactory"
+                                  }
+                                },
+                                "id": 37,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "memberName": "tokenToPool",
+                                "nodeType": "MemberAccess",
+                                "referencedDeclaration": 10,
+                                "src": "492:19:0",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_function_external_view$_t_address_$_t_address_$returns$_t_address_$",
+                                  "typeString": "function (address,address) view external returns (address)"
+                                }
+                              },
+                              "id": 40,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "kind": "functionCall",
+                              "lValueRequested": false,
+                              "names": [],
+                              "nodeType": "FunctionCall",
+                              "src": "492:107:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 35,
+                            "name": "IExchange",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 21,
+                            "src": "482:9:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_IExchange_$21_$",
+                              "typeString": "type(contract IExchange)"
+                            }
+                          },
+                          "id": 41,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "482:118:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IExchange_$21",
+                            "typeString": "contract IExchange"
+                          }
+                        },
+                        "nodeType": "VariableDeclarationStatement",
+                        "src": "461:139:0"
+                      },
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 49,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "argumentTypes": null,
+                            "id": 43,
+                            "name": "amountOut",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 31,
+                            "src": "611:9:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "hexValue": "307830323638646265643338333262383735383242314641353038614346353935386362623163643734",
+                                "id": 46,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "kind": "number",
+                                "lValueRequested": false,
+                                "nodeType": "Literal",
+                                "src": "644:42:0",
+                                "subdenomination": null,
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                },
+                                "value": "0x0268dbed3832b87582B1FA508aCF5958cbb1cd74"
+                              },
+                              {
+                                "argumentTypes": null,
+                                "id": 47,
+                                "name": "amountIn",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 28,
+                                "src": "688:8:0",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 44,
+                                "name": "exchange",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 34,
+                                "src": "623:8:0",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_IExchange_$21",
+                                  "typeString": "contract IExchange"
+                                }
+                              },
+                              "id": 45,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "estimatePos",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 20,
+                              "src": "623:20:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$_t_address_$_t_uint256_$returns$_t_uint256_$",
+                                "typeString": "function (address,uint256) view external returns (uint256)"
+                              }
+                            },
+                            "id": 48,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "623:74:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "611:86:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 50,
+                        "nodeType": "ExpressionStatement",
+                        "src": "611:86:0"
+                      }
+                    ]
+                  },
+                  "documentation": null,
+                  "id": 52,
+                  "implemented": true,
+                  "kind": "function",
+                  "modifiers": [],
+                  "name": "estimatePos",
+                  "nodeType": "FunctionDefinition",
+                  "parameters": {
+                    "id": 29,
+                    "nodeType": "ParameterList",
+                    "parameters": [
+                      {
+                        "constant": false,
+                        "id": 28,
+                        "name": "amountIn",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 52,
+                        "src": "398:13:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "typeName": {
+                          "id": 27,
+                          "name": "uint",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "398:4:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "src": "397:15:0"
+                  },
+                  "returnParameters": {
+                    "id": 32,
+                    "nodeType": "ParameterList",
+                    "parameters": [
+                      {
+                        "constant": false,
+                        "id": 31,
+                        "name": "amountOut",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 52,
+                        "src": "434:14:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "typeName": {
+                          "id": 30,
+                          "name": "uint",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "434:4:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "src": "433:16:0"
+                  },
+                  "scope": 53,
+                  "src": "377:328:0",
+                  "stateMutability": "view",
+                  "superFunction": null,
+                  "visibility": "public"
+                }
+              ],
+              "scope": 54,
+              "src": "260:448:0"
+            }
+          ],
+          "src": "0:710:0"
+        },
+        "id": 0
+      }
+    }
+  }
+}

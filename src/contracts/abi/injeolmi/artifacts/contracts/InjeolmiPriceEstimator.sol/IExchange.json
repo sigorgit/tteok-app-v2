@@ -1,0 +1,34 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IExchange",
+  "sourceName": "contracts/InjeolmiPriceEstimator.sol",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "tokenIn",
+          "type": "address"
+        },
+        {
+          "name": "amountIn",
+          "type": "uint256"
+        }
+      ],
+      "name": "estimatePos",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

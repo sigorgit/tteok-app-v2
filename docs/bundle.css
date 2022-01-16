@@ -414,6 +414,8 @@ body {
   max-width: 1240px;
   width: 100%;
   margin: auto;
+  border-bottom: 1px solid #e4e8eb;
+  padding-bottom: 32px;
 }
 .home-view > section > .top-banner {
   display: flex;
@@ -532,6 +534,26 @@ body {
 .home-view > section > .content-container > .left-container > .price-container > .content > .price {
   margin: 8px;
 }
+.home-view > section > .content-container > .left-container > .price-container > .content > button {
+  min-width: 100px;
+  font-family: 'ChosunGs';
+  display: block;
+  margin-top: 11px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  padding: 8px 16px;
+  margin: auto;
+  margin-top: 8px;
+}
+@media only screen and (max-width: 719px) {
+  .home-view > section > .content-container > .left-container > .price-container > .content > button {
+    margin-left: 0px;
+  }
+}
+.home-view > section > .content-container > .left-container > .price-container > .content > button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
 .home-view > section > .content-container > .left-container > .group-issue {
   display: flex;
   flex-direction: row;
@@ -599,15 +621,6 @@ body {
 .home-view > section > .content-container > .left-container > .form .result {
   margin-top: 8px;
 }
-.home-view > section > .content-container > .left-container > .banner {
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-.home-view > section > .content-container > .left-container > .banner > img {
-  margin-top: 16px;
-  max-width: 350px;
-  max-height: 200px;
-}
 .home-view > section > .content-container > .right-container {
   padding-left: 32px;
 }
@@ -670,6 +683,15 @@ body {
 }
 .home-view > section > .content-container > .right-container > .community > a:hover {
   color: #0000FF;
+}
+.home-view > .banner {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+.home-view > .banner > img {
+  margin-top: 16px;
+  max-width: 350px;
+  max-height: 200px;
 }
 .introduce-view {
   line-height: 1.5em;

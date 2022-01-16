@@ -26,9 +26,11 @@
     }
 
     >section {
-        max-width: 1240px;
-        width    : 100%;
-        margin   : auto;
+        max-width     : 1240px;
+        width         : 100%;
+        margin        : auto;
+        border-bottom : 1px solid #e4e8eb;
+        padding-bottom: 32px;
 
         >.top-banner {
             display        : flex;
@@ -151,6 +153,27 @@
                         >.price {
                             margin: 8px;
                         }
+
+                        >button {
+                            min-width            : 100px;
+                            font-family          : 'ChosunGs';
+                            display              : block;
+                            margin-top           : 11px;
+                            -webkit-border-radius: 2px;
+                            border-radius        : 2px;
+                            text-align           : center;
+                            padding              : 8px 16px;
+                            margin               : auto;
+                            margin-top           : 8px;
+
+                            @media @phone {
+                                margin-left: 0px;
+                            }
+                        }
+
+                        >button:hover {
+                            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                        }
                     }
                 }
 
@@ -229,17 +252,6 @@
                         margin-top: 8px;
                     }
                 }
-
-                >.banner {
-                    margin-top   : 16px;
-                    margin-bottom: 16px;
-
-                    >img {
-                        margin-top: 16px;
-                        max-width : 350px;
-                        max-height: 200px;
-                    }
-                }
             }
 
             >.right-container {
@@ -316,6 +328,17 @@
                     }
                 }
             }
+        }
+    }
+
+    >.banner {
+        margin-top   : 32px;
+        margin-bottom: 16px;
+
+        >img {
+            margin-top: 16px;
+            max-width : 350px;
+            max-height: 200px;
         }
     }
 }

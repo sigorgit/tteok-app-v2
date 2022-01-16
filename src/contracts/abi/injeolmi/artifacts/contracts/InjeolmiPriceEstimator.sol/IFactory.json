@@ -1,0 +1,34 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IFactory",
+  "sourceName": "contracts/InjeolmiPriceEstimator.sol",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "tokenA",
+          "type": "address"
+        },
+        {
+          "name": "tokenB",
+          "type": "address"
+        }
+      ],
+      "name": "tokenToPool",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

@@ -7,6 +7,8 @@ import ArkContract from "../contracts/ArkContract";
 import InitialSaleContract from "../contracts/InitialSaleContract";
 import InitialSaleReceiverContract from "../contracts/InitialSaleReceiverContract";
 import InjeolmiContract from "../contracts/InjeolmiContract";
+import InjeolmiPriceEstimatorContract from "../contracts/InjeolmiPriceEstimatorContract";
+import KlayswapContract from "../contracts/KlayswapContract";
 import YearendAirdropContract from "../contracts/YearendAirdropContract";
 import Wallet from "../klaytn/Wallet";
 import Layout from "./Layout";
@@ -29,8 +31,8 @@ export default class Home implements View {
     private buyInput: DomNode<HTMLInputElement>;
     private buyResult: DomNode;
 
-    //private sellInput: DomNode<HTMLInputElement>;
-    //private sellResult: DomNode;
+    private sellInput: DomNode<HTMLInputElement>;
+    private sellResult: DomNode;
 
     constructor() {
         Layout.current.title = "홈";
@@ -66,7 +68,7 @@ export default class Home implements View {
                             el(".price-container",
                                 el(".content",
                                     el("h3", "인절미 가격"),
-                                    el(".price", (this.priceDisplay = el("span.price", utils.formatEther(this.ijmPrice))), " KLAY")
+                                    el(".price", (this.priceDisplay = el("span.price", "...")), " KLAY")
                                 ),
                                 el(".content",
                                     el("h3", "너의 인절미"),
@@ -121,30 +123,27 @@ export default class Home implements View {
                                 }),
                             ),
                             el(".form",
-                                el("h3", "클레이로 인절미 사기"),
+                                el("h3", "사기"),
                                 el(".caption", el("a", "클레이스왑", {
                                     href: "https://klayswap.com/",
                                     target: "_blank",
                                 }), "을 통해 삼"),
                                 el(".input-container",
                                     this.buyInput = el("input", {
-                                        placeholder: "클레이 수량 입력",
-                                        keyup: () => setTimeout(() => {
+                                        placeholder: "인절미 수량 입력",
+                                        keyup: () => setTimeout(async () => {
                                             if (this.buyInput.domElement.value.trim() === "") {
                                                 this.buyResult.empty();
                                             } else {
-                                                const value = utils.parseEther(this.buyInput.domElement.value);
-                                                this.buyResult.empty().appendText(
-                                                    `대략 ${utils.formatEther(
-                                                        value.mul(utils.parseEther("1")).div(this.ijmPrice)//.mul(9).div(10)
-                                                    )} IJM`
-                                                );
+                                                const amount = utils.parseEther(this.buyInput.domElement.value);
+                                                const klay = await InjeolmiPriceEstimatorContract.estimatePos(amount);
+                                                this.buyResult.empty().appendText(`${utils.formatEther(klay.mul(100).div(99))} KLAY`);
                                             }
                                         }),
                                     }),
                                     el("button", "인절미 사기", {
                                         click: async () => {
-                                            await InitialSaleContract.buy(
+                                            await KlayswapContract.buy(
                                                 utils.parseEther(this.buyInput.domElement.value)
                                             );
                                             ViewUtil.waitTransactionAndRefresh();
@@ -154,34 +153,35 @@ export default class Home implements View {
                                 this.buyResult = el(".result"),
                             ),
                             el(".form",
-                                el("h3", "클레이로 인절기 펄기"),
+                                el("h3", "펄기"),
                                 el(".caption", el("a", "클레이스왑", {
                                     href: "https://klayswap.com/",
                                     target: "_blank",
                                 }), "을 통해 펌"),
+                                el(".caption", "트랜잭션 2번 발생"),
                                 el(".input-container",
-                                    this.buyInput = el("input", {
+                                    this.sellInput = el("input", {
                                         placeholder: "인절미 수량 입력",
-                                        keyup: () => setTimeout(() => {
-                                            const value = utils.parseEther(this.buyInput.domElement.value);
-                                            this.buyResult.empty().appendText(
-                                                `대략 ${utils.formatEther(
-                                                    value.mul(utils.parseEther("1")).div(this.ijmPrice).mul(9).div(10)
-                                                )} IJM`
-                                            );
+                                        keyup: () => setTimeout(async () => {
+                                            if (this.sellInput.domElement.value.trim() === "") {
+                                                this.sellResult.empty();
+                                            } else {
+                                                const amount = utils.parseEther(this.sellInput.domElement.value);
+                                                const klay = await InjeolmiPriceEstimatorContract.estimatePos(amount);
+                                                this.sellResult.empty().appendText(`${utils.formatEther(klay)} KLAY`);
+                                            }
                                         }),
                                     }),
-                                    this.buyResult = el(".result"),
                                     el("button", "인절미 펄기", {
                                         click: async () => {
+                                            await KlayswapContract.sell(
+                                                utils.parseEther(this.sellInput.domElement.value)
+                                            );
+                                            ViewUtil.waitTransactionAndRefresh();
                                         },
                                     })
-                                )
-                            ),
-                            el(".banner",
-                                el("img", {
-                                    src: "/images/thankyou.gif"
-                                })
+                                ),
+                                this.sellResult = el(".result"),
                             ),
                         ),
                         el(".right-container",
@@ -206,6 +206,11 @@ export default class Home implements View {
                         ),
                     ),
                 ),
+                el(".banner",
+                    el("img", {
+                        src: "/images/thankyou.gif"
+                    })
+                ),
             )),
         );
 
@@ -220,6 +225,9 @@ export default class Home implements View {
     private async load() {
         const address = await Wallet.loadAddress();
         if (address !== undefined) {
+
+            const price = await InjeolmiPriceEstimatorContract.estimatePos(utils.parseEther("1"));
+            this.priceDisplay.empty().appendText(utils.formatEther(price));
 
             const balance = await InjeolmiContract.balanceOf(address);
             this.balanceDisplay.empty().appendText(utils.formatEther(balance));
