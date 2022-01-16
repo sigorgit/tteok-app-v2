@@ -9,16 +9,15 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
-import {
-  Contract,
+  BaseContract,
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "@ethersproject/contracts";
+} from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface PausableInterface extends ethers.utils.Interface {
   functions: {
@@ -63,196 +62,191 @@ interface PausableInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "PauserRemoved"): EventFragment;
 }
 
-export class Pausable extends Contract {
+export type PausedEvent = TypedEvent<[string] & { account: string }>;
+
+export type UnpausedEvent = TypedEvent<[string] & { account: string }>;
+
+export type PauserAddedEvent = TypedEvent<[string] & { account: string }>;
+
+export type PauserRemovedEvent = TypedEvent<[string] & { account: string }>;
+
+export class Pausable extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  listeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter?: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): Array<TypedListener<EventArgsArray, EventArgsObject>>;
+  off<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  on<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  once<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeListener<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeAllListeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): this;
+
+  listeners(eventName?: string): Array<Listener>;
+  off(eventName: string, listener: Listener): this;
+  on(eventName: string, listener: Listener): this;
+  once(eventName: string, listener: Listener): this;
+  removeListener(eventName: string, listener: Listener): this;
+  removeAllListeners(eventName?: string): this;
+
+  queryFilter<EventArgsArray extends Array<any>, EventArgsObject>(
+    event: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    fromBlockOrBlockhash?: string | number | undefined,
+    toBlock?: string | number | undefined
+  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
   interface: PausableInterface;
 
   functions: {
-    unpause(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
+    unpause(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     isPauser(account: string, overrides?: CallOverrides): Promise<[boolean]>;
 
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     paused(overrides?: CallOverrides): Promise<[boolean]>;
 
-    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
-
-    renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     addPauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+    pause(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    pause(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
   };
 
-  unpause(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
+  unpause(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
 
-  "isPauser(address)"(
-    account: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   paused(overrides?: CallOverrides): Promise<boolean>;
 
-  "paused()"(overrides?: CallOverrides): Promise<boolean>;
-
-  renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
+  renouncePauser(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   addPauser(
     account: string,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "addPauser(address)"(
-    account: string,
-    overrides?: Overrides
+  pause(
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  pause(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   callStatic: {
     unpause(overrides?: CallOverrides): Promise<void>;
 
-    "unpause()"(overrides?: CallOverrides): Promise<void>;
-
     isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
-
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
 
     paused(overrides?: CallOverrides): Promise<boolean>;
 
-    "paused()"(overrides?: CallOverrides): Promise<boolean>;
-
     renouncePauser(overrides?: CallOverrides): Promise<void>;
-
-    "renouncePauser()"(overrides?: CallOverrides): Promise<void>;
 
     addPauser(account: string, overrides?: CallOverrides): Promise<void>;
 
-    "addPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     pause(overrides?: CallOverrides): Promise<void>;
-
-    "pause()"(overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
-    Paused(account: null): EventFilter;
+    "Paused(address)"(
+      account?: null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    Unpaused(account: null): EventFilter;
+    Paused(account?: null): TypedEventFilter<[string], { account: string }>;
 
-    PauserAdded(account: string | null): EventFilter;
+    "Unpaused(address)"(
+      account?: null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    PauserRemoved(account: string | null): EventFilter;
+    Unpaused(account?: null): TypedEventFilter<[string], { account: string }>;
+
+    "PauserAdded(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    PauserAdded(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    "PauserRemoved(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    PauserRemoved(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
   };
 
   estimateGas: {
-    unpause(overrides?: Overrides): Promise<BigNumber>;
-
-    "unpause()"(overrides?: Overrides): Promise<BigNumber>;
+    unpause(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     isPauser(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     paused(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    renouncePauser(overrides?: Overrides): Promise<BigNumber>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<BigNumber>;
-
-    addPauser(account: string, overrides?: Overrides): Promise<BigNumber>;
-
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    pause(overrides?: Overrides): Promise<BigNumber>;
+    addPauser(
+      account: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    "pause()"(overrides?: Overrides): Promise<BigNumber>;
+    pause(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    unpause(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "unpause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+    unpause(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     isPauser(
       account: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    renouncePauser(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     addPauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+    pause(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    pause(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "pause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
   };
 }

@@ -2,19 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { IKIP37MetadataURI } from "../IKIP37MetadataURI";
-
-export class IKIP37MetadataURI__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): IKIP37MetadataURI {
-    return new Contract(address, _abi, signerOrProvider) as IKIP37MetadataURI;
-  }
-}
+import type {
+  IKIP37MetadataURI,
+  IKIP37MetadataURIInterface,
+} from "../IKIP37MetadataURI";
 
 const _abi = [
   {
@@ -306,3 +299,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class IKIP37MetadataURI__factory {
+  static readonly abi = _abi;
+  static createInterface(): IKIP37MetadataURIInterface {
+    return new utils.Interface(_abi) as IKIP37MetadataURIInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IKIP37MetadataURI {
+    return new Contract(address, _abi, signerOrProvider) as IKIP37MetadataURI;
+  }
+}

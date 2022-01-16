@@ -2,19 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { IKIP37Receiver } from "../IKIP37Receiver";
-
-export class IKIP37Receiver__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): IKIP37Receiver {
-    return new Contract(address, _abi, signerOrProvider) as IKIP37Receiver;
-  }
-}
+import type {
+  IKIP37Receiver,
+  IKIP37ReceiverInterface,
+} from "../IKIP37Receiver";
 
 const _abi = [
   {
@@ -107,3 +100,16 @@ const _abi = [
     type: "function",
   },
 ];
+
+export class IKIP37Receiver__factory {
+  static readonly abi = _abi;
+  static createInterface(): IKIP37ReceiverInterface {
+    return new utils.Interface(_abi) as IKIP37ReceiverInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IKIP37Receiver {
+    return new Contract(address, _abi, signerOrProvider) as IKIP37Receiver;
+  }
+}

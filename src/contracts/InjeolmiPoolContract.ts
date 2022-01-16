@@ -1,8 +1,8 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import Wallet from "../klaytn/Wallet";
-import InjeolmiPoolArtifact from "./abi/injeolmi/artifacts/contracts/InjeolmiPool.sol/InjeolmiPool.json";
+import InjeolmiPoolArtifact from "./abi/injeolmi-classic/artifacts/contracts/InjeolmiPool.sol/InjeolmiPool.json";
 import Contract from "./Contract";
-import InjeolmiContract from "./InjeolmiContract";
+import InjeolmiClassicContract from "./InjeolmiClassicContract";
 
 class InjeolmiPoolContract extends Contract {
 
@@ -17,8 +17,8 @@ class InjeolmiPoolContract extends Contract {
     public async swapToKlay(amount: BigNumber) {
         const owner = await Wallet.loadAddress();
         if (owner !== undefined) {
-            if ((await InjeolmiContract.allowance(owner, this.address)).lt(amount)) {
-                await InjeolmiContract.approve(this.address, amount);
+            if ((await InjeolmiClassicContract.allowance(owner, this.address)).lt(amount)) {
+                await InjeolmiClassicContract.approve(this.address, amount);
                 await new Promise<void>((resolve) => {
                     setTimeout(async () => {
                         await this.runWalletMethod("swapToKlay", amount);

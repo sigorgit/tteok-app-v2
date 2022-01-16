@@ -2,19 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { Pausable } from "../Pausable";
-
-export class Pausable__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): Pausable {
-    return new Contract(address, _abi, signerOrProvider) as Pausable;
-  }
-}
+import type { Pausable, PausableInterface } from "../Pausable";
 
 const _abi = [
   {
@@ -146,3 +136,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class Pausable__factory {
+  static readonly abi = _abi;
+  static createInterface(): PausableInterface {
+    return new utils.Interface(_abi) as PausableInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): Pausable {
+    return new Contract(address, _abi, signerOrProvider) as Pausable;
+  }
+}

@@ -1,7 +1,7 @@
 import { BodyNode, DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
 import { View, ViewParams } from "skyrouter";
-import InjeolmiContract from "../contracts/InjeolmiContract";
+import InjeolmiClassicContract from "../contracts/InjeolmiClassicContract";
 import InjeolmiPoolContract from "../contracts/InjeolmiPoolContract";
 import InjeolmiPriceContract from "../contracts/InjeolmiPriceContract";
 import Wallet from "../klaytn/Wallet";
@@ -36,11 +36,12 @@ export default class Classic implements View {
                 }),
                 el(".links",
                     el("a", "인절미 카이카스 지갑에 추가(클립은 영원히 지원 계획이 없습니다.)", {
+                        href: "#",
                         click: () => Wallet.addToken(
-                            InjeolmiContract.address,
-                            "IJM",
+                            InjeolmiClassicContract.address,
+                            "IJC",
                             8,
-                            "https://raw.githubusercontent.com/tteokmill/tteok-app/main/docs/images/injeolmi.png"
+                            "https://tteok.org/images/injeolmi-classic.png"
                         ),
                     }), "\n",
                     el("a", "스마트 콘트랙트 주소: 0x9CFc059F64D664F92f3d0329844B8ccca4E5215B", {

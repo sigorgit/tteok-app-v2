@@ -9,16 +9,15 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
-import {
-  Contract,
+  BaseContract,
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "@ethersproject/contracts";
+} from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface KIP37ReceiverMockInterface extends ethers.utils.Interface {
   functions: {
@@ -71,16 +70,68 @@ interface KIP37ReceiverMockInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "BatchReceived"): EventFragment;
 }
 
-export class KIP37ReceiverMock extends Contract {
+export type ReceivedEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber, string, BigNumber] & {
+    operator: string;
+    from: string;
+    id: BigNumber;
+    value: BigNumber;
+    data: string;
+    gas: BigNumber;
+  }
+>;
+
+export type BatchReceivedEvent = TypedEvent<
+  [string, string, BigNumber[], BigNumber[], string, BigNumber] & {
+    operator: string;
+    from: string;
+    ids: BigNumber[];
+    values: BigNumber[];
+    data: string;
+    gas: BigNumber;
+  }
+>;
+
+export class KIP37ReceiverMock extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  listeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter?: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): Array<TypedListener<EventArgsArray, EventArgsObject>>;
+  off<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  on<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  once<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeListener<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeAllListeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): this;
+
+  listeners(eventName?: string): Array<Listener>;
+  off(eventName: string, listener: Listener): this;
+  on(eventName: string, listener: Listener): this;
+  once(eventName: string, listener: Listener): this;
+  removeListener(eventName: string, listener: Listener): this;
+  removeAllListeners(eventName?: string): this;
+
+  queryFilter<EventArgsArray extends Array<any>, EventArgsObject>(
+    event: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    fromBlockOrBlockhash?: string | number | undefined,
+    toBlock?: string | number | undefined
+  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
   interface: KIP37ReceiverMockInterface;
 
@@ -90,19 +141,9 @@ export class KIP37ReceiverMock extends Contract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     registerInterface(
       interfaceId: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "registerInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     onKIP37BatchReceived(
@@ -111,16 +152,7 @@ export class KIP37ReceiverMock extends Contract {
       ids: BigNumberish[],
       values: BigNumberish[],
       data: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "onKIP37BatchReceived(address,address,uint256[],uint256[],bytes)"(
-      operator: string,
-      from: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     onKIP37Received(
@@ -129,16 +161,7 @@ export class KIP37ReceiverMock extends Contract {
       id: BigNumberish,
       value: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "onKIP37Received(address,address,uint256,uint256,bytes)"(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -147,19 +170,9 @@ export class KIP37ReceiverMock extends Contract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  "supportsInterface(bytes4)"(
-    interfaceId: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   registerInterface(
     interfaceId: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "registerInterface(bytes4)"(
-    interfaceId: BytesLike,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   onKIP37BatchReceived(
@@ -168,16 +181,7 @@ export class KIP37ReceiverMock extends Contract {
     ids: BigNumberish[],
     values: BigNumberish[],
     data: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "onKIP37BatchReceived(address,address,uint256[],uint256[],bytes)"(
-    operator: string,
-    from: string,
-    ids: BigNumberish[],
-    values: BigNumberish[],
-    data: BytesLike,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   onKIP37Received(
@@ -186,16 +190,7 @@ export class KIP37ReceiverMock extends Contract {
     id: BigNumberish,
     value: BigNumberish,
     data: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "onKIP37Received(address,address,uint256,uint256,bytes)"(
-    operator: string,
-    from: string,
-    id: BigNumberish,
-    value: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -204,17 +199,7 @@ export class KIP37ReceiverMock extends Contract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     registerInterface(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "registerInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -228,25 +213,7 @@ export class KIP37ReceiverMock extends Contract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "onKIP37BatchReceived(address,address,uint256[],uint256[],bytes)"(
-      operator: string,
-      from: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     onKIP37Received(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    "onKIP37Received(address,address,uint256,uint256,bytes)"(
       operator: string,
       from: string,
       id: BigNumberish,
@@ -257,23 +224,81 @@ export class KIP37ReceiverMock extends Contract {
   };
 
   filters: {
+    "Received(address,address,uint256,uint256,bytes,uint256)"(
+      operator?: null,
+      from?: null,
+      id?: null,
+      value?: null,
+      data?: null,
+      gas?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber, BigNumber, string, BigNumber],
+      {
+        operator: string;
+        from: string;
+        id: BigNumber;
+        value: BigNumber;
+        data: string;
+        gas: BigNumber;
+      }
+    >;
+
     Received(
-      operator: null,
-      from: null,
-      id: null,
-      value: null,
-      data: null,
-      gas: null
-    ): EventFilter;
+      operator?: null,
+      from?: null,
+      id?: null,
+      value?: null,
+      data?: null,
+      gas?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber, BigNumber, string, BigNumber],
+      {
+        operator: string;
+        from: string;
+        id: BigNumber;
+        value: BigNumber;
+        data: string;
+        gas: BigNumber;
+      }
+    >;
+
+    "BatchReceived(address,address,uint256[],uint256[],bytes,uint256)"(
+      operator?: null,
+      from?: null,
+      ids?: null,
+      values?: null,
+      data?: null,
+      gas?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber[], BigNumber[], string, BigNumber],
+      {
+        operator: string;
+        from: string;
+        ids: BigNumber[];
+        values: BigNumber[];
+        data: string;
+        gas: BigNumber;
+      }
+    >;
 
     BatchReceived(
-      operator: null,
-      from: null,
-      ids: null,
-      values: null,
-      data: null,
-      gas: null
-    ): EventFilter;
+      operator?: null,
+      from?: null,
+      ids?: null,
+      values?: null,
+      data?: null,
+      gas?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber[], BigNumber[], string, BigNumber],
+      {
+        operator: string;
+        from: string;
+        ids: BigNumber[];
+        values: BigNumber[];
+        data: string;
+        gas: BigNumber;
+      }
+    >;
   };
 
   estimateGas: {
@@ -282,19 +307,9 @@ export class KIP37ReceiverMock extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     registerInterface(
       interfaceId: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "registerInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     onKIP37BatchReceived(
@@ -303,16 +318,7 @@ export class KIP37ReceiverMock extends Contract {
       ids: BigNumberish[],
       values: BigNumberish[],
       data: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "onKIP37BatchReceived(address,address,uint256[],uint256[],bytes)"(
-      operator: string,
-      from: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     onKIP37Received(
@@ -321,16 +327,7 @@ export class KIP37ReceiverMock extends Contract {
       id: BigNumberish,
       value: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "onKIP37Received(address,address,uint256,uint256,bytes)"(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
@@ -340,19 +337,9 @@ export class KIP37ReceiverMock extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     registerInterface(
       interfaceId: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "registerInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     onKIP37BatchReceived(
@@ -361,16 +348,7 @@ export class KIP37ReceiverMock extends Contract {
       ids: BigNumberish[],
       values: BigNumberish[],
       data: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "onKIP37BatchReceived(address,address,uint256[],uint256[],bytes)"(
-      operator: string,
-      from: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     onKIP37Received(
@@ -379,16 +357,7 @@ export class KIP37ReceiverMock extends Contract {
       id: BigNumberish,
       value: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "onKIP37Received(address,address,uint256,uint256,bytes)"(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

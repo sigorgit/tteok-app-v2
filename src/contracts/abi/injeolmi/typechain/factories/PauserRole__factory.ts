@@ -2,19 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { PauserRole } from "../PauserRole";
-
-export class PauserRole__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): PauserRole {
-    return new Contract(address, _abi, signerOrProvider) as PauserRole;
-  }
-}
+import type { PauserRole, PauserRoleInterface } from "../PauserRole";
 
 const _abi = [
   {
@@ -90,3 +80,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class PauserRole__factory {
+  static readonly abi = _abi;
+  static createInterface(): PauserRoleInterface {
+    return new utils.Interface(_abi) as PauserRoleInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): PauserRole {
+    return new Contract(address, _abi, signerOrProvider) as PauserRole;
+  }
+}

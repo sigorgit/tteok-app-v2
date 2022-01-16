@@ -9,16 +9,15 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
-import {
-  Contract,
+  BaseContract,
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "@ethersproject/contracts";
+} from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface KIP7PausableMockInterface extends ethers.utils.Interface {
   functions: {
@@ -151,16 +150,66 @@ interface KIP7PausableMockInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
 }
 
-export class KIP7PausableMock extends Contract {
+export type PausedEvent = TypedEvent<[string] & { account: string }>;
+
+export type UnpausedEvent = TypedEvent<[string] & { account: string }>;
+
+export type PauserAddedEvent = TypedEvent<[string] & { account: string }>;
+
+export type PauserRemovedEvent = TypedEvent<[string] & { account: string }>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
+
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export class KIP7PausableMock extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  listeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter?: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): Array<TypedListener<EventArgsArray, EventArgsObject>>;
+  off<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  on<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  once<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeListener<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeAllListeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): this;
+
+  listeners(eventName?: string): Array<Listener>;
+  off(eventName: string, listener: Listener): this;
+  on(eventName: string, listener: Listener): this;
+  once(eventName: string, listener: Listener): this;
+  removeListener(eventName: string, listener: Listener): this;
+  removeAllListeners(eventName?: string): this;
+
+  queryFilter<EventArgsArray extends Array<any>, EventArgsObject>(
+    event: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    fromBlockOrBlockhash?: string | number | undefined,
+    toBlock?: string | number | undefined
+  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
   interface: KIP7PausableMockInterface;
 
@@ -170,67 +219,45 @@ export class KIP7PausableMock extends Contract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     approve(
       spender: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "approve(address,uint256)"(
-      spender: string,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    "totalSupply()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transferFrom(
       from: string,
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "transferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     onlyPauserMock(overrides?: CallOverrides): Promise<[void]>;
 
-    "onlyPauserMock()"(overrides?: CallOverrides): Promise<[void]>;
-
-    unpause(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
+    unpause(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     "safeTransfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     "safeTransfer(address,uint256,bytes)"(
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
@@ -238,74 +265,40 @@ export class KIP7PausableMock extends Contract {
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     isPauser(account: string, overrides?: CallOverrides): Promise<[boolean]>;
 
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     paused(overrides?: CallOverrides): Promise<[boolean]>;
-
-    "paused()"(overrides?: CallOverrides): Promise<[boolean]>;
 
     removePauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "removePauser(address)"(
-      account: string,
-      overrides?: Overrides
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     balanceOf(account: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "balanceOf(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     addPauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+    pause(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    pause(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     transfer(
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "transfer(address,uint256)"(
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     allowance(
-      owner: string,
-      spender: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    "allowance(address,address)"(
       owner: string,
       spender: string,
       overrides?: CallOverrides
@@ -317,67 +310,45 @@ export class KIP7PausableMock extends Contract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  "supportsInterface(bytes4)"(
-    interfaceId: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   approve(
     spender: string,
     value: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "approve(address,uint256)"(
-    spender: string,
-    value: BigNumberish,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-
-  "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   transferFrom(
     from: string,
     to: string,
     value: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "transferFrom(address,address,uint256)"(
-    from: string,
-    to: string,
-    value: BigNumberish,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   onlyPauserMock(overrides?: CallOverrides): Promise<void>;
 
-  "onlyPauserMock()"(overrides?: CallOverrides): Promise<void>;
-
-  unpause(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
+  unpause(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   "safeTransfer(address,uint256)"(
     recipient: string,
     amount: BigNumberish,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   "safeTransfer(address,uint256,bytes)"(
     recipient: string,
     amount: BigNumberish,
     data: BytesLike,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   "safeTransferFrom(address,address,uint256)"(
     sender: string,
     recipient: string,
     amount: BigNumberish,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   "safeTransferFrom(address,address,uint256,bytes)"(
@@ -385,74 +356,40 @@ export class KIP7PausableMock extends Contract {
     recipient: string,
     amount: BigNumberish,
     data: BytesLike,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
 
-  "isPauser(address)"(
-    account: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   paused(overrides?: CallOverrides): Promise<boolean>;
-
-  "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
   removePauser(
     account: string,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "removePauser(address)"(
-    account: string,
-    overrides?: Overrides
+  renouncePauser(
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  "balanceOf(address)"(
-    account: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   addPauser(
     account: string,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "addPauser(address)"(
-    account: string,
-    overrides?: Overrides
+  pause(
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  pause(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   transfer(
     to: string,
     value: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "transfer(address,uint256)"(
-    to: string,
-    value: BigNumberish,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   allowance(
-    owner: string,
-    spender: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  "allowance(address,address)"(
     owner: string,
     spender: string,
     overrides?: CallOverrides
@@ -464,26 +401,13 @@ export class KIP7PausableMock extends Contract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     approve(
       spender: string,
       value: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "approve(address,uint256)"(
-      spender: string,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferFrom(
       from: string,
@@ -492,20 +416,9 @@ export class KIP7PausableMock extends Contract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "transferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     onlyPauserMock(overrides?: CallOverrides): Promise<void>;
 
-    "onlyPauserMock()"(overrides?: CallOverrides): Promise<void>;
-
     unpause(overrides?: CallOverrides): Promise<void>;
-
-    "unpause()"(overrides?: CallOverrides): Promise<void>;
 
     "safeTransfer(address,uint256)"(
       recipient: string,
@@ -537,51 +450,19 @@ export class KIP7PausableMock extends Contract {
 
     isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
 
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     paused(overrides?: CallOverrides): Promise<boolean>;
-
-    "paused()"(overrides?: CallOverrides): Promise<boolean>;
 
     removePauser(account: string, overrides?: CallOverrides): Promise<void>;
 
-    "removePauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     renouncePauser(overrides?: CallOverrides): Promise<void>;
-
-    "renouncePauser()"(overrides?: CallOverrides): Promise<void>;
 
     balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "balanceOf(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     addPauser(account: string, overrides?: CallOverrides): Promise<void>;
-
-    "addPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     pause(overrides?: CallOverrides): Promise<void>;
 
-    "pause()"(overrides?: CallOverrides): Promise<void>;
-
     transfer(
-      to: string,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "transfer(address,uint256)"(
       to: string,
       value: BigNumberish,
       overrides?: CallOverrides
@@ -592,30 +473,72 @@ export class KIP7PausableMock extends Contract {
       spender: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    "allowance(address,address)"(
-      owner: string,
-      spender: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
   };
 
   filters: {
-    Paused(account: null): EventFilter;
+    "Paused(address)"(
+      account?: null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    Unpaused(account: null): EventFilter;
+    Paused(account?: null): TypedEventFilter<[string], { account: string }>;
 
-    PauserAdded(account: string | null): EventFilter;
+    "Unpaused(address)"(
+      account?: null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    PauserRemoved(account: string | null): EventFilter;
+    Unpaused(account?: null): TypedEventFilter<[string], { account: string }>;
 
-    Transfer(from: string | null, to: string | null, value: null): EventFilter;
+    "PauserAdded(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    PauserAdded(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    "PauserRemoved(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    PauserRemoved(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
+    >;
+
+    Transfer(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
+    >;
+
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
 
     Approval(
-      owner: string | null,
-      spender: string | null,
-      value: null
-    ): EventFilter;
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
   };
 
   estimateGas: {
@@ -624,67 +547,45 @@ export class KIP7PausableMock extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     approve(
       spender: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "approve(address,uint256)"(
-      spender: string,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "totalSupply()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferFrom(
       from: string,
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "transferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     onlyPauserMock(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "onlyPauserMock()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    unpause(overrides?: Overrides): Promise<BigNumber>;
-
-    "unpause()"(overrides?: Overrides): Promise<BigNumber>;
+    unpause(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     "safeTransfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     "safeTransfer(address,uint256,bytes)"(
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
@@ -692,68 +593,40 @@ export class KIP7PausableMock extends Contract {
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     isPauser(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     paused(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "paused()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    removePauser(account: string, overrides?: Overrides): Promise<BigNumber>;
-
-    "removePauser(address)"(
+    removePauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    renouncePauser(overrides?: Overrides): Promise<BigNumber>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<BigNumber>;
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     balanceOf(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "balanceOf(address)"(
+    addPauser(
       account: string,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    addPauser(account: string, overrides?: Overrides): Promise<BigNumber>;
-
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+    pause(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    pause(overrides?: Overrides): Promise<BigNumber>;
-
-    "pause()"(overrides?: Overrides): Promise<BigNumber>;
 
     transfer(
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "transfer(address,uint256)"(
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     allowance(
-      owner: string,
-      spender: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "allowance(address,address)"(
       owner: string,
       spender: string,
       overrides?: CallOverrides
@@ -766,69 +639,45 @@ export class KIP7PausableMock extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     approve(
       spender: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "approve(address,uint256)"(
-      spender: string,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "totalSupply()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferFrom(
       from: string,
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "transferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     onlyPauserMock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "onlyPauserMock()"(
-      overrides?: CallOverrides
+    unpause(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    unpause(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "unpause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     "safeTransfer(address,uint256)"(
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     "safeTransfer(address,uint256,bytes)"(
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       sender: string,
       recipient: string,
       amount: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
@@ -836,7 +685,7 @@ export class KIP7PausableMock extends Contract {
       recipient: string,
       amount: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     isPauser(
@@ -844,72 +693,38 @@ export class KIP7PausableMock extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "paused()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     removePauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removePauser(address)"(
-      account: string,
-      overrides?: Overrides
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    renouncePauser(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     balanceOf(
       account: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "balanceOf(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     addPauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+    pause(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    pause(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "pause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     transfer(
       to: string,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "transfer(address,uint256)"(
-      to: string,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     allowance(
-      owner: string,
-      spender: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "allowance(address,address)"(
       owner: string,
       spender: string,
       overrides?: CallOverrides

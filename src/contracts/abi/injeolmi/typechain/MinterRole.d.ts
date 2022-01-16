@@ -9,16 +9,15 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
-import {
-  Contract,
+  BaseContract,
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "@ethersproject/contracts";
+} from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface MinterRoleInterface extends ethers.utils.Interface {
   functions: {
@@ -50,130 +49,127 @@ interface MinterRoleInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "MinterRemoved"): EventFragment;
 }
 
-export class MinterRole extends Contract {
+export type MinterAddedEvent = TypedEvent<[string] & { account: string }>;
+
+export type MinterRemovedEvent = TypedEvent<[string] & { account: string }>;
+
+export class MinterRole extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  listeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter?: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): Array<TypedListener<EventArgsArray, EventArgsObject>>;
+  off<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  on<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  once<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeListener<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeAllListeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): this;
+
+  listeners(eventName?: string): Array<Listener>;
+  off(eventName: string, listener: Listener): this;
+  on(eventName: string, listener: Listener): this;
+  once(eventName: string, listener: Listener): this;
+  removeListener(eventName: string, listener: Listener): this;
+  removeAllListeners(eventName?: string): this;
+
+  queryFilter<EventArgsArray extends Array<any>, EventArgsObject>(
+    event: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    fromBlockOrBlockhash?: string | number | undefined,
+    toBlock?: string | number | undefined
+  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
   interface: MinterRoleInterface;
 
   functions: {
     addMinter(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "addMinter(address)"(
-      account: string,
-      overrides?: Overrides
+    renounceMinter(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    renounceMinter(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "renounceMinter()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     isMinter(account: string, overrides?: CallOverrides): Promise<[boolean]>;
-
-    "isMinter(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
   };
 
   addMinter(
     account: string,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "addMinter(address)"(
-    account: string,
-    overrides?: Overrides
+  renounceMinter(
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  renounceMinter(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "renounceMinter()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   isMinter(account: string, overrides?: CallOverrides): Promise<boolean>;
-
-  "isMinter(address)"(
-    account: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
 
   callStatic: {
     addMinter(account: string, overrides?: CallOverrides): Promise<void>;
 
-    "addMinter(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     renounceMinter(overrides?: CallOverrides): Promise<void>;
 
-    "renounceMinter()"(overrides?: CallOverrides): Promise<void>;
-
     isMinter(account: string, overrides?: CallOverrides): Promise<boolean>;
-
-    "isMinter(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
   };
 
   filters: {
-    MinterAdded(account: string | null): EventFilter;
+    "MinterAdded(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    MinterRemoved(account: string | null): EventFilter;
+    MinterAdded(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    "MinterRemoved(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    MinterRemoved(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
   };
 
   estimateGas: {
-    addMinter(account: string, overrides?: Overrides): Promise<BigNumber>;
-
-    "addMinter(address)"(
+    addMinter(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    renounceMinter(overrides?: Overrides): Promise<BigNumber>;
-
-    "renounceMinter()"(overrides?: Overrides): Promise<BigNumber>;
+    renounceMinter(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     isMinter(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "isMinter(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addMinter(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "addMinter(address)"(
-      account: string,
-      overrides?: Overrides
+    renounceMinter(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    renounceMinter(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "renounceMinter()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     isMinter(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isMinter(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

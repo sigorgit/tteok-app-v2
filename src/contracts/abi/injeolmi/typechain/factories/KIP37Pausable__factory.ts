@@ -2,19 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { KIP37Pausable } from "../KIP37Pausable";
-
-export class KIP37Pausable__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): KIP37Pausable {
-    return new Contract(address, _abi, signerOrProvider) as KIP37Pausable;
-  }
-}
+import type { KIP37Pausable, KIP37PausableInterface } from "../KIP37Pausable";
 
 const _abi = [
   {
@@ -534,3 +524,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class KIP37Pausable__factory {
+  static readonly abi = _abi;
+  static createInterface(): KIP37PausableInterface {
+    return new utils.Interface(_abi) as KIP37PausableInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): KIP37Pausable {
+    return new Contract(address, _abi, signerOrProvider) as KIP37Pausable;
+  }
+}

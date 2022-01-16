@@ -4,7 +4,7 @@ import KIP7Contract from "./standard/KIP7Contract";
 class InjeolmiContract extends KIP7Contract {
 
     constructor() {
-        super("0x9CFc059F64D664F92f3d0329844B8ccca4E5215B", InjeolmiArtifact.abi);
+        super("0x0268dbed3832b87582B1FA508aCF5958cbb1cd74", InjeolmiArtifact.abi);
     }
 }
 

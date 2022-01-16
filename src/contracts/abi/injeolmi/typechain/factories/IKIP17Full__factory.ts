@@ -2,19 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { IKIP17Full } from "../IKIP17Full";
-
-export class IKIP17Full__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): IKIP17Full {
-    return new Contract(address, _abi, signerOrProvider) as IKIP17Full;
-  }
-}
+import type { IKIP17Full, IKIP17FullInterface } from "../IKIP17Full";
 
 const _abi = [
   {
@@ -392,3 +382,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class IKIP17Full__factory {
+  static readonly abi = _abi;
+  static createInterface(): IKIP17FullInterface {
+    return new utils.Interface(_abi) as IKIP17FullInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IKIP17Full {
+    return new Contract(address, _abi, signerOrProvider) as IKIP17Full;
+  }
+}

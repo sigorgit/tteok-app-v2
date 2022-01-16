@@ -2,35 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { IInjeolmi } from "../IInjeolmi";
-
-export class IInjeolmi__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): IInjeolmi {
-    return new Contract(address, _abi, signerOrProvider) as IInjeolmi;
-  }
-}
+import type { IInjeolmi, IInjeolmiInterface } from "../IInjeolmi";
 
 const _abi = [
-  {
-    constant: true,
-    inputs: [],
-    name: "name",
-    outputs: [
-      {
-        name: "",
-        type: "string",
-      },
-    ],
-    payable: false,
-    stateMutability: "pure",
-    type: "function",
-  },
   {
     constant: false,
     inputs: [
@@ -46,7 +22,7 @@ const _abi = [
     name: "approve",
     outputs: [
       {
-        name: "success",
+        name: "",
         type: "bool",
       },
     ],
@@ -65,18 +41,18 @@ const _abi = [
       },
     ],
     payable: false,
-    stateMutability: "pure",
+    stateMutability: "view",
     type: "function",
   },
   {
     constant: false,
     inputs: [
       {
-        name: "from",
+        name: "sender",
         type: "address",
       },
       {
-        name: "to",
+        name: "recipient",
         type: "address",
       },
       {
@@ -87,7 +63,7 @@ const _abi = [
     name: "transferFrom",
     outputs: [
       {
-        name: "success",
+        name: "",
         type: "bool",
       },
     ],
@@ -97,76 +73,16 @@ const _abi = [
   },
   {
     constant: true,
-    inputs: [],
-    name: "decimals",
-    outputs: [
-      {
-        name: "",
-        type: "uint8",
-      },
-    ],
-    payable: false,
-    stateMutability: "pure",
-    type: "function",
-  },
-  {
-    constant: true,
     inputs: [
       {
-        name: "user",
-        type: "address",
-      },
-    ],
-    name: "excluded",
-    outputs: [
-      {
-        name: "",
-        type: "bool",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "user",
-        type: "address",
-      },
-    ],
-    name: "_userInfo",
-    outputs: [
-      {
-        name: "lastBalance",
-        type: "uint256",
-      },
-      {
-        name: "lastMultiplier",
-        type: "uint256",
-      },
-      {
-        name: "resettingCount",
-        type: "uint256",
-      },
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "owner",
+        name: "account",
         type: "address",
       },
     ],
     name: "balanceOf",
     outputs: [
       {
-        name: "balance",
+        name: "",
         type: "uint256",
       },
     ],
@@ -175,24 +91,10 @@ const _abi = [
     type: "function",
   },
   {
-    constant: true,
-    inputs: [],
-    name: "symbol",
-    outputs: [
-      {
-        name: "",
-        type: "string",
-      },
-    ],
-    payable: false,
-    stateMutability: "pure",
-    type: "function",
-  },
-  {
     constant: false,
     inputs: [
       {
-        name: "to",
+        name: "recipient",
         type: "address",
       },
       {
@@ -203,7 +105,7 @@ const _abi = [
     name: "transfer",
     outputs: [
       {
-        name: "success",
+        name: "",
         type: "bool",
       },
     ],
@@ -226,7 +128,7 @@ const _abi = [
     name: "allowance",
     outputs: [
       {
-        name: "remaining",
+        name: "",
         type: "uint256",
       },
     ],
@@ -249,7 +151,7 @@ const _abi = [
       },
       {
         indexed: false,
-        name: "amount",
+        name: "value",
         type: "uint256",
       },
     ],
@@ -271,7 +173,7 @@ const _abi = [
       },
       {
         indexed: false,
-        name: "amount",
+        name: "value",
         type: "uint256",
       },
     ],
@@ -279,3 +181,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class IInjeolmi__factory {
+  static readonly abi = _abi;
+  static createInterface(): IInjeolmiInterface {
+    return new utils.Interface(_abi) as IInjeolmiInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IInjeolmi {
+    return new Contract(address, _abi, signerOrProvider) as IInjeolmi;
+  }
+}

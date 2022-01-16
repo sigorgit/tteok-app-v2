@@ -4,12 +4,14 @@ export default class Home implements View {
     private interval;
     private priceDisplay;
     private balanceDisplay;
+    private hardforkDisplay;
     private initialSaleDisplay;
-    private buyableDisplay;
+    private yearendDisplay;
     private ijmPrice;
     private buyInput;
     private buyResult;
     constructor();
+    private refresh;
     private load;
     changeParams(params: ViewParams, uri: string): void;
     close(): void;

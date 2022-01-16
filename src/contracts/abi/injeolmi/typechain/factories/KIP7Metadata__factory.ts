@@ -2,19 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { KIP7Metadata } from "../KIP7Metadata";
-
-export class KIP7Metadata__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): KIP7Metadata {
-    return new Contract(address, _abi, signerOrProvider) as KIP7Metadata;
-  }
-}
+import type { KIP7Metadata, KIP7MetadataInterface } from "../KIP7Metadata";
 
 const _abi = [
   {
@@ -359,3 +349,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class KIP7Metadata__factory {
+  static readonly abi = _abi;
+  static createInterface(): KIP7MetadataInterface {
+    return new utils.Interface(_abi) as KIP7MetadataInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): KIP7Metadata {
+    return new Contract(address, _abi, signerOrProvider) as KIP7Metadata;
+  }
+}

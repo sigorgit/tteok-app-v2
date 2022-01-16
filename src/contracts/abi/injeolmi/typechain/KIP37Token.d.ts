@@ -9,16 +9,15 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
-import {
-  Contract,
+  BaseContract,
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "@ethersproject/contracts";
+} from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface KIP37TokenInterface extends ethers.utils.Interface {
   functions: {
@@ -201,16 +200,98 @@ interface KIP37TokenInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "URI"): EventFragment;
 }
 
-export class KIP37Token extends Contract {
+export type MinterAddedEvent = TypedEvent<[string] & { account: string }>;
+
+export type MinterRemovedEvent = TypedEvent<[string] & { account: string }>;
+
+export type Paused_uint256_address_Event = TypedEvent<
+  [BigNumber, string] & { tokenId: BigNumber; account: string }
+>;
+
+export type Paused_address_Event = TypedEvent<[string] & { account: string }>;
+
+export type Unpaused_uint256_address_Event = TypedEvent<
+  [BigNumber, string] & { tokenId: BigNumber; account: string }
+>;
+
+export type Unpaused_address_Event = TypedEvent<[string] & { account: string }>;
+
+export type PauserAddedEvent = TypedEvent<[string] & { account: string }>;
+
+export type PauserRemovedEvent = TypedEvent<[string] & { account: string }>;
+
+export type TransferSingleEvent = TypedEvent<
+  [string, string, string, BigNumber, BigNumber] & {
+    operator: string;
+    from: string;
+    to: string;
+    id: BigNumber;
+    value: BigNumber;
+  }
+>;
+
+export type TransferBatchEvent = TypedEvent<
+  [string, string, string, BigNumber[], BigNumber[]] & {
+    operator: string;
+    from: string;
+    to: string;
+    ids: BigNumber[];
+    values: BigNumber[];
+  }
+>;
+
+export type ApprovalForAllEvent = TypedEvent<
+  [string, string, boolean] & {
+    account: string;
+    operator: string;
+    approved: boolean;
+  }
+>;
+
+export type URIEvent = TypedEvent<
+  [string, BigNumber] & { value: string; id: BigNumber }
+>;
+
+export class KIP37Token extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  listeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter?: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): Array<TypedListener<EventArgsArray, EventArgsObject>>;
+  off<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  on<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  once<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeListener<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeAllListeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): this;
+
+  listeners(eventName?: string): Array<Listener>;
+  off(eventName: string, listener: Listener): this;
+  on(eventName: string, listener: Listener): this;
+  once(eventName: string, listener: Listener): this;
+  removeListener(eventName: string, listener: Listener): this;
+  removeAllListeners(eventName?: string): this;
+
+  queryFilter<EventArgsArray extends Array<any>, EventArgsObject>(
+    event: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    fromBlockOrBlockhash?: string | number | undefined,
+    toBlock?: string | number | undefined
+  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
   interface: KIP37TokenInterface;
 
@@ -228,35 +309,21 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "balanceOf(address,uint256)"(
-      account: string,
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     supportsInterface(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
 
-    "uri(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     "pause(uint256)"(
       _id: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
+    "pause()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     safeBatchTransferFrom(
       from: string,
@@ -264,53 +331,28 @@ export class KIP37Token extends Contract {
       ids: BigNumberish[],
       amounts: BigNumberish[],
       data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      amounts: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides
+    "unpause()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     "unpause(uint256)"(
       _id: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     isPauser(account: string, overrides?: CallOverrides): Promise<[boolean]>;
-
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
 
     create(
       _id: BigNumberish,
       _initialSupply: BigNumberish,
       _uri: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "create(uint256,uint256,string)"(
-      _id: BigNumberish,
-      _initialSupply: BigNumberish,
-      _uri: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     balanceOfBatch(
-      accounts: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<[BigNumber[]]>;
-
-    "balanceOfBatch(address[],uint256[])"(
       accounts: string[],
       ids: BigNumberish[],
       overrides?: CallOverrides
@@ -320,115 +362,64 @@ export class KIP37Token extends Contract {
       account: string,
       ids: BigNumberish[],
       values: BigNumberish[],
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "burnBatch(address,uint256[],uint256[])"(
-      account: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      overrides?: Overrides
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     addPauser(
       account: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     "mint(uint256,address,uint256)"(
       _id: BigNumberish,
       _to: string,
       _value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     "mint(uint256,address[],uint256[])"(
       _id: BigNumberish,
       _toList: string[],
       _values: BigNumberish[],
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     addMinter(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "addMinter(address)"(
-      account: string,
-      overrides?: Overrides
+    renounceMinter(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    renounceMinter(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "renounceMinter()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     setApprovalForAll(
       operator: string,
       approved: boolean,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     isMinter(account: string, overrides?: CallOverrides): Promise<[boolean]>;
-
-    "isMinter(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
 
     totalSupply(
       _tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    "totalSupply(uint256)"(
-      _tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     creators(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
-
-    "creators(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
 
     mintBatch(
       _to: string,
       _ids: BigNumberish[],
       _values: BigNumberish[],
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "mintBatch(address,uint256[],uint256[])"(
-      _to: string,
-      _ids: BigNumberish[],
-      _values: BigNumberish[],
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     isApprovedForAll(
-      account: string,
-      operator: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    "isApprovedForAll(address,address)"(
       account: string,
       operator: string,
       overrides?: CallOverrides
@@ -440,30 +431,14 @@ export class KIP37Token extends Contract {
       id: BigNumberish,
       amount: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      amount: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     burn(
       account: string,
       id: BigNumberish,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "burn(address,uint256,uint256)"(
-      account: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -480,35 +455,21 @@ export class KIP37Token extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "balanceOf(address,uint256)"(
-    account: string,
-    id: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   supportsInterface(
-    interfaceId: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "supportsInterface(bytes4)"(
     interfaceId: BytesLike,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
-  "uri(uint256)"(
-    tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
   "pause(uint256)"(
     _id: BigNumberish,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "pause()"(overrides?: Overrides): Promise<ContractTransaction>;
+  "pause()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   safeBatchTransferFrom(
     from: string,
@@ -516,53 +477,28 @@ export class KIP37Token extends Contract {
     ids: BigNumberish[],
     amounts: BigNumberish[],
     data: BytesLike,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-    from: string,
-    to: string,
-    ids: BigNumberish[],
-    amounts: BigNumberish[],
-    data: BytesLike,
-    overrides?: Overrides
+  "unpause()"(
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  "unpause()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   "unpause(uint256)"(
     _id: BigNumberish,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
-
-  "isPauser(address)"(
-    account: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
 
   create(
     _id: BigNumberish,
     _initialSupply: BigNumberish,
     _uri: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "create(uint256,uint256,string)"(
-    _id: BigNumberish,
-    _initialSupply: BigNumberish,
-    _uri: string,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   balanceOfBatch(
-    accounts: string[],
-    ids: BigNumberish[],
-    overrides?: CallOverrides
-  ): Promise<BigNumber[]>;
-
-  "balanceOfBatch(address[],uint256[])"(
     accounts: string[],
     ids: BigNumberish[],
     overrides?: CallOverrides
@@ -572,115 +508,64 @@ export class KIP37Token extends Contract {
     account: string,
     ids: BigNumberish[],
     values: BigNumberish[],
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "burnBatch(address,uint256[],uint256[])"(
-    account: string,
-    ids: BigNumberish[],
-    values: BigNumberish[],
-    overrides?: Overrides
+  renouncePauser(
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   addPauser(
     account: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "addPauser(address)"(
-    account: string,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   "mint(uint256,address,uint256)"(
     _id: BigNumberish,
     _to: string,
     _value: BigNumberish,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   "mint(uint256,address[],uint256[])"(
     _id: BigNumberish,
     _toList: string[],
     _values: BigNumberish[],
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   addMinter(
     account: string,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "addMinter(address)"(
-    account: string,
-    overrides?: Overrides
+  renounceMinter(
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  renounceMinter(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "renounceMinter()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   setApprovalForAll(
     operator: string,
     approved: boolean,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "setApprovalForAll(address,bool)"(
-    operator: string,
-    approved: boolean,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   isMinter(account: string, overrides?: CallOverrides): Promise<boolean>;
-
-  "isMinter(address)"(
-    account: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
 
   totalSupply(
     _tokenId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  "totalSupply(uint256)"(
-    _tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   creators(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  "creators(uint256)"(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
 
   mintBatch(
     _to: string,
     _ids: BigNumberish[],
     _values: BigNumberish[],
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "mintBatch(address,uint256[],uint256[])"(
-    _to: string,
-    _ids: BigNumberish[],
-    _values: BigNumberish[],
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   isApprovedForAll(
-    account: string,
-    operator: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  "isApprovedForAll(address,address)"(
     account: string,
     operator: string,
     overrides?: CallOverrides
@@ -692,30 +577,14 @@ export class KIP37Token extends Contract {
     id: BigNumberish,
     amount: BigNumberish,
     data: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-    from: string,
-    to: string,
-    id: BigNumberish,
-    amount: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   burn(
     account: string,
     id: BigNumberish,
     value: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "burn(address,uint256,uint256)"(
-    account: string,
-    id: BigNumberish,
-    value: BigNumberish,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -732,28 +601,12 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "balanceOf(address,uint256)"(
-      account: string,
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    "uri(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
 
     "pause(uint256)"(
       _id: BigNumberish,
@@ -771,15 +624,6 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      amounts: BigNumberish[],
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     "unpause()"(overrides?: CallOverrides): Promise<void>;
 
     "unpause(uint256)"(
@@ -789,19 +633,7 @@ export class KIP37Token extends Contract {
 
     isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
 
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     create(
-      _id: BigNumberish,
-      _initialSupply: BigNumberish,
-      _uri: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "create(uint256,uint256,string)"(
       _id: BigNumberish,
       _initialSupply: BigNumberish,
       _uri: string,
@@ -814,20 +646,7 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
-    "balanceOfBatch(address[],uint256[])"(
-      accounts: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<BigNumber[]>;
-
     burnBatch(
-      account: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "burnBatch(address,uint256[],uint256[])"(
       account: string,
       ids: BigNumberish[],
       values: BigNumberish[],
@@ -836,14 +655,7 @@ export class KIP37Token extends Contract {
 
     renouncePauser(overrides?: CallOverrides): Promise<void>;
 
-    "renouncePauser()"(overrides?: CallOverrides): Promise<void>;
-
     addPauser(account: string, overrides?: CallOverrides): Promise<void>;
-
-    "addPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     "mint(uint256,address,uint256)"(
       _id: BigNumberish,
@@ -861,14 +673,7 @@ export class KIP37Token extends Contract {
 
     addMinter(account: string, overrides?: CallOverrides): Promise<void>;
 
-    "addMinter(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     renounceMinter(overrides?: CallOverrides): Promise<void>;
-
-    "renounceMinter()"(overrides?: CallOverrides): Promise<void>;
 
     setApprovalForAll(
       operator: string,
@@ -876,35 +681,14 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setApprovalForAll(address,bool)"(
-      operator: string,
-      approved: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     isMinter(account: string, overrides?: CallOverrides): Promise<boolean>;
-
-    "isMinter(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
 
     totalSupply(
       _tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "totalSupply(uint256)"(
-      _tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     creators(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    "creators(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
 
     mintBatch(
       _to: string,
@@ -913,20 +697,7 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "mintBatch(address,uint256[],uint256[])"(
-      _to: string,
-      _ids: BigNumberish[],
-      _values: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     isApprovedForAll(
-      account: string,
-      operator: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    "isApprovedForAll(address,address)"(
       account: string,
       operator: string,
       overrides?: CallOverrides
@@ -941,23 +712,7 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      amount: BigNumberish,
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     burn(
-      account: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "burn(address,uint256,uint256)"(
       account: string,
       id: BigNumberish,
       value: BigNumberish,
@@ -966,41 +721,157 @@ export class KIP37Token extends Contract {
   };
 
   filters: {
-    MinterAdded(account: string | null): EventFilter;
+    "MinterAdded(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    MinterRemoved(account: string | null): EventFilter;
+    MinterAdded(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    Paused(tokenId: null, account: null): EventFilter;
+    "MinterRemoved(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    Unpaused(tokenId: null, account: null): EventFilter;
+    MinterRemoved(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    PauserAdded(account: string | null): EventFilter;
+    "Paused(uint256,address)"(
+      tokenId?: null,
+      account?: null
+    ): TypedEventFilter<
+      [BigNumber, string],
+      { tokenId: BigNumber; account: string }
+    >;
 
-    PauserRemoved(account: string | null): EventFilter;
+    "Paused(address)"(
+      account?: null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    "Unpaused(uint256,address)"(
+      tokenId?: null,
+      account?: null
+    ): TypedEventFilter<
+      [BigNumber, string],
+      { tokenId: BigNumber; account: string }
+    >;
+
+    "Unpaused(address)"(
+      account?: null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    "PauserAdded(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    PauserAdded(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    "PauserRemoved(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    PauserRemoved(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    "TransferSingle(address,address,address,uint256,uint256)"(
+      operator?: string | null,
+      from?: string | null,
+      to?: string | null,
+      id?: null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber, BigNumber],
+      {
+        operator: string;
+        from: string;
+        to: string;
+        id: BigNumber;
+        value: BigNumber;
+      }
+    >;
 
     TransferSingle(
-      operator: string | null,
-      from: string | null,
-      to: string | null,
-      id: null,
-      value: null
-    ): EventFilter;
+      operator?: string | null,
+      from?: string | null,
+      to?: string | null,
+      id?: null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber, BigNumber],
+      {
+        operator: string;
+        from: string;
+        to: string;
+        id: BigNumber;
+        value: BigNumber;
+      }
+    >;
+
+    "TransferBatch(address,address,address,uint256[],uint256[])"(
+      operator?: string | null,
+      from?: string | null,
+      to?: string | null,
+      ids?: null,
+      values?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber[], BigNumber[]],
+      {
+        operator: string;
+        from: string;
+        to: string;
+        ids: BigNumber[];
+        values: BigNumber[];
+      }
+    >;
 
     TransferBatch(
-      operator: string | null,
-      from: string | null,
-      to: string | null,
-      ids: null,
-      values: null
-    ): EventFilter;
+      operator?: string | null,
+      from?: string | null,
+      to?: string | null,
+      ids?: null,
+      values?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber[], BigNumber[]],
+      {
+        operator: string;
+        from: string;
+        to: string;
+        ids: BigNumber[];
+        values: BigNumber[];
+      }
+    >;
+
+    "ApprovalForAll(address,address,bool)"(
+      account?: string | null,
+      operator?: string | null,
+      approved?: null
+    ): TypedEventFilter<
+      [string, string, boolean],
+      { account: string; operator: string; approved: boolean }
+    >;
 
     ApprovalForAll(
-      account: string | null,
-      operator: string | null,
-      approved: null
-    ): EventFilter;
+      account?: string | null,
+      operator?: string | null,
+      approved?: null
+    ): TypedEventFilter<
+      [string, string, boolean],
+      { account: string; operator: string; approved: boolean }
+    >;
 
-    URI(value: null, id: BigNumberish | null): EventFilter;
+    "URI(string,uint256)"(
+      value?: null,
+      id?: BigNumberish | null
+    ): TypedEventFilter<[string, BigNumber], { value: string; id: BigNumber }>;
+
+    URI(
+      value?: null,
+      id?: BigNumberish | null
+    ): TypedEventFilter<[string, BigNumber], { value: string; id: BigNumber }>;
   };
 
   estimateGas: {
@@ -1017,35 +888,21 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "balanceOf(address,uint256)"(
-      account: string,
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     supportsInterface(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "uri(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     "pause(uint256)"(
       _id: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "pause()"(overrides?: Overrides): Promise<BigNumber>;
+    "pause()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     safeBatchTransferFrom(
       from: string,
@@ -1053,53 +910,28 @@ export class KIP37Token extends Contract {
       ids: BigNumberish[],
       amounts: BigNumberish[],
       data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      amounts: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides
+    "unpause()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    "unpause()"(overrides?: Overrides): Promise<BigNumber>;
 
     "unpause(uint256)"(
       _id: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     isPauser(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     create(
       _id: BigNumberish,
       _initialSupply: BigNumberish,
       _uri: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "create(uint256,uint256,string)"(
-      _id: BigNumberish,
-      _initialSupply: BigNumberish,
-      _uri: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     balanceOfBatch(
-      accounts: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "balanceOfBatch(address[],uint256[])"(
       accounts: string[],
       ids: BigNumberish[],
       overrides?: CallOverrides
@@ -1109,109 +941,64 @@ export class KIP37Token extends Contract {
       account: string,
       ids: BigNumberish[],
       values: BigNumberish[],
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "burnBatch(address,uint256[],uint256[])"(
-      account: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      overrides?: Overrides
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    renouncePauser(overrides?: Overrides): Promise<BigNumber>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<BigNumber>;
-
-    addPauser(account: string, overrides?: Overrides): Promise<BigNumber>;
-
-    "addPauser(address)"(
+    addPauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     "mint(uint256,address,uint256)"(
       _id: BigNumberish,
       _to: string,
       _value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     "mint(uint256,address[],uint256[])"(
       _id: BigNumberish,
       _toList: string[],
       _values: BigNumberish[],
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    addMinter(account: string, overrides?: Overrides): Promise<BigNumber>;
-
-    "addMinter(address)"(
+    addMinter(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    renounceMinter(overrides?: Overrides): Promise<BigNumber>;
-
-    "renounceMinter()"(overrides?: Overrides): Promise<BigNumber>;
+    renounceMinter(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     setApprovalForAll(
       operator: string,
       approved: boolean,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     isMinter(account: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "isMinter(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     totalSupply(
       _tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "totalSupply(uint256)"(
-      _tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     creators(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    "creators(uint256)"(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     mintBatch(
       _to: string,
       _ids: BigNumberish[],
       _values: BigNumberish[],
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "mintBatch(address,uint256[],uint256[])"(
-      _to: string,
-      _ids: BigNumberish[],
-      _values: BigNumberish[],
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     isApprovedForAll(
-      account: string,
-      operator: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    "isApprovedForAll(address,address)"(
       account: string,
       operator: string,
       overrides?: CallOverrides
@@ -1223,30 +1010,14 @@ export class KIP37Token extends Contract {
       id: BigNumberish,
       amount: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      amount: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     burn(
       account: string,
       id: BigNumberish,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "burn(address,uint256,uint256)"(
-      account: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
@@ -1264,18 +1035,7 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "balanceOf(address,uint256)"(
-      account: string,
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     supportsInterface(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "supportsInterface(bytes4)"(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1285,17 +1045,14 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "uri(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     "pause(uint256)"(
       _id: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "pause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
+    "pause()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     safeBatchTransferFrom(
       from: string,
@@ -1303,31 +1060,19 @@ export class KIP37Token extends Contract {
       ids: BigNumberish[],
       amounts: BigNumberish[],
       data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)"(
-      from: string,
-      to: string,
-      ids: BigNumberish[],
-      amounts: BigNumberish[],
-      data: BytesLike,
-      overrides?: Overrides
+    "unpause()"(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    "unpause()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     "unpause(uint256)"(
       _id: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     isPauser(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isPauser(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1336,23 +1081,10 @@ export class KIP37Token extends Contract {
       _id: BigNumberish,
       _initialSupply: BigNumberish,
       _uri: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "create(uint256,uint256,string)"(
-      _id: BigNumberish,
-      _initialSupply: BigNumberish,
-      _uri: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     balanceOfBatch(
-      accounts: string[],
-      ids: BigNumberish[],
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "balanceOfBatch(address[],uint256[])"(
       accounts: string[],
       ids: BigNumberish[],
       overrides?: CallOverrides
@@ -1362,76 +1094,48 @@ export class KIP37Token extends Contract {
       account: string,
       ids: BigNumberish[],
       values: BigNumberish[],
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "burnBatch(address,uint256[],uint256[])"(
-      account: string,
-      ids: BigNumberish[],
-      values: BigNumberish[],
-      overrides?: Overrides
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    renouncePauser(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     addPauser(
       account: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     "mint(uint256,address,uint256)"(
       _id: BigNumberish,
       _to: string,
       _value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     "mint(uint256,address[],uint256[])"(
       _id: BigNumberish,
       _toList: string[],
       _values: BigNumberish[],
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     addMinter(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "addMinter(address)"(
-      account: string,
-      overrides?: Overrides
+    renounceMinter(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    renounceMinter(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "renounceMinter()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     setApprovalForAll(
       operator: string,
       approved: boolean,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "setApprovalForAll(address,bool)"(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     isMinter(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isMinter(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1441,17 +1145,7 @@ export class KIP37Token extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "totalSupply(uint256)"(
-      _tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     creators(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "creators(uint256)"(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1460,23 +1154,10 @@ export class KIP37Token extends Contract {
       _to: string,
       _ids: BigNumberish[],
       _values: BigNumberish[],
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "mintBatch(address,uint256[],uint256[])"(
-      _to: string,
-      _ids: BigNumberish[],
-      _values: BigNumberish[],
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
-      account: string,
-      operator: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isApprovedForAll(address,address)"(
       account: string,
       operator: string,
       overrides?: CallOverrides
@@ -1488,30 +1169,14 @@ export class KIP37Token extends Contract {
       id: BigNumberish,
       amount: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "safeTransferFrom(address,address,uint256,uint256,bytes)"(
-      from: string,
-      to: string,
-      id: BigNumberish,
-      amount: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     burn(
       account: string,
       id: BigNumberish,
       value: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "burn(address,uint256,uint256)"(
-      account: string,
-      id: BigNumberish,
-      value: BigNumberish,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

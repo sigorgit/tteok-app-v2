@@ -2,19 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { MinterRole } from "../MinterRole";
-
-export class MinterRole__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): MinterRole {
-    return new Contract(address, _abi, signerOrProvider) as MinterRole;
-  }
-}
+import type { MinterRole, MinterRoleInterface } from "../MinterRole";
 
 const _abi = [
   {
@@ -90,3 +80,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class MinterRole__factory {
+  static readonly abi = _abi;
+  static createInterface(): MinterRoleInterface {
+    return new utils.Interface(_abi) as MinterRoleInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): MinterRole {
+    return new Contract(address, _abi, signerOrProvider) as MinterRole;
+  }
+}

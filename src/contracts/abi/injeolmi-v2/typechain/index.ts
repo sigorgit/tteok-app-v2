@@ -3,6 +3,7 @@
 /* eslint-disable */
 export type { Ark } from "./Ark";
 export type { InitialSale } from "./InitialSale";
+export type { InitialSaleReceiver } from "./InitialSaleReceiver";
 export type { MinterRole } from "./MinterRole";
 export type { PauserRole } from "./PauserRole";
 export type { Context } from "./Context";
@@ -74,6 +75,7 @@ export type { YearendAirdrop } from "./YearendAirdrop";
 
 export { Ark__factory } from "./factories/Ark__factory";
 export { InitialSale__factory } from "./factories/InitialSale__factory";
+export { InitialSaleReceiver__factory } from "./factories/InitialSaleReceiver__factory";
 export { MinterRole__factory } from "./factories/MinterRole__factory";
 export { PauserRole__factory } from "./factories/PauserRole__factory";
 export { Context__factory } from "./factories/Context__factory";

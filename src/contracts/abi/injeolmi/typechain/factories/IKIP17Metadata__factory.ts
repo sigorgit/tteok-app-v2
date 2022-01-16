@@ -2,19 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { IKIP17Metadata } from "../IKIP17Metadata";
-
-export class IKIP17Metadata__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): IKIP17Metadata {
-    return new Contract(address, _abi, signerOrProvider) as IKIP17Metadata;
-  }
-}
+import type {
+  IKIP17Metadata,
+  IKIP17MetadataInterface,
+} from "../IKIP17Metadata";
 
 const _abi = [
   {
@@ -336,3 +329,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class IKIP17Metadata__factory {
+  static readonly abi = _abi;
+  static createInterface(): IKIP17MetadataInterface {
+    return new utils.Interface(_abi) as IKIP17MetadataInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IKIP17Metadata {
+    return new Contract(address, _abi, signerOrProvider) as IKIP17Metadata;
+  }
+}

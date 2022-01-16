@@ -1,11 +1,12 @@
 import { DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
 import { View, ViewParams } from "skyrouter";
-import CommonUtil from "../CommonUtil";
 import Alert from "../component/dialogue/Alert";
 import UserInfo from "../component/UserInfo";
 import ArkContract from "../contracts/ArkContract";
 import InitialSaleContract from "../contracts/InitialSaleContract";
+import InitialSaleReceiverContract from "../contracts/InitialSaleReceiverContract";
+import InjeolmiContract from "../contracts/InjeolmiContract";
 import YearendAirdropContract from "../contracts/YearendAirdropContract";
 import Wallet from "../klaytn/Wallet";
 import Layout from "./Layout";
@@ -19,8 +20,9 @@ export default class Home implements View {
     private priceDisplay: DomNode;
     private balanceDisplay: DomNode;
 
+    private hardforkDisplay: DomNode;
     private initialSaleDisplay: DomNode;
-    private buyableDisplay: DomNode;
+    private yearendDisplay: DomNode;
 
     private ijmPrice: BigNumber = BigNumber.from("144374553246136709");
 
@@ -69,16 +71,38 @@ export default class Home implements View {
                                 el(".content",
                                     el("h3", "너의 인절미"),
                                     el(".price", (this.balanceDisplay = el("span.price", "...")), " IJM"),
+                                    el("button", "인절미 지갑에 추가", {
+                                        click: () => Wallet.addToken(
+                                            InjeolmiContract.address,
+                                            "IJM",
+                                            18,
+                                            "https://tteok.org/images/injeolmi.png"
+                                        ),
+                                    }),
                                 ),
                             ),
                             el(".price-container",
                                 el(".content",
-                                    el("h3", "떡크노믹스 미반영 물량"),
-                                    el(".price", (this.initialSaleDisplay = el("span.price", "...")), " IJM"),
+                                    el("h3", "하드포크 물량 받기"),
+                                    el(".price", (this.hardforkDisplay = el("span.price", "...")), " IJM"),
+                                    el("button", "받기", {
+                                        click: () => ArkContract.receiveNew(),
+                                    }),
                                 ),
                                 el(".content",
-                                    el("h3", "구매 가능 물량"),
-                                    el(".price", (this.buyableDisplay = el("span.price", "...")), " IJM"),
+                                    el("h3", "구매한 물량 받기"),
+                                    el("p", "떡크노믹스가 사라졌으므로 10% 추가함"),
+                                    el(".price", (this.initialSaleDisplay = el("span.price", "...")), " IJM"),
+                                    el("button", "받기", {
+                                        click: () => InitialSaleReceiverContract.receiveNew(),
+                                    }),
+                                ),
+                                el(".content",
+                                    el("h3", "연말 이벤트 물량 받기"),
+                                    el(".price", (this.yearendDisplay = el("span.price", "...")), " IJM"),
+                                    el("button", "받기", {
+                                        click: () => YearendAirdropContract.receiveNew(),
+                                    }),
                                 ),
                             ),
                             el(".group-issue",
@@ -98,8 +122,10 @@ export default class Home implements View {
                             ),
                             el(".form",
                                 el("h3", "클레이로 인절미 사기"),
-                                el(".caption", "현재 하드포크 기간이어서 떡크노믹스 반영되지 않고 액수 그대로 구매 가능함"),
-                                el(".caption", "떡크노믹스 미반영 물량에서 사는거고 지갑당 최대 5만개(7218.72766230683545 KLAY)까지 구매 가능"),
+                                el(".caption", el("a", "클레이스왑", {
+                                    href: "https://klayswap.com/",
+                                    target: "_blank",
+                                }), "을 통해 삼"),
                                 el(".input-container",
                                     this.buyInput = el("input", {
                                         placeholder: "클레이 수량 입력",
@@ -127,9 +153,12 @@ export default class Home implements View {
                                 ),
                                 this.buyResult = el(".result"),
                             ),
-                            /*el(".form",
+                            el(".form",
                                 el("h3", "클레이로 인절기 펄기"),
-                                el(".caption", "인절미를 펄때도 떡크노믹스 때문에 10%를 적게 받습니다."),
+                                el(".caption", el("a", "클레이스왑", {
+                                    href: "https://klayswap.com/",
+                                    target: "_blank",
+                                }), "을 통해 펌"),
                                 el(".input-container",
                                     this.buyInput = el("input", {
                                         placeholder: "인절미 수량 입력",
@@ -148,7 +177,7 @@ export default class Home implements View {
                                         },
                                     })
                                 )
-                            )*/
+                            )
                         ),
                         el(".right-container",
                             el(".connect-wallet",
@@ -187,35 +216,30 @@ export default class Home implements View {
         const address = await Wallet.loadAddress();
         if (address !== undefined) {
 
-            let balance = BigNumber.from(0);
+            const balance = await InjeolmiContract.balanceOf(address);
+            this.balanceDisplay.empty().appendText(utils.formatEther(balance));
 
-            const records = await ArkContract.records(address);
-            const bought = await InitialSaleContract.bought(address);
+            if (await ArkContract.received(address) === true) {
+                this.hardforkDisplay.empty().appendText("0");
+            } else {
+                const records = await ArkContract.records(address);
+                this.hardforkDisplay.empty().appendText(utils.formatEther(records.mul(10000000000)));
+            }
 
-            balance = balance.add(records.mul("10000000000")).add(bought);
+            if (await InitialSaleReceiverContract.received(address) === true) {
+                this.initialSaleDisplay.empty().appendText("0");
+            } else {
+                const bought = await InitialSaleContract.bought(address);
+                this.initialSaleDisplay.empty().appendText(utils.formatEther(bought.mul(11).div(10)));
+            }
 
             const toReceive = await YearendAirdropContract.toReceive(address);
             if (toReceive === true) {
-                balance = balance.add(utils.parseEther("100"));
+                this.yearendDisplay.empty().appendText(utils.formatEther("100"));
+            } else {
+                this.yearendDisplay.empty().appendText("0");
             }
-
-            this.balanceDisplay.empty().appendText(utils.formatEther(balance));
-
-            this.buyableDisplay.empty().appendText(utils.formatEther(BigNumber.from("50000000000000000000000").sub(bought)));
         }
-
-        let buyable = BigNumber.from("100000000000000000000000000");
-        // sparrow nft
-        buyable = buyable.sub("10000000000000000000000000");
-        // ark
-        buyable = buyable.sub("72885984369501670000000000");
-        // airdrop
-        buyable = buyable.sub("731800000000000000000000");
-        // yj
-        buyable = buyable.add("4466106537452830000000000");
-
-        buyable = buyable.div(2).sub(await InitialSaleContract.total());
-        this.initialSaleDisplay.empty().appendText(utils.formatEther(buyable));
     }
 
     public changeParams(params: ViewParams, uri: string): void { }

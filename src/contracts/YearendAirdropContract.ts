@@ -10,6 +10,10 @@ class YearendAirdropContract extends Contract {
     public async toReceive(address: string): Promise<boolean> {
         return await this.runMethod("toReceive", address);
     }
+
+    public async receiveNew(): Promise<void> {
+        await this.runWalletMethod("receiveNew");
+    }
 }
 
 export default new YearendAirdropContract();

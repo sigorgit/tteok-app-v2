@@ -1,4 +1,4 @@
-import AirdropArtifact from "./abi/injeolmi/artifacts/contracts/Airdrop.sol/Airdrop.json";
+import AirdropArtifact from "./abi/injeolmi-classic/artifacts/contracts/Airdrop.sol/Airdrop.json";
 import Contract from "./Contract";
 
 class AirdropContract extends Contract {

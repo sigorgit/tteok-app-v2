@@ -1,0 +1,1 @@
+{"version":3,"file":"InjeolmiClassicContract.js","sourceRoot":"","sources":["../../src/contracts/InjeolmiClassicContract.ts"],"names":[],"mappings":";;;;;AAAA,0HAAqG;AACrG,2EAAmD;AAEnD,MAAM,uBAAwB,SAAQ,sBAAY;IAE9C;QACI,KAAK,CAAC,4CAA4C,EAAE,uBAAgB,CAAC,GAAG,CAAC,CAAC;IAC9E,CAAC;CACJ;AAED,kBAAe,IAAI,uBAAuB,EAAE,CAAC"}

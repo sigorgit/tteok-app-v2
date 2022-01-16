@@ -2,19 +2,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { IKIP17Enumerable } from "../IKIP17Enumerable";
-
-export class IKIP17Enumerable__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): IKIP17Enumerable {
-    return new Contract(address, _abi, signerOrProvider) as IKIP17Enumerable;
-  }
-}
+import type {
+  IKIP17Enumerable,
+  IKIP17EnumerableInterface,
+} from "../IKIP17Enumerable";
 
 const _abi = [
   {
@@ -345,3 +338,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class IKIP17Enumerable__factory {
+  static readonly abi = _abi;
+  static createInterface(): IKIP17EnumerableInterface {
+    return new utils.Interface(_abi) as IKIP17EnumerableInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): IKIP17Enumerable {
+    return new Contract(address, _abi, signerOrProvider) as IKIP17Enumerable;
+  }
+}

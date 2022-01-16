@@ -2,19 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { KIP37Burnable } from "../KIP37Burnable";
-
-export class KIP37Burnable__factory {
-  static connect(
-    address: string,
-    signerOrProvider: Signer | Provider
-  ): KIP37Burnable {
-    return new Contract(address, _abi, signerOrProvider) as KIP37Burnable;
-  }
-}
+import type { KIP37Burnable, KIP37BurnableInterface } from "../KIP37Burnable";
 
 const _abi = [
   {
@@ -375,3 +365,16 @@ const _abi = [
     type: "event",
   },
 ];
+
+export class KIP37Burnable__factory {
+  static readonly abi = _abi;
+  static createInterface(): KIP37BurnableInterface {
+    return new utils.Interface(_abi) as KIP37BurnableInterface;
+  }
+  static connect(
+    address: string,
+    signerOrProvider: Signer | Provider
+  ): KIP37Burnable {
+    return new Contract(address, _abi, signerOrProvider) as KIP37Burnable;
+  }
+}

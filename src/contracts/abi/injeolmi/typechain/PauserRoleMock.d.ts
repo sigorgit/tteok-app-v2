@@ -9,16 +9,15 @@ import {
   BigNumber,
   BigNumberish,
   PopulatedTransaction,
-} from "ethers";
-import {
-  Contract,
+  BaseContract,
   ContractTransaction,
   Overrides,
   CallOverrides,
-} from "@ethersproject/contracts";
+} from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface PauserRoleMockInterface extends ethers.utils.Interface {
   functions: {
@@ -68,198 +67,161 @@ interface PauserRoleMockInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "PauserRemoved"): EventFragment;
 }
 
-export class PauserRoleMock extends Contract {
+export type PauserAddedEvent = TypedEvent<[string] & { account: string }>;
+
+export type PauserRemovedEvent = TypedEvent<[string] & { account: string }>;
+
+export class PauserRoleMock extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  on(event: EventFilter | string, listener: Listener): this;
-  once(event: EventFilter | string, listener: Listener): this;
-  addListener(eventName: EventFilter | string, listener: Listener): this;
-  removeAllListeners(eventName: EventFilter | string): this;
-  removeListener(eventName: any, listener: Listener): this;
+  listeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter?: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): Array<TypedListener<EventArgsArray, EventArgsObject>>;
+  off<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  on<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  once<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeListener<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    listener: TypedListener<EventArgsArray, EventArgsObject>
+  ): this;
+  removeAllListeners<EventArgsArray extends Array<any>, EventArgsObject>(
+    eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>
+  ): this;
+
+  listeners(eventName?: string): Array<Listener>;
+  off(eventName: string, listener: Listener): this;
+  on(eventName: string, listener: Listener): this;
+  once(eventName: string, listener: Listener): this;
+  removeListener(eventName: string, listener: Listener): this;
+  removeAllListeners(eventName?: string): this;
+
+  queryFilter<EventArgsArray extends Array<any>, EventArgsObject>(
+    event: TypedEventFilter<EventArgsArray, EventArgsObject>,
+    fromBlockOrBlockhash?: string | number | undefined,
+    toBlock?: string | number | undefined
+  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
   interface: PauserRoleMockInterface;
 
   functions: {
     onlyPauserMock(overrides?: CallOverrides): Promise<[void]>;
 
-    "onlyPauserMock()"(overrides?: CallOverrides): Promise<[void]>;
-
     isPauser(account: string, overrides?: CallOverrides): Promise<[boolean]>;
-
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
 
     removePauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "removePauser(address)"(
-      account: string,
-      overrides?: Overrides
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     addPauser(
       account: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   onlyPauserMock(overrides?: CallOverrides): Promise<void>;
 
-  "onlyPauserMock()"(overrides?: CallOverrides): Promise<void>;
-
   isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
-
-  "isPauser(address)"(
-    account: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
 
   removePauser(
     account: string,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "removePauser(address)"(
-    account: string,
-    overrides?: Overrides
+  renouncePauser(
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  renouncePauser(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "renouncePauser()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   addPauser(
     account: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "addPauser(address)"(
-    account: string,
-    overrides?: Overrides
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     onlyPauserMock(overrides?: CallOverrides): Promise<void>;
 
-    "onlyPauserMock()"(overrides?: CallOverrides): Promise<void>;
-
     isPauser(account: string, overrides?: CallOverrides): Promise<boolean>;
-
-    "isPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
 
     removePauser(account: string, overrides?: CallOverrides): Promise<void>;
 
-    "removePauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     renouncePauser(overrides?: CallOverrides): Promise<void>;
 
-    "renouncePauser()"(overrides?: CallOverrides): Promise<void>;
-
     addPauser(account: string, overrides?: CallOverrides): Promise<void>;
-
-    "addPauser(address)"(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
   };
 
   filters: {
-    PauserAdded(account: string | null): EventFilter;
+    "PauserAdded(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
 
-    PauserRemoved(account: string | null): EventFilter;
+    PauserAdded(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    "PauserRemoved(address)"(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
+
+    PauserRemoved(
+      account?: string | null
+    ): TypedEventFilter<[string], { account: string }>;
   };
 
   estimateGas: {
     onlyPauserMock(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "onlyPauserMock()"(overrides?: CallOverrides): Promise<BigNumber>;
-
     isPauser(account: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "isPauser(address)"(
+    removePauser(
       account: string,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    removePauser(account: string, overrides?: Overrides): Promise<BigNumber>;
-
-    "removePauser(address)"(
-      account: string,
-      overrides?: Overrides
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    renouncePauser(overrides?: Overrides): Promise<BigNumber>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<BigNumber>;
-
-    addPauser(account: string, overrides?: Overrides): Promise<BigNumber>;
-
-    "addPauser(address)"(
+    addPauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     onlyPauserMock(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "onlyPauserMock()"(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     isPauser(
-      account: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    "isPauser(address)"(
       account: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     removePauser(
       account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removePauser(address)"(
-      account: string,
-      overrides?: Overrides
+    renouncePauser(
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    renouncePauser(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "renouncePauser()"(overrides?: Overrides): Promise<PopulatedTransaction>;
 
     addPauser(
       account: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "addPauser(address)"(
-      account: string,
-      overrides?: Overrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

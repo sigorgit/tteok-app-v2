@@ -2,16 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { Contract, Signer } from "ethers";
+import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-
-import type { KIP13 } from "../KIP13";
-
-export class KIP13__factory {
-  static connect(address: string, signerOrProvider: Signer | Provider): KIP13 {
-    return new Contract(address, _abi, signerOrProvider) as KIP13;
-  }
-}
+import type { KIP13, KIP13Interface } from "../KIP13";
 
 const _abi = [
   {
@@ -40,3 +33,13 @@ const _abi = [
     type: "constructor",
   },
 ];
+
+export class KIP13__factory {
+  static readonly abi = _abi;
+  static createInterface(): KIP13Interface {
+    return new utils.Interface(_abi) as KIP13Interface;
+  }
+  static connect(address: string, signerOrProvider: Signer | Provider): KIP13 {
+    return new Contract(address, _abi, signerOrProvider) as KIP13;
+  }
+}
