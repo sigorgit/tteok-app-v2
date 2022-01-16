@@ -185,6 +185,34 @@ export default class Home implements View {
                                 ),
                                 this.sellResult = el(".result"),
                             ),
+                            el(".suggest-container",
+                                el("h3", "이건 어때?"),
+                                el(".content",
+                                    el(".suggest",
+                                        el("p", "절기고 싶어?"),
+                                        el("button", "참새 NFT 사기", {
+                                            click: () => { window.open("https://klu.bs/pfp/0x29d05593116C443da54DaBFB4e5322DEA2fff8Cd") }
+                                        })
+                                    ),
+                                    el(".suggest",
+                                        el("p", "혹시 개발자니...?"),
+                                        el("button", "인절미 컨트랙트", {
+                                            click: () => { window.open("https://github.com/tteokmill/injeolmi") }
+                                        })
+                                    ),
+                                    el(".suggest",
+                                        el("p", "떡크노믹스...?"),
+                                        el("button", "인절미 클래식", {
+                                            click: () => { ViewUtil.go("classic") }
+                                        })
+                                    )
+                                )
+                            ),
+                            el(".banner",
+                                el("img", {
+                                    src: "/images/thankyou.gif"
+                                })
+                            ),
                         ),
                         el(".right-container",
                             el(".connect-wallet",
@@ -205,13 +233,12 @@ export default class Home implements View {
                                 el("a", "미디엄", { href: "https://medium.com/tteok", target: "_blank" }),
                                 el("a", "깃허브", { href: "https://github.com/tteokmill", target: "_blank" }),
                             ),
+                            el("iframe.chart", {
+                                src: "https://dexata.kr/?tokenA=0x0268dbed3832b87582b1fa508acf5958cbb1cd74&tokenB=",
+                                title: "IJM_Chart",
+                            }),
                         ),
                     ),
-                ),
-                el(".banner",
-                    el("img", {
-                        src: "/images/thankyou.gif"
-                    })
                 ),
             )),
         );

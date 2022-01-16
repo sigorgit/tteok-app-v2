@@ -29,7 +29,6 @@
         max-width     : 1240px;
         width         : 100%;
         margin        : auto;
-        border-bottom : 1px solid #e4e8eb;
         padding-bottom: 32px;
 
         >.top-banner {
@@ -139,10 +138,15 @@
                     align-items     : center;
                     justify-content : space-around;
                     width           : 100%;
-                    height          : 140px;
+                    min-height      : 140px;
                     background-color: @brand-primary;
                     padding-top     : 8px;
                     padding-bottom  : 8px;
+
+                    @media @phone {
+                        flex-direction : column;
+                        justify-content: center;
+                    }
 
                     >.content {
                         >h3 {
@@ -155,6 +159,7 @@
                         }
 
                         >button {
+                            width: 100%;
                             min-width            : 100px;
                             font-family          : 'ChosunGs';
                             display              : block;
@@ -164,7 +169,7 @@
                             text-align           : center;
                             padding              : 8px 16px;
                             margin               : auto;
-                            margin-top           : 8px;
+                            margin-bottom        : 16px;
 
                             @media @phone {
                                 margin-left: 0px;
@@ -252,6 +257,58 @@
                         margin-top: 8px;
                     }
                 }
+
+                >.suggest-container {
+                    margin-top: 32px;
+
+                    >h3 {
+                        font-size: 24px;
+                    }
+
+                    >.content {
+                        display        : flex;
+                        justify-content: space-around;
+                        margin-top     : 32px;
+
+                        >.suggest {
+                            >p {
+                                margin-bottom: 16px;
+                            }
+
+                            >button {
+                                min-width            : 100px;
+                                font-family          : 'ChosunGs';
+                                display              : block;
+                                margin-top           : 11px;
+                                -webkit-border-radius: 2px;
+                                border-radius        : 2px;
+                                text-align           : center;
+                                padding              : 8px 16px;
+                                margin               : auto;
+                                margin-bottom        : 16px;
+
+                                @media @phone {
+                                    margin-left: 0px;
+                                }
+                            }
+
+                            >button:hover {
+                                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                            }
+                        }
+                    }
+                }
+
+                >.banner {
+                    margin-top   : 32px;
+                    margin-bottom: 16px;
+
+                    >img {
+                        margin-top: 16px;
+                        max-width : 350px;
+                        max-height: 200px;
+                    }
+                }
             }
 
             >.right-container {
@@ -327,18 +384,14 @@
                         color: @link;
                     }
                 }
+
+                >.chart {
+                    max-width : 350px;
+                    width     : 100%;
+                    height    : 350px;
+                    margin-top: 32px;
+                }
             }
-        }
-    }
-
-    >.banner {
-        margin-top   : 32px;
-        margin-bottom: 16px;
-
-        >img {
-            margin-top: 16px;
-            max-width : 350px;
-            max-height: 200px;
         }
     }
 }
