@@ -86,6 +86,7 @@ export default class Home implements View {
                             el(".price-container",
                                 el(".content",
                                     el("h3", "하드포크 물량 받기"),
+                                    el("p", "2월 16일까지 받을 수 있음"),
                                     el(".price", (this.hardforkDisplay = el("span.price", "...")), " IJM"),
                                     el("button", "받기", {
                                         click: () => ArkContract.receiveNew(),
@@ -101,6 +102,7 @@ export default class Home implements View {
                                 ),
                                 el(".content",
                                     el("h3", "연말 이벤트 물량 받기"),
+                                    el("p", "1월 23일까지 받을 수 있음"),
                                     el(".price", (this.yearendDisplay = el("span.price", "...")), " IJM"),
                                     el("button", "받기", {
                                         click: () => YearendAirdropContract.receiveNew(),
@@ -248,7 +250,7 @@ export default class Home implements View {
 
             const toReceive = await YearendAirdropContract.toReceive(address);
             if (toReceive === true) {
-                this.yearendDisplay.empty().appendText(utils.formatEther("100"));
+                this.yearendDisplay.empty().appendText("100");
             } else {
                 this.yearendDisplay.empty().appendText("0");
             }
