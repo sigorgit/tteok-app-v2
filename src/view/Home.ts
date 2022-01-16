@@ -68,7 +68,12 @@ export default class Home implements View {
                             el(".price-container",
                                 el(".content",
                                     el("h3", "인절미 가격"),
-                                    el(".price", (this.priceDisplay = el("span.price", "...")), " KLAY")
+                                    el(".price", (this.priceDisplay = el("span.price", "...")), " KLAY"),
+                                    el("button", "차트 보기", {
+                                        click: () => {
+                                            window.open("https://dexata.kr/?tokenA=0x0268dbed3832b87582b1fa508acf5958cbb1cd74&tokenB=")
+                                        }
+                                    }),
                                 ),
                                 el(".content",
                                     el("h3", "너의 인절미"),
@@ -233,10 +238,6 @@ export default class Home implements View {
                                 el("a", "미디엄", { href: "https://medium.com/tteok", target: "_blank" }),
                                 el("a", "깃허브", { href: "https://github.com/tteokmill", target: "_blank" }),
                             ),
-                            el("iframe.chart", {
-                                src: "https://dexata.kr/?tokenA=0x0268dbed3832b87582b1fa508acf5958cbb1cd74&tokenB=",
-                                title: "IJM_Chart",
-                            }),
                         ),
                     ),
                 ),
