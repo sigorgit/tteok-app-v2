@@ -31,6 +31,11 @@ export default class SparrowHonor implements View {
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/ff444ad2-6e20-4cec-a889-af86e0c070b4.png" }),
                     el(".title", "물레방아#4101"),
                     el("p", "참새들의 형아")
+                ),
+                el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/564de77e-071d-40ad-bfbe-3f376450d19f.png" }),
+                    el(".title", "초무새#6130"),
+                    el("p", "참새들의 어머니")
                 )
             ),
             el("h3", "청년 참새"),
@@ -48,17 +53,27 @@ export default class SparrowHonor implements View {
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/a25e6803-77f7-4124-82d7-32d3b888caa3.png" }),
                     el(".title", "은퇴한 인절미 시세 알림 봇#6625"),
-                    el("p", "")
+                    el("p", "왕년엔 잘나갔던 알림봇")
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/a286081e-642d-40b3-97de-c2c9c8394d45.png" }),
                     el(".title", "이보세요 나야#169"),
-                    el("p", "")
+                    el("p", "강퇴를 많이 해서 미안해")
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/ef3c078a-8d68-47d6-b29a-71372f7263a7.png" }),
-                    el(".title", "주모#303"),
-                    el("p", "")
+                    el(".title", "JUMO#303"),
+                    el("p", "뒤에서 포스터 만드는 중")
+                ),
+                el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/57b8157e-a752-41ed-8673-29ac363b4261.png" }),
+                    el(".title", "태구#7985"),
+                    el("p", "계속 절며드는중")
+                ),
+                el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/89eba3d0-f645-4fff-8b4e-ad1c4fce6f33.png" }),
+                    el(".title", "ultrason#3060"),
+                    el("p", "니들 뒤엔 내가 있어")
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/8ca7c7c9-b92b-4377-8eea-5870ab27ebea.png" }),
@@ -72,6 +87,11 @@ export default class SparrowHonor implements View {
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/ae07903c-de6d-4188-abe5-dc45245ce5ef.png" }),
                     el(".title", "인절머리하고는#7243"),
                     el("p", "")
+                ),
+                el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/02e480c4-9e9b-4bb4-820e-157a2e9304f4.png" }),
+                    el(".title", "mangoo#6160"),
+                    el("p", "주막열려고 할망시대 멤버 9명 모았다")
                 )
             ),
         ));
