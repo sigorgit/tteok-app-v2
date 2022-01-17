@@ -48,7 +48,7 @@ export default class SparrowHonor implements View {
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/bab3cefd-e8b0-490e-8aab-4a0e63a4c6ea.png" }),
                     el(".title", "똥상우#5877"),
-                    el("p", "")
+                    el("p", "아마 참새들의 친구")
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/a25e6803-77f7-4124-82d7-32d3b888caa3.png" }),
@@ -79,6 +79,11 @@ export default class SparrowHonor implements View {
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/8ca7c7c9-b92b-4377-8eea-5870ab27ebea.png" }),
                     el(".title", "이학성#77"),
                     el("p", "나는 커서 영재가 될거야!")
+                ),
+                el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/ba2dbdc3-12ff-4eda-9726-34a1abe7a4b7.png" }),
+                    el(".title", "영재사생팬#5653"),
+                    el("p", "영재야 태어나줘서 고맙다")
                 )
             ),
             el("h3", "아기 참새"),
@@ -89,9 +94,9 @@ export default class SparrowHonor implements View {
                     el("p", "")
                 ),
                 el(".card",
-                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/02e480c4-9e9b-4bb4-820e-157a2e9304f4.png" }),
-                    el(".title", "mangoo#6160"),
-                    el("p", "주막열려고 할망시대 멤버 9명 모았다")
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/c81aeca3-7a8f-4c56-ae1c-4bf43cb0fe92.png" }),
+                    el(".title", "mangoo#5169"),
+                    el("p", "지금은 할망시대!")
                 )
             ),
         ));
