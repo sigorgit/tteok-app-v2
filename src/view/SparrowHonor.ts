@@ -76,6 +76,11 @@ export default class SparrowHonor implements View {
                     el("p", "니들 뒤엔 내가 있어")
                 ),
                 el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/64b3a491-fb46-417b-917d-8700211d59c4.png" }),
+                    el(".title", "Beber Ever#1644"),
+                    el("p", "으르릉컹컹 컹컹컹컹")
+                ),
+                el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/8ca7c7c9-b92b-4377-8eea-5870ab27ebea.png" }),
                     el(".title", "이학성#77"),
                     el("p", "나는 커서 영재가 될거야!")
@@ -84,6 +89,16 @@ export default class SparrowHonor implements View {
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/ba2dbdc3-12ff-4eda-9726-34a1abe7a4b7.png" }),
                     el(".title", "영재사생팬#5653"),
                     el("p", "영재야 태어나줘서 고맙다")
+                ),
+                el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/b73b07ad-c43c-4f5e-ace9-fc01166c86fb.png" }),
+                    el(".title", "초코#6612"),
+                    el("p", "그게 시한부 랭킹1위")
+                ),
+                el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/a342b011-d332-4b6e-8efa-29ce61f9b648.png" }),
+                    el(".title", "전설의 프리젠테이터#412"),
+                    el("p", "부끄러...")
                 )
             ),
             el("h3", "아기 참새"),
