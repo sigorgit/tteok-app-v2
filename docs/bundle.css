@@ -383,8 +383,43 @@ body {
   margin: auto;
   margin-top: 16px;
   padding: 16px;
-  padding-bottom: 32px;
+  padding-bottom: 16px;
   font-size: 12px;
+}
+.layout > footer > .aside-container {
+  margin-top: 16px;
+}
+.layout > footer > .aside-container a:hover,
+.layout > footer > .aside-container a:focus {
+  animation-duration: 3s;
+  animation-name: rainbowLink;
+  animation-iteration-count: infinite;
+}
+@keyframes rainbowLink {
+  0% {
+    color: red;
+  }
+  15% {
+    color: orange;
+  }
+  30% {
+    color: yellow;
+  }
+  45% {
+    color: green;
+  }
+  60% {
+    color: blue;
+  }
+  75% {
+    color: navy;
+  }
+  90% {
+    color: purple;
+  }
+  100% {
+    color: pink;
+  }
 }
 .home-view {
   display: flex;
@@ -1188,6 +1223,73 @@ body {
   margin-left: 8px;
 }
 .add-sparrow-nft-view > button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.sparrow-honor-view {
+  line-height: 1.5em;
+}
+.sparrow-honor-view > .gnb {
+  height: 52px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  background-color: #F7DEA5;
+}
+.sparrow-honor-view > .gnb > .inner-gnb {
+  display: flex;
+  align-items: center;
+  max-width: 1240px;
+  width: 100%;
+  margin: auto;
+  text-align: left;
+}
+.sparrow-honor-view > h2 {
+  margin-top: 16px;
+  font-size: 24px;
+}
+.sparrow-honor-view > p {
+  margin-top: 8px;
+  font-size: 14px;
+}
+.sparrow-honor-view > h3 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+.sparrow-honor-view > .sparrow-container {
+  max-width: 1240px;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  column-gap: 16px;
+  row-gap: 16px;
+  margin: auto;
+  padding: 0px;
+}
+@media only screen and (max-width: 719px) {
+  .sparrow-honor-view > .sparrow-container {
+    grid-template-columns: 100%;
+  }
+}
+.sparrow-honor-view > .sparrow-container > .card {
+  background: #fff;
+  border: 1px solid #e4e8eb;
+  border-radius: 4px;
+  word-break: break-all;
+}
+.sparrow-honor-view > .sparrow-container > .card > img {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  object-fit: contain;
+  object-position: 50% 50%;
+  cursor: pointer;
+}
+.sparrow-honor-view > .sparrow-container > .card > p {
+  font-size: 14px;
+  color: #606060;
+}
+.sparrow-honor-view > .sparrow-container > .card:hover {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 

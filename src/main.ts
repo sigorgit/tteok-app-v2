@@ -1,3 +1,6 @@
+import msg from "msg.js";
+import superagent from "superagent";
+import BrowserInfo from "./BrowserInfo";
 import { SkyRouter } from "skyrouter";
 import Layout from "./view/Layout";
 import Wallet from "./klaytn/Wallet";
@@ -7,8 +10,11 @@ import Junior from "./view/Junior";
 import Classic from "./view/Classic";
 import MemeNFT from "./view/memeNFT/MemeNFT";
 import AddMemeNFT from "./view/memeNFT/AddMemeNFT";
+import SparrowHonor from "./view/SparrowHonor";
 
 (async () => {
+    msg.language = BrowserInfo.language;
+    msg.parseCSV((await superagent.get("/msg.csv")).text);
 
     SkyRouter.route("**", Layout, ["classic"]);
     SkyRouter.route("", Home);
@@ -19,6 +25,8 @@ import AddMemeNFT from "./view/memeNFT/AddMemeNFT";
 
     SkyRouter.route("meme-nft", MemeNFT);
     SkyRouter.route("meme-nft/add", AddMemeNFT);
+
+    SkyRouter.route("sparrow-honor", SparrowHonor);
 
     if (sessionStorage.__spa_path) {
         SkyRouter.go(sessionStorage.__spa_path);

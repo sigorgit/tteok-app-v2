@@ -1,10 +1,6 @@
 import { DomNode, el } from "@hanul/skynode";
-import { SkyRouter, View, ViewParams } from "skyrouter";
+import { View, ViewParams } from "skyrouter";
 import Layout from "./Layout";
-import CommonUtil from "../CommonUtil";
-import SparrowNFTsContract from "../contracts/SparrowNFTsContract";
-import Wallet from "../klaytn/Wallet";
-import ViewUtil from "./ViewUtil";
 
 export default class Introduce implements View {
 
