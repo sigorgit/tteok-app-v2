@@ -128,6 +128,11 @@ export default class SparrowHonor implements View {
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/c81aeca3-7a8f-4c56-ae1c-4bf43cb0fe92.png" }),
                     el(".title", "mangoo#5169"),
                     el("p", "지금은 할망시대!")
+                ),
+                el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/2ab24f91-80c8-4e43-8989-cce8e65be7ca.png" }),
+                    el(".title", "나희#3041"),
+                    el("p", "")
                 )
             ),
         ));
