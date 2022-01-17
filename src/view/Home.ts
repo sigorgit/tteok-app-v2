@@ -14,6 +14,7 @@ import YearendAirdropContract from "../contracts/YearendAirdropContract";
 import Wallet from "../klaytn/Wallet";
 import Layout from "./Layout";
 import ViewUtil from "./ViewUtil";
+import BrowserInfo from "../BrowserInfo";
 
 export default class Home implements View {
 
@@ -90,7 +91,7 @@ export default class Home implements View {
                                 ),
                             ),
                             el(".price-container",
-                                el(".content",
+                                el(`${BrowserInfo.language === "ko" ? ".content" : ".en-content"}`,
                                     el("h3", msg("GET_HARD_FORK_IJM_TITLE")),
                                     el("p", msg("GET_HARD_FORK_IJM_DESC")),
                                     el(".price", (this.hardforkDisplay = el("span.price", "...")), " IJM"),
@@ -98,7 +99,7 @@ export default class Home implements View {
                                         click: () => ArkContract.receiveNew(),
                                     }),
                                 ),
-                                el(".content",
+                                el(`${BrowserInfo.language === "ko" ? ".content" : ".en-content"}`,
                                     el("h3", msg("RECEIVE_BOUGHT_IJM_TITLE")),
                                     el("p", msg("RECEIVE_BOUGHT_IJM_DESC")),
                                     el(".price", (this.initialSaleDisplay = el("span.price", "...")), " IJM"),
@@ -106,7 +107,7 @@ export default class Home implements View {
                                         click: () => InitialSaleReceiverContract.receiveNew(),
                                     }),
                                 ),
-                                el(".content",
+                                el(`${BrowserInfo.language === "ko" ? ".content" : ".en-content"}`,
                                     el("h3", msg("GET_YEAR_END_EVENT_TITLE")),
                                     el("p", msg("GET_YEAR_END_EVENT_DESC")),
                                     el(".price", (this.yearendDisplay = el("span.price", "...")), " IJM"),

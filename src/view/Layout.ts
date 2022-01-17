@@ -28,7 +28,7 @@ export default class Layout implements View {
                             el("option", "繁体字", { value: "zh-CN" }),
                             el("option", "簡體字", { value: "zh-TW" }),
                             el("option", "Tiếng Việt", { value: "vn" }),
-                            el("option", "Tâi-gí", { value: "TH" }),
+                            el("option", "ภาษาไทย", { value: "TH" }),
                             el("option", "짹짹어", { value: "짹짹어" }),
                             {
                                 change: () => {
