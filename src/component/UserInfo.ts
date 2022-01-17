@@ -1,4 +1,5 @@
 import { DomNode, el } from "@hanul/skynode";
+import msg from "msg.js";
 import CommonUtil from "../CommonUtil";
 import Wallet from "../klaytn/Wallet";
 import ViewUtil from "../view/ViewUtil";
@@ -11,7 +12,7 @@ export default class UserInfo extends DomNode {
     constructor(private mobile?: boolean) {
         super(".user-menu");
         this.append(
-            this.connectWalletButton = el("a.connect-wallet", "CONNECT WALLET", {
+            this.connectWalletButton = el("a.connect-wallet", msg("CONNECT_WALLET_BUTTON"), {
                 click: () => Wallet.connect(),
             }),
             this.addressDisplay = el("button.wallet-address"),

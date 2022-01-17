@@ -22,13 +22,26 @@
         font-size       : 12px;
 
         >.aside-container {
-            margin-top: 16px;
+            display       : flex;
+            flex-direction: column;
+            margin-top    : 16px;
 
             a:hover,
             a:focus {
                 animation-duration       : 3s;
                 animation-name           : rainbowLink;
                 animation-iteration-count: infinite;
+            }
+
+            >.language-select {
+                max-width       : 300px;
+                font-family     : 'ChosunGs';
+                font-size       : 12px;
+                margin-top      : 16px;
+                margin          : auto;
+                background-color: transparent;
+                border          : none;
+                padding         : 8px;
             }
         }
     }

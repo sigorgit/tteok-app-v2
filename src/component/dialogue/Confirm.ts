@@ -1,4 +1,5 @@
 import { DomNode, el, Popup } from "@hanul/skynode";
+import msg from "msg.js";
 
 export default class Confirm extends Popup {
 
@@ -16,7 +17,7 @@ export default class Confirm extends Popup {
                 el("h2", title),
                 el("p", message),
                 el(".button-container",
-                    el("button", "취소", {
+                    el("button", msg("CANCEL_BUTTON"), {
                         click: () => this.delete(),
                     }),
                     el("button", confirmTitle, {

@@ -1,4 +1,5 @@
 import { DomNode, el, Popup } from "@hanul/skynode";
+import msg from "msg.js";
 
 export default class Prompt extends Popup {
 
@@ -20,7 +21,7 @@ export default class Prompt extends Popup {
                     this.input = el("input"),
                 ),
                 el(".button-container",
-                    el("button", "취소", {
+                    el("button", msg("CANCEL_BUTTON"), {
                         click: () => this.delete(),
                     }),
                     el("button", confirmTitle, {

@@ -1,4 +1,5 @@
 import { DomNode, el } from "@hanul/skynode";
+import msg from "msg.js";
 import { View, ViewParams } from "skyrouter";
 import Layout from "./Layout";
 import ViewUtil from "./ViewUtil";
@@ -8,19 +9,19 @@ export default class SparrowHonor implements View {
     private container: DomNode;
 
     constructor() {
-        Layout.current.title = "명예의 참새";
+        Layout.current.title = msg("SPARROW_OF_HONOR_TITLE");
         Layout.current.content.append(this.container = el(".sparrow-honor-view",
             el(".gnb",
                 el(".inner-gnb",
                     el("a", { click: () => ViewUtil.go("/") },
                         el("img", { src: "/images/injeolmi.png", height: "40px" })
                     ),
-                    el("h1", "명예의 참새"),
+                    el("h1", msg("SPARROW_OF_HONOR_TITLE")),
                 )
             ),
-            el("h2", "명예로운 참새들"),
-            el("p", "나 때는 말이야...\n 인절미를 위해서 힘써준 명예로운 참새들이 있었어..."),
-            el("h3", "왕 참새"),
+            el("h2", msg("HONORABLE_SPARROWS_TITLE")),
+            el("p", msg("SPARROW_OF_HONOR_DESC1")),
+            el("h3", msg("KING_SPARROW")),
             el(".sparrow-container",
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/6eac2877-52c0-4ede-92b6-d0ac3b2ab2cf.png" }),
@@ -38,7 +39,7 @@ export default class SparrowHonor implements View {
                     el("p", "참새들의 어머니")
                 )
             ),
-            el("h3", "청년 참새"),
+            el("h3", msg("YOUTH_SPARROW")),
             el(".sparrow-container",
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/d18ba326-2718-4d20-8824-2de518d812ed.png" }),
@@ -111,12 +112,12 @@ export default class SparrowHonor implements View {
                     el("p", "떡재 사랑해")
                 )
             ),
-            el("h3", "아기 참새"),
+            el("h3", msg("BABY_SPARROW")),
             el(".sparrow-container",
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/ae07903c-de6d-4188-abe5-dc45245ce5ef.png" }),
                     el(".title", "인절머리하고는#7243"),
-                    el("p", "")
+                    el("p", "참새들아꽉잡아앗ㅅ")
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/c81aeca3-7a8f-4c56-ae1c-4bf43cb0fe92.png" }),

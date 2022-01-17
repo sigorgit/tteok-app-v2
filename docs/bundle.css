@@ -387,6 +387,8 @@ body {
   font-size: 12px;
 }
 .layout > footer > .aside-container {
+  display: flex;
+  flex-direction: column;
   margin-top: 16px;
 }
 .layout > footer > .aside-container a:hover,
@@ -394,6 +396,16 @@ body {
   animation-duration: 3s;
   animation-name: rainbowLink;
   animation-iteration-count: infinite;
+}
+.layout > footer > .aside-container > .language-select {
+  max-width: 300px;
+  font-family: 'ChosunGs';
+  font-size: 12px;
+  margin-top: 16px;
+  margin: auto;
+  background-color: transparent;
+  border: none;
+  padding: 8px;
 }
 @keyframes rainbowLink {
   0% {

@@ -1,4 +1,5 @@
 import { DomNode, el, Popup } from "@hanul/skynode";
+import msg from "msg.js";
 
 export default class Alert extends Popup {
 
@@ -15,7 +16,7 @@ export default class Alert extends Popup {
                 el("h2", title),
                 el("p", message),
                 el(".button-container",
-                    el("button", confirmTitle === undefined ? "확인" : confirmTitle, {
+                    el("button", confirmTitle === undefined ? msg("CONFIRM_BUTTON") : confirmTitle, {
                         click: () => this.delete(),
                     }),
                 ),

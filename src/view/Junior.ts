@@ -5,40 +5,41 @@ import CommonUtil from "../CommonUtil";
 import SparrowNFTsContract from "../contracts/SparrowNFTsContract";
 import Wallet from "../klaytn/Wallet";
 import ViewUtil from "./ViewUtil";
+import msg from "msg.js";
 
 export default class Junior implements View {
 
     private container: DomNode;
 
     constructor() {
-        Layout.current.title = "쥬니어";
+        Layout.current.title = msg("IJM_JUNIOR_TITLE");
         Layout.current.content.append(this.container = el(".junior-view",
             el(".gnb",
                 el(".inner-gnb",
                     el("a", { click: () => ViewUtil.go("/") },
                         el("img", { src: "/images/injeolmi.png", height: "40px" })
                     ),
-                    el("h1", "인절미 쥬니어"),
+                    el("h1", msg("IJM_JUNIOR_TITLE")),
                 )
             ),
             el("section",
-                el("h2", "인절미 팬게임"),
+                el("h2", msg("IJM_FANGAME")),
                 el(".pangame-list",
                     el("a", { href: "https://flappy-injeolmi.netlify.app/", target: "_blank" },
                         el(".card",
                             el(".content",
-                                el("h3", "플래피 인절미"),
+                                el("h3", msg("IJM_FANGAME_TITLE1")),
                                 el("img", { src: "/images/junior/flappy.png" }),
-                                el(".description", "'학성참새'가 만든 플래피 인절미")
+                                el(".description", msg("IJM_FANGAME_DESC1"))
                             )
                         )
                     ),
                     el("a", { href: "ijmclassic.itch.io/ultrarisk", target: "_blank" },
                         el(".card",
                             el(".content",
-                                el("h3", "울트라리스크 피하기V1"),
+                                el("h3", msg("IJM_FANGAME_TITLE2")),
                                 el("img", { src: "/images/junior/ultraRisk.png" }),
-                                el(".description", "'떡동성 참새'가 만든 하이리스크 울트라리스크 노리턴코인  IJC미니게임")
+                                el(".description", msg("IJM_FANGAME_DESC2"))
                             )
                         )
                     )

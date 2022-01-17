@@ -1,5 +1,6 @@
 import { BodyNode, DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
+import msg from "msg.js";
 import { View, ViewParams } from "skyrouter";
 import InjeolmiClassicContract from "../contracts/InjeolmiClassicContract";
 import InjeolmiPoolContract from "../contracts/InjeolmiPoolContract";
@@ -23,19 +24,19 @@ export default class Classic implements View {
     constructor() {
         this.container = el(".classic-view",
             el("section",
-                el("h1", "떡방앗간.닷컴\n클래식"),
-                el("p", `한국인의 정과 훈훈한 인심. 따뜻한 코인 커뮤니티 떡방앗간 코인 이야기.\nhttp://tteok.org으로도 접속하실 수 있습니다.\n떡방앗간 회원들은 "참새"로 불리웁니다.`),
-                el("h3", "클래식 인절미"),
+                el("h1", msg("IJM_CLASSIC_TITLE1")),
+                el("p", msg("IJM_CLASSIC_DESC1")),
+                el("h3", msg("CLASSIC_INJEOLMI_TITLE")),
                 el("img.injeolmi", { src: "/images/injeolmi-classic.png", height: "330" }),
-                el("h3", "인절미 클래식 떡크노믹스"),
-                el("p", "토큰 전송 시 10% 떼감 -> 9%는 홀더들한테 떡돌림, 1%는 떡방앗간에 팁으로 제공 (팁은 이벤트, 에드, 기부, 개발자 사리사욕에 쓰임)"),
-                el("p", "인절미 클래식은 클레이튼 밈 토큰입니다. 따라서 클레이튼 지갑인 카이카스 지갑이 필요합니다."),
-                el("a", "카이카스 지갑 다운로드", {
+                el("h3", msg("TTEOKNOMICS_TITLE")),
+                el("p", msg("TTEOKNOMICS_DESC1")),
+                el("p", msg("IJM_CLASSIC_DESC2")),
+                el("a", msg("CLASSIC_KAIKAS_BUTTON"), {
                     href: "https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi",
                     target: "_blank",
                 }),
                 el(".links",
-                    el("a", "인절미 카이카스 지갑에 추가(클립은 영원히 지원 계획이 없습니다.)", {
+                    el("a", msg("CLASSIC_ADD_IJM_BUTTON"), {
                         href: "#",
                         click: () => Wallet.addToken(
                             InjeolmiClassicContract.address,
@@ -44,40 +45,40 @@ export default class Classic implements View {
                             "https://tteok.org/images/injeolmi-classic.png"
                         ),
                     }), "\n",
-                    el("a", "스마트 콘트랙트 주소: 0x9CFc059F64D664F92f3d0329844B8ccca4E5215B", {
+                    el("a", msg("CLASSIC_CONTRACT_ADDRESS_BUTTON"), {
                         href: "https://scope.klaytn.com/token/0x9CFc059F64D664F92f3d0329844B8ccca4E5215B",
                         target: "_blank",
                     }), "\n",
-                    el("a", "소스 코드", {
+                    el("a", msg("SOURCE_CODE_BUTTON"), {
                         href: "https://github.com/tteokmill/injeolmi",
                         target: "_blank",
                     }), "\n",
-                    el("a", "인절미 차트보기", {
+                    el("a", msg("CLASSIC_CHART_BUTTON"), {
                         href: "https://dexata.kr/?tokenA=0x9cfc059f64d664f92f3d0329844b8ccca4e5215b&tokenB=0x0000000000000000000000000000000000000000",
                         target: "_blank",
                     }),
                 ),
-                el("p.warning", "절대 본인의 인절미 클래식을 본인의 지갑에 전송하지 마세요. 인절미 클래식을 모두 잃어버릴 수 있습니다!"),
+                el("p.warning", msg("CLASSIC_WARNING")),
                 el(".card",
-                    el("h5", "인절미 클래식 가격"),
+                    el("h5", msg("CLASSIC_PRICE")),
                     el("h6", (this.priceDisplay = el("span.price", "...")), " KLAY\n"),
                 ),
-                el("h3", "클레이로 인절미 클래식 사기"),
-                el("p", "인절미 클래식을 살때도 떡크노믹스 때문에 10%를 적게 받습니다."),
+                el("h3", msg("CLASSIC_IJM_BUY_TITLE")),
+                el("p", msg("CLASSIC_IJM_BUY_DESC")),
                 el(".form",
                     this.buyInput = el("input", {
-                        placeholder: "KLAY 수량",
+                        placeholder: msg("CLASSIC_IJM_BUY_INPUT"),
                         keyup: () => setTimeout(() => {
                             const value = utils.parseEther(this.buyInput.domElement.value);
                             this.buyResult.empty().appendText(
-                                `대략 ${utils.formatEther(
+                                `${utils.formatEther(
                                     value.mul(utils.parseEther("1")).div(this.ijmPrice).mul(9).div(10)
                                 )} IJM`
                             );
                         }),
                     }),
                     this.buyResult = el(".result"),
-                    el("button", "사기", {
+                    el("button", msg("CLASSIC_IJM_BUY_BUTTON"), {
                         click: async () => {
                             await InjeolmiPoolContract.swapToIJM(
                                 utils.parseEther(this.buyInput.domElement.value)
@@ -85,22 +86,22 @@ export default class Classic implements View {
                         },
                     })
                 ),
-                el("h3", "인절미 클래식 클레이로 팔기"),
-                el("p", "인절미 클래식을 펄때도 떡크노믹스 때문에 10%를 적게 받습니다."),
+                el("h3", msg("CLASSIC_IJM_SELL_TITLE")),
+                el("p", msg("CLASSIC_IJM_SELL_DESC")),
                 el(".form",
                     this.sellInput = el("input", {
-                        placeholder: "IMJ 수량",
+                        placeholder: msg("CLASSIC_IJM_SELL_INPUT"),
                         keyup: () => setTimeout(() => {
                             const value = utils.parseEther(this.sellInput.domElement.value);
                             this.sellResult.empty().appendText(
-                                `대략 ${utils.formatEther(
+                                `${utils.formatEther(
                                     value.mul(this.ijmPrice).div(utils.parseEther("1")).mul(9).div(10)
                                 )} KLAY`
                             );
                         }),
                     }),
                     this.sellResult = el(".result"),
-                    el("button", "펄기", {
+                    el("button", msg("CLASSIC_IJM_SELL_BUTTON"), {
                         click: async () => {
                             await InjeolmiPoolContract.swapToKlay(
                                 utils.parseUnits(this.sellInput.domElement.value, 8)
@@ -109,11 +110,11 @@ export default class Classic implements View {
                     })
                 ),
                 el("footer",
-                    el("a", "트위터", {
+                    el("a", msg("TWITTER_BUTTON"), {
                         href: "https://twitter.com/tteokclassic",
                         target: "_blank",
                     }), "\n",
-                    el("a", "오카방 (오픈 카카오톡 방)", {
+                    el("a", msg("OPENKAKAO_BUTTON"), {
                         href: "https://open.kakao.com/o/gc5NMySd",
                         target: "_blank",
                     }), "\n",

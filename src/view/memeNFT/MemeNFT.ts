@@ -5,6 +5,7 @@ import CommonUtil from "../../CommonUtil";
 import SparrowNFTsContract from "../../contracts/SparrowNFTsContract";
 import Wallet from "../../klaytn/Wallet";
 import ViewUtil from "../ViewUtil";
+import msg from "msg.js";
 
 export default class MemeNFT implements View {
 
@@ -12,21 +13,21 @@ export default class MemeNFT implements View {
     private nftList: DomNode;
 
     constructor() {
-        Layout.current.title = "밈 NFT";
+        Layout.current.title = msg("MEME_NFT");
         Layout.current.content.append(this.container = el(".sparrow-nft-view",
             el(".gnb",
                 el(".inner-gnb",
                     el("a", { click: () => ViewUtil.go("/") },
                         el("img", { src: "/images/injeolmi.png", height: "40px" })
                     ),
-                    el("h1", "밈 NFT"),
+                    el("h1", msg("MEME_NFT")),
                 )
             ),
-            el("h2", "밈 NFT 목록"),
-            el("button", "NFT 만들기", {
+            el("h2", msg("MEME_NFT_TITLE")),
+            el("button", msg("CREATE_MEME_NFT_BUTTON"), {
                 click: () => ViewUtil.go("/meme-nft/add")
             }),
-            el("button.outline", "밈 NFT 주소", {
+            el("button.outline", msg("MEME_NFT_ADDRESS_BUTTON"), {
                 click: () => window.open("https://opensea.io/collection/sparrow-nfts")
             }),
             this.nftList = el("ul.nft-list"),
@@ -59,11 +60,11 @@ export default class MemeNFT implements View {
                         }),
                         el(".description", description),
                         el(".info",
-                            el(".minter", `발행자: ${CommonUtil.shortenAddress(minter)}`),
-                            el(".totalSupply", `총 발행량: ${totalSupply.toNumber()}`),
+                            el(".minter", `${msg("ISSUER")}: ${CommonUtil.shortenAddress(minter)}`),
+                            el(".totalSupply", `${msg("TOTAL_AMOUNT")}: ${totalSupply.toNumber()}`),
                         ),
                         minter !== address ? undefined : el(".reupload",
-                            el("h6", "이미지 재업로드"),
+                            el("h6", msg("IMAGE_REUPLOAD")),
                             el("input.hidden", {
                                 type: "file",
                                 change: (event) => {

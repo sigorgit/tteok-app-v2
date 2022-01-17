@@ -5,6 +5,7 @@ import CommonUtil from "../../CommonUtil";
 import SparrowNFTsContract from "../../contracts/SparrowNFTsContract";
 import Wallet from "../../klaytn/Wallet";
 import ViewUtil from "../ViewUtil";
+import msg from "msg.js";
 
 export default class AddMemeNFT implements View {
 
@@ -19,22 +20,22 @@ export default class AddMemeNFT implements View {
     private dataURL: string | undefined;
 
     constructor() {
-        Layout.current.title = "참새 NFT";
+        Layout.current.title = msg("MEME_NFT");
         Layout.current.content.append(this.container = el(".add-sparrow-nft-view",
             el(".gnb",
                 el(".inner-gnb",
                     el("a", { click: () => ViewUtil.go("/") },
                         el("img", { src: "/images/injeolmi.png", height: "40px" })
                     ),
-                    el("h1", "참새 NFT"),
+                    el("h1", msg("MEME_NFT")),
                 )
             ),
-            el("h2", "참새 NFT 만들기"),
+            el("h2", msg("CREATE_MEME_NFT_BUTTON")),
             el(".form",
-                this.extnameInput = el("input", { placeholder: "파일 확장자 (png 등, 점 빼고)" }),
-                this.nameInput = el("input", { placeholder: "NFT 이름" }),
-                this.descriptionInput = el("input", { placeholder: "NFT 설명" }),
-                this.amountInput = el("input", { placeholder: "발행 개수 (숫자로만)" }),
+                this.extnameInput = el("input", { placeholder: msg("NFT_EXT_NAME_INPUT") }),
+                this.nameInput = el("input", { placeholder: msg("NFT_NAME_INPUT") }),
+                this.descriptionInput = el("input", { placeholder: msg("NFT_DESC_INPUT") }),
+                this.amountInput = el("input", { placeholder: msg("NFT_TOTAL_AMOUNT") }),
                 el("input", {
                     type: "file",
                     change: (event) => {
@@ -49,7 +50,7 @@ export default class AddMemeNFT implements View {
                     },
                 }),
             ),
-            el("button", "만들기", {
+            el("button", msg("CREATE_MEME_NFT_BUTTON"), {
                 click: () => ViewUtil.go("/")
             }),
             this.nftList = el("ul.nft-list"),

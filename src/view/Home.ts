@@ -1,6 +1,7 @@
 import { DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
 import { View, ViewParams } from "skyrouter";
+import msg from "msg.js";
 import Alert from "../component/dialogue/Alert";
 import UserInfo from "../component/UserInfo";
 import ArkContract from "../contracts/ArkContract";
@@ -35,7 +36,7 @@ export default class Home implements View {
     private sellResult: DomNode;
 
     constructor() {
-        Layout.current.title = "홈";
+        Layout.current.title = msg("HOME");
         Layout.current.content.append(
             (this.container = el(".home-view",
                 el("section",
@@ -43,8 +44,8 @@ export default class Home implements View {
                         el(".banner-image0"),
                         el(".banner-image1",
                             el("img", { src: "/images/injeolmi.png" }),
-                            el("h2", "한국인의 정과 훈훈한 인심"),
-                            el("h1", "떡방앗간.닷컴")
+                            el("h2", msg("TITLE_DESC")),
+                            el("h1", msg("TITLE"))
                         ),
                         el("a.banner-image2", {
                             href: "https://gall.dcinside.com/mini/board/view/?id=defidev&no=47&s_type=search_subject_memo&s_keyword=%EC%9D%B8%EC%A0%88%EB%AF%B8&page=1",
@@ -54,12 +55,12 @@ export default class Home implements View {
                 ),
                 el(".gnb",
                     el(".item-container",
-                        el("a.item", "소개", { click: () => { ViewUtil.go("introduce") } }),
-                        el("a.item", "시고르", { click: () => { new Alert("준비중", "아직 페이지 준비중이야"); } }),
-                        el("a.item", "참새 NFT", { click: () => { new Alert("준비중", "이것도 아직 페이지 준비중이야"); } }),
-                        el("a.item", "밈 NFT", { click: () => { ViewUtil.go("meme-nft") } }),
-                        el("a.item", "쥬니어", { click: () => { ViewUtil.go("junior") } }),
-                        el("a.item", "클래식", { click: () => { ViewUtil.go("classic") } }),
+                        el("a.item", msg("INTRODUCTION_MENU"), { click: () => { ViewUtil.go("introduce") } }),
+                        el("a.item", msg("SIGOR"), { click: () => { new Alert(msg("SIGRO_POPUP_TITLE"), msg("SIGRO_POPUP_DESC")); } }),
+                        el("a.item", msg("SPARROW_NFT"), { click: () => { new Alert(msg("SIGRO_POPUP_TITLE"), msg("SPARROW_NFT_POPUP_DESC")); } }),
+                        el("a.item", msg("MEME_NFT"), { click: () => { ViewUtil.go("meme-nft") } }),
+                        el("a.item", msg("JUNIOR_MENU"), { click: () => { ViewUtil.go("junior") } }),
+                        el("a.item", msg("CLASSIC"), { click: () => { ViewUtil.go("classic") } }),
                     )
                 ),
                 el("section",
@@ -67,18 +68,18 @@ export default class Home implements View {
                         el(".left-container",
                             el(".price-container",
                                 el(".content",
-                                    el("h3", "인절미 가격"),
+                                    el("h3", msg("IJM_PRICE")),
                                     el(".price", (this.priceDisplay = el("span.price", "...")), " KLAY"),
-                                    el("button", "차트 보기", {
+                                    el("button", msg("CHART_BUTTON"), {
                                         click: () => {
                                             window.open("https://dexata.kr/?tokenA=0x0268dbed3832b87582b1fa508acf5958cbb1cd74&tokenB=")
                                         }
                                     }),
                                 ),
                                 el(".content",
-                                    el("h3", "너의 인절미"),
+                                    el("h3", msg("YOUR_IJM_DESC")),
                                     el(".price", (this.balanceDisplay = el("span.price", "...")), " IJM"),
-                                    el("button", "인절미 지갑에 추가", {
+                                    el("button", msg("ADD_IJM_BUTTON"), {
                                         click: () => Wallet.addToken(
                                             InjeolmiContract.address,
                                             "IJM",
@@ -90,54 +91,54 @@ export default class Home implements View {
                             ),
                             el(".price-container",
                                 el(".content",
-                                    el("h3", "하드포크 물량 받기"),
-                                    el("p", "2월 16일까지 받을 수 있음"),
+                                    el("h3", msg("GET_HARD_FORK_IJM_TITLE")),
+                                    el("p", msg("GET_HARD_FORK_IJM_DESC")),
                                     el(".price", (this.hardforkDisplay = el("span.price", "...")), " IJM"),
-                                    el("button", "받기", {
+                                    el("button", msg("GET_BUTTON"), {
                                         click: () => ArkContract.receiveNew(),
                                     }),
                                 ),
                                 el(".content",
-                                    el("h3", "구매한 물량 받기"),
-                                    el("p", "떡크노믹스가 사라졌으므로 10% 추가함"),
+                                    el("h3", msg("RECEIVE_BOUGHT_IJM_TITLE")),
+                                    el("p", msg("RECEIVE_BOUGHT_IJM_DESC")),
                                     el(".price", (this.initialSaleDisplay = el("span.price", "...")), " IJM"),
-                                    el("button", "받기", {
+                                    el("button", msg("GET_BUTTON"), {
                                         click: () => InitialSaleReceiverContract.receiveNew(),
                                     }),
                                 ),
                                 el(".content",
-                                    el("h3", "연말 이벤트 물량 받기"),
-                                    el("p", "1월 23일까지 받을 수 있음"),
+                                    el("h3", msg("GET_YEAR_END_EVENT_TITLE")),
+                                    el("p", msg("GET_YEAR_END_EVENT_DESC")),
                                     el(".price", (this.yearendDisplay = el("span.price", "...")), " IJM"),
-                                    el("button", "받기", {
+                                    el("button", msg("GET_BUTTON"), {
                                         click: () => YearendAirdropContract.receiveNew(),
                                     }),
                                 ),
                             ),
                             el(".group-issue",
-                                el(".issue_area", "참새 뉴스"),
-                                el("a.issue", "[속보] 인절미 코인베이스 상장...", {
+                                el(".issue_area", msg("SPARROW_NEWS_TITLE")),
+                                el("a.issue", msg("SPARROW_NEWS_DESC1"), {
                                     href: "https://w.namu.la/s/0e4f61a6fc7b16d00ce2db04a7775a601c489c6cfe3cbd24c674619c8ddb32e72fa1f7a2b91ba09b8dedb28d2e0fbad4b6fcb141224e999aa698343dc0ec0315bd0d79b35ddfc7490f5be8a206e3d2dae929b1ed1a629de301cf76d0f0f2fec7",
                                     target: "_blank"
                                 }),
-                                el("a.issue", `[단독] 심영재 "절미페이" 만든다고 선언하여 충격...`, {
+                                el("a.issue", msg("SPARROW_NEWS_DESC2"), {
                                     href: "https://w.namu.la/s/518022bb341cb7e5fae54943759c6011298f551c1b77ef108dd888ff08ca4a41286fcef3b9d90d5d81e646b1482b9ce98da14e940e2a4dd956635a6d0b0ab55744666997086e5a081476b097acfd1720ade2bbd903203b1a1cd9993af75759db",
                                     target: "_blank"
                                 }),
-                                el("a.issue", `[화재] 이론 머스크 "인절미"로 테슬라사고 싶다...`, {
+                                el("a.issue", msg("SPARROW_NEWS_DESC3"), {
                                     href: "https://w.namu.la/s/c9b951140de72f66425f2f5523cd2a4aa0a796a5c67e4c8363782e249d58f9d4fbbd977b1c6fd8d0fcecf5ee70a146619ee15c502a074c547f931384a97d69e55f6df0a69665e426abb196329c39487ee6007803c94733c87a40c1d0ee24b436",
                                     target: "_blank"
                                 }),
                             ),
                             el(".form",
-                                el("h3", "사기"),
-                                el(".caption", el("a", "클레이스왑", {
+                                el("h3", msg("BUY_TITLE")),
+                                el(".caption", el("a", msg("BUY_DESC"), {
                                     href: "https://klayswap.com/",
                                     target: "_blank",
-                                }), "을 통해 삼"),
+                                })),
                                 el(".input-container",
                                     this.buyInput = el("input", {
-                                        placeholder: "인절미 수량 입력",
+                                        placeholder: msg("IJM_ACCOUNT_INPUT"),
                                         keyup: () => setTimeout(async () => {
                                             if (this.buyInput.domElement.value.trim() === "") {
                                                 this.buyResult.empty();
@@ -148,7 +149,7 @@ export default class Home implements View {
                                             }
                                         }),
                                     }),
-                                    el("button", "인절미 사기", {
+                                    el("button", msg("BUY_BUTTON"), {
                                         click: async () => {
                                             await KlayswapContract.buy(
                                                 utils.parseEther(this.buyInput.domElement.value)
@@ -160,15 +161,15 @@ export default class Home implements View {
                                 this.buyResult = el(".result"),
                             ),
                             el(".form",
-                                el("h3", "펄기"),
-                                el(".caption", el("a", "클레이스왑", {
+                                el("h3", msg("SELL_TITLE")),
+                                el(".caption", el("a", msg("SELL_DESC1"), {
                                     href: "https://klayswap.com/",
                                     target: "_blank",
-                                }), "을 통해 펌"),
-                                el(".caption", "트랜잭션 2번 발생"),
+                                })),
+                                el(".caption", msg("SELL_DESC2")),
                                 el(".input-container",
                                     this.sellInput = el("input", {
-                                        placeholder: "인절미 수량 입력",
+                                        placeholder: msg("IJM_ACCOUNT_INPUT"),
                                         keyup: () => setTimeout(async () => {
                                             if (this.sellInput.domElement.value.trim() === "") {
                                                 this.sellResult.empty();
@@ -179,7 +180,7 @@ export default class Home implements View {
                                             }
                                         }),
                                     }),
-                                    el("button", "인절미 펄기", {
+                                    el("button", msg("SELL_BUTTON"), {
                                         click: async () => {
                                             await KlayswapContract.sell(
                                                 utils.parseEther(this.sellInput.domElement.value)
@@ -191,23 +192,23 @@ export default class Home implements View {
                                 this.sellResult = el(".result"),
                             ),
                             el(".suggest-container",
-                                el("h3", "이건 어때?"),
+                                el("h3", msg("SUGGEST_TITLE")),
                                 el(".content",
                                     el(".suggest",
-                                        el("p", "절기고 싶어?"),
-                                        el("button", "참새 NFT 사기", {
+                                        el("p", msg("SUGGEST_DESC1")),
+                                        el("button", msg("SUGGEST_BUTTON1"), {
                                             click: () => { window.open("https://klu.bs/pfp/0x29d05593116C443da54DaBFB4e5322DEA2fff8Cd") }
                                         })
                                     ),
                                     el(".suggest",
-                                        el("p", "혹시 개발자니...?"),
-                                        el("button", "인절미 컨트랙트", {
+                                        el("p", msg("SUGGEST_DESC2")),
+                                        el("button", msg("SUGGEST_BUTTON2"), {
                                             click: () => { window.open("https://github.com/tteokmill/injeolmi") }
                                         })
                                     ),
                                     el(".suggest",
-                                        el("p", "떡크노믹스...?"),
-                                        el("button", "인절미 클래식", {
+                                        el("p", msg("SUGGEST_DESC3")),
+                                        el("button", msg("SUGGEST_BUTTON3"), {
                                             click: () => { ViewUtil.go("classic") }
                                         })
                                     )
@@ -221,7 +222,7 @@ export default class Home implements View {
                         ),
                         el(".right-container",
                             el(".connect-wallet",
-                                el(".caption", "정과 훈훈한 인심의 세계로"),
+                                el(".caption", msg("CONNECT_WALLET_DESC")),
                                 new UserInfo()
                             ),
                             el("a.ad-banner", { href: "https://klayfox.com", target: "_blank" },
@@ -230,13 +231,13 @@ export default class Home implements View {
                                 })
                             ),
                             el(".community",
-                                el("h3", "떡방앗간 커뮤니티"),
-                                el("a", "오카방\n(오픈 카카오톡 방)", { href: "https://open.kakao.com/o/g1nYzIHd", target: "_blank" }),
-                                el("a", "디스코드", { href: "https://discord.gg/YgdruRMFtJ", target: "_blank" }),
-                                el("a", "텔레그램", { href: "https://t.me/ricecakemill3", target: "_blank" }),
-                                el("a", "트위터", { href: "https://twitter.com/tteokmill", target: "_blank" }),
-                                el("a", "미디엄", { href: "https://medium.com/tteok", target: "_blank" }),
-                                el("a", "깃허브", { href: "https://github.com/tteokmill", target: "_blank" }),
+                                el("h3", msg("COMMUNITY_TITLE")),
+                                el("a", msg("OPENKAKAO_BUTTON"), { href: "https://open.kakao.com/o/g1nYzIHd", target: "_blank" }),
+                                el("a", msg("DISCORD_BUTTON"), { href: "https://discord.gg/YgdruRMFtJ", target: "_blank" }),
+                                el("a", msg("TELEGRAM_BUTTON"), { href: "https://t.me/ricecakemill3", target: "_blank" }),
+                                el("a", msg("TWITTER_BUTTON"), { href: "https://twitter.com/tteokmill", target: "_blank" }),
+                                el("a", msg("MEDIUM_BUTTON"), { href: "https://medium.com/tteok", target: "_blank" }),
+                                el("a", msg("GITHUB_BUTTON"), { href: "https://github.com/tteokmill", target: "_blank" }),
                             ),
                         ),
                     ),
@@ -256,7 +257,7 @@ export default class Home implements View {
 
         const price = await InjeolmiPriceEstimatorContract.estimatePos(utils.parseEther("1"));
         this.priceDisplay.empty().appendText(utils.formatEther(price));
-        
+
         const address = await Wallet.loadAddress();
         if (address !== undefined) {
 
