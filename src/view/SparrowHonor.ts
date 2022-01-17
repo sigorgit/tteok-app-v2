@@ -87,6 +87,11 @@ export default class SparrowHonor implements View {
                     el("p", "오늘 정신이 쏙 빠진다")
                 ),
                 el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/3a848c61-d6c0-48b9-b0e9-e1f75aeaf624.png" }),
+                    el(".title", "선시깅#5562"),
+                    el("p", "인절미의 서포터")
+                ),
+                el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/8ca7c7c9-b92b-4377-8eea-5870ab27ebea.png" }),
                     el(".title", "이학성#77"),
                     el("p", "나는 커서 영재가 될거야!")
