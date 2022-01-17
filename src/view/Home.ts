@@ -253,11 +253,12 @@ export default class Home implements View {
     }
 
     private async load() {
+
+        const price = await InjeolmiPriceEstimatorContract.estimatePos(utils.parseEther("1"));
+        this.priceDisplay.empty().appendText(utils.formatEther(price));
+        
         const address = await Wallet.loadAddress();
         if (address !== undefined) {
-
-            const price = await InjeolmiPriceEstimatorContract.estimatePos(utils.parseEther("1"));
-            this.priceDisplay.empty().appendText(utils.formatEther(price));
 
             const balance = await InjeolmiContract.balanceOf(address);
             this.balanceDisplay.empty().appendText(utils.formatEther(balance));
