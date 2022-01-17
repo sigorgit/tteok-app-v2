@@ -43,7 +43,7 @@ export default class SparrowHonor implements View {
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/d18ba326-2718-4d20-8824-2de518d812ed.png" }),
                     el(".title", "고래절미#1459"),
-                    el("p", "나..고래절미는 인절에 진심이다!")
+                    el("p", "나..고래절미는 인절미에 진심이다!")
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/bab3cefd-e8b0-490e-8aab-4a0e63a4c6ea.png" }),
@@ -62,7 +62,7 @@ export default class SparrowHonor implements View {
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/ef3c078a-8d68-47d6-b29a-71372f7263a7.png" }),
-                    el(".title", "JUMO#303"),
+                    el(".title", "JUMO#0303"),
                     el("p", "뒤에서 포스터 만드는 중")
                 ),
                 el(".card",
@@ -81,6 +81,11 @@ export default class SparrowHonor implements View {
                     el("p", "으르릉컹컹 컹컹컹컹")
                 ),
                 el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/f73d355f-f164-43b2-a6b2-f32676a8f406.png" }),
+                    el(".title", "Medo#1282"),
+                    el("p", "오늘 정신이 쏙 빠진다")
+                ),
+                el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/8ca7c7c9-b92b-4377-8eea-5870ab27ebea.png" }),
                     el(".title", "이학성#77"),
                     el("p", "나는 커서 영재가 될거야!")
@@ -93,12 +98,17 @@ export default class SparrowHonor implements View {
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/b73b07ad-c43c-4f5e-ace9-fc01166c86fb.png" }),
                     el(".title", "초코#6612"),
-                    el("p", "그게 시한부 랭킹1위")
+                    el("p", "계약직 랭킹1위")
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/a342b011-d332-4b6e-8efa-29ce61f9b648.png" }),
                     el(".title", "전설의 프리젠테이터#412"),
                     el("p", "부끄러...")
+                ),
+                el(".card",
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/749698ae-0386-45d4-bc9a-45828263f35e.png" }),
+                    el(".title", "다람이와 메타버스#3030"),
+                    el("p", "떡재 사랑해")
                 )
             ),
             el("h3", "아기 참새"),
