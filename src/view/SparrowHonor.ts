@@ -132,7 +132,7 @@ export default class SparrowHonor implements View {
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/2ab24f91-80c8-4e43-8989-cce8e65be7ca.png" }),
                     el(".title", "나희#3041"),
-                    el("p", "")
+                    el("p", "함께하자☆")
                 )
             ),
         ));
