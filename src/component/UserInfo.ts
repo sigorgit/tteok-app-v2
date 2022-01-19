@@ -28,7 +28,7 @@ export default class UserInfo extends DomNode {
 
     private async loadAddress() {
         const address = await Wallet.loadAddress();
-        if (address !== undefined) {
+        if (address !== undefined && this.deleted !== true) {
             if (this.connectWalletButton.deleted !== true) {
                 this.connectWalletButton.delete();
             }

@@ -1,0 +1,104 @@
+{
+  "id": "88fca41abda5ff94f25b8ab830a25eb5",
+  "_format": "hh-sol-build-info-1",
+  "solcVersion": "0.5.6",
+  "solcLongVersion": "0.5.6+commit.b259423e",
+  "input": {
+    "language": "Solidity",
+    "sources": {
+      "contracts/klaytn-contracts/mocks/KIP13/KIP13NotSupported.sol": {
+        "content": "pragma solidity ^0.5.0;\r\n\r\ncontract KIP13NotSupported {\r\n    // solhint-disable-previous-line no-empty-blocks\r\n}\r\n"
+      }
+    },
+    "settings": {
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ],
+          "": [
+            "ast"
+          ]
+        }
+      }
+    }
+  },
+  "output": {
+    "contracts": {
+      "contracts/klaytn-contracts/mocks/KIP13/KIP13NotSupported.sol": {
+        "KIP13NotSupported": {
+          "abi": [],
+          "evm": {
+            "bytecode": {
+              "linkReferences": {},
+              "object": "6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a7230582088d2f3b429e9546af708b1def7d27fc02c2572cbf20e1ce789de5c3af49820380029",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH1 0xF JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x35 DUP1 PUSH1 0x1D PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG1 PUSH6 0x627A7A723058 KECCAK256 DUP9 0xd2 RETURN 0xb4 0x29 0xe9 SLOAD PUSH11 0xF708B1DEF7D27FC02C2572 0xcb CALLCODE 0xe SHR 0xe7 DUP10 0xde 0x5c GASPRICE DELEGATECALL SWAP9 KECCAK256 CODESIZE STOP 0x29 ",
+              "sourceMap": "27:85:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:85:0;;;;;;;"
+            },
+            "deployedBytecode": {
+              "linkReferences": {},
+              "object": "6080604052600080fdfea165627a7a7230582088d2f3b429e9546af708b1def7d27fc02c2572cbf20e1ce789de5c3af49820380029",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG1 PUSH6 0x627A7A723058 KECCAK256 DUP9 0xd2 RETURN 0xb4 0x29 0xe9 SLOAD PUSH11 0xF708B1DEF7D27FC02C2572 0xcb CALLCODE 0xe SHR 0xe7 DUP10 0xde 0x5c GASPRICE DELEGATECALL SWAP9 KECCAK256 CODESIZE STOP 0x29 ",
+              "sourceMap": "27:85:0:-;;;;;"
+            },
+            "methodIdentifiers": {}
+          },
+          "metadata": "{\"compiler\":{\"version\":\"0.5.6+commit.b259423e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"contracts/klaytn-contracts/mocks/KIP13/KIP13NotSupported.sol\":\"KIP13NotSupported\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/klaytn-contracts/mocks/KIP13/KIP13NotSupported.sol\":{\"keccak256\":\"0x8ea0ed4318bf92f673e39b91193f45a64faefe97adef9f1e952b3ab851a38fa9\",\"urls\":[\"bzzr://1af9049bcd629ea8a7bf338f371fc6495eda7baa76d1ba50fee846c3db9a8611\"]}},\"version\":1}"
+        }
+      }
+    },
+    "sources": {
+      "contracts/klaytn-contracts/mocks/KIP13/KIP13NotSupported.sol": {
+        "ast": {
+          "absolutePath": "contracts/klaytn-contracts/mocks/KIP13/KIP13NotSupported.sol",
+          "exportedSymbols": {
+            "KIP13NotSupported": [
+              2
+            ]
+          },
+          "id": 3,
+          "nodeType": "SourceUnit",
+          "nodes": [
+            {
+              "id": 1,
+              "literals": [
+                "solidity",
+                "^",
+                "0.5",
+                ".0"
+              ],
+              "nodeType": "PragmaDirective",
+              "src": "0:23:0"
+            },
+            {
+              "baseContracts": [],
+              "contractDependencies": [],
+              "contractKind": "contract",
+              "documentation": null,
+              "fullyImplemented": true,
+              "id": 2,
+              "linearizedBaseContracts": [
+                2
+              ],
+              "name": "KIP13NotSupported",
+              "nodeType": "ContractDefinition",
+              "nodes": [],
+              "scope": 3,
+              "src": "27:85:0"
+            }
+          ],
+          "src": "0:114:0"
+        },
+        "id": 0
+      }
+    }
+  }
+}

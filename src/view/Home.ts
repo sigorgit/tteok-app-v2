@@ -1,7 +1,8 @@
 import { DomNode, el } from "@hanul/skynode";
-import { BigNumber, utils } from "ethers";
-import { View, ViewParams } from "skyrouter";
+import { utils } from "ethers";
 import msg from "msg.js";
+import { View, ViewParams } from "skyrouter";
+import BrowserInfo from "../BrowserInfo";
 import Alert from "../component/dialogue/Alert";
 import UserInfo from "../component/UserInfo";
 import ArkContract from "../contracts/ArkContract";
@@ -10,11 +11,11 @@ import InitialSaleReceiverContract from "../contracts/InitialSaleReceiverContrac
 import InjeolmiContract from "../contracts/InjeolmiContract";
 import InjeolmiPriceEstimatorContract from "../contracts/InjeolmiPriceEstimatorContract";
 import KlayswapContract from "../contracts/KlayswapContract";
+import SInjeolmiContract from "../contracts/SInjeolmiContract";
 import YearendAirdropContract from "../contracts/YearendAirdropContract";
 import Wallet from "../klaytn/Wallet";
 import Layout from "./Layout";
 import ViewUtil from "./ViewUtil";
-import BrowserInfo from "../BrowserInfo";
 
 export default class Home implements View {
 
@@ -23,18 +24,20 @@ export default class Home implements View {
 
     private priceDisplay: DomNode;
     private balanceDisplay: DomNode;
+    private withdrawableDisplay: DomNode;
 
     private hardforkDisplay: DomNode;
     private initialSaleDisplay: DomNode;
     private yearendDisplay: DomNode;
-
-    private ijmPrice: BigNumber = BigNumber.from("144374553246136709");
 
     private buyInput: DomNode<HTMLInputElement>;
     private buyResult: DomNode;
 
     private sellInput: DomNode<HTMLInputElement>;
     private sellResult: DomNode;
+
+    private stakeInput: DomNode<HTMLInputElement>;
+    private unstakeInput: DomNode<HTMLInputElement>;
 
     constructor() {
         Layout.current.title = msg("HOME");
@@ -56,12 +59,12 @@ export default class Home implements View {
                 ),
                 el(".gnb",
                     el(".item-container",
-                        el("a.item", msg("INTRODUCTION_MENU"), { click: () => { ViewUtil.go("introduce") } }),
+                        el("a.item", msg("INTRODUCTION_MENU"), { click: () => { ViewUtil.go("/introduce") } }),
                         el("a.item", msg("SIGOR"), { click: () => { new Alert(msg("SIGRO_POPUP_TITLE"), msg("SIGRO_POPUP_DESC")); } }),
-                        el("a.item", msg("SPARROW_NFT"), { click: () => { new Alert(msg("SIGRO_POPUP_TITLE"), msg("SPARROW_NFT_POPUP_DESC")); } }),
-                        el("a.item", msg("MEME_NFT"), { click: () => { ViewUtil.go("meme-nft") } }),
-                        el("a.item", msg("JUNIOR_MENU"), { click: () => { ViewUtil.go("junior") } }),
-                        el("a.item", msg("CLASSIC"), { click: () => { ViewUtil.go("classic") } }),
+                        el("a.item", msg("SPARROW_NFT"), { click: () => { ViewUtil.go("/sparrows") } }),
+                        el("a.item", msg("MEME_NFT"), { click: () => { ViewUtil.go("/meme-nft") } }),
+                        el("a.item", msg("JUNIOR_MENU"), { click: () => { ViewUtil.go("/junior") } }),
+                        el("a.item", msg("CLASSIC"), { click: () => { ViewUtil.go("/classic") } }),
                     )
                 ),
                 el("section",
@@ -192,6 +195,38 @@ export default class Home implements View {
                                 ),
                                 this.sellResult = el(".result"),
                             ),
+                            el(".form",
+                                el("h3", "절미 적금"),
+                                el(".caption", "절미를 넣어두면 수익을 나눠줘서 예치한 절미가 계속 늘어나!"),
+                                el(".caption", "너가 예치한 절미: ", (this.withdrawableDisplay = el("span.price", "...")), " IJM"),
+                                el(".input-container",
+                                    this.stakeInput = el("input", {
+                                        placeholder: "인절미 수량 입력",
+                                    }),
+                                    el("button", "예치하기", {
+                                        click: async () => {
+                                            await SInjeolmiContract.stake(
+                                                utils.parseEther(this.stakeInput.domElement.value)
+                                            );
+                                            ViewUtil.waitTransactionAndRefresh();
+                                        },
+                                    })
+                                ),
+                                el(".input-container",
+                                    this.unstakeInput = el("input", {
+                                        placeholder: "인절미 수량 입력",
+                                    }),
+                                    el("button", "출금하기", {
+                                        click: async () => {
+                                            await SInjeolmiContract.unstake(
+                                                utils.parseEther(this.unstakeInput.domElement.value)
+                                            );
+                                            ViewUtil.waitTransactionAndRefresh();
+                                        },
+                                    })
+                                ),
+                                this.sellResult = el(".result"),
+                            ),
                             el(".suggest-container",
                                 el("h3", msg("SUGGEST_TITLE")),
                                 el(".content",
@@ -210,7 +245,7 @@ export default class Home implements View {
                                     el(".suggest",
                                         el("p", msg("SUGGEST_DESC3")),
                                         el("button", msg("SUGGEST_BUTTON3"), {
-                                            click: () => { ViewUtil.go("classic") }
+                                            click: () => { ViewUtil.go("/classic") }
                                         })
                                     )
                                 )
@@ -257,33 +292,52 @@ export default class Home implements View {
     private async load() {
 
         const price = await InjeolmiPriceEstimatorContract.estimatePos(utils.parseEther("1"));
-        this.priceDisplay.empty().appendText(utils.formatEther(price));
+        if (this.container.deleted !== true) {
+            this.priceDisplay.empty().appendText(utils.formatEther(price));
+        }
 
         const address = await Wallet.loadAddress();
         if (address !== undefined) {
 
             const balance = await InjeolmiContract.balanceOf(address);
-            this.balanceDisplay.empty().appendText(utils.formatEther(balance));
+            if (this.container.deleted !== true) {
+                this.balanceDisplay.empty().appendText(utils.formatEther(balance));
+            }
 
             if (await ArkContract.received(address) === true) {
-                this.hardforkDisplay.empty().appendText("0");
+                if (this.container.deleted !== true) {
+                    this.hardforkDisplay.empty().appendText("0");
+                }
             } else {
                 const records = await ArkContract.records(address);
-                this.hardforkDisplay.empty().appendText(utils.formatEther(records.mul(10000000000)));
+                if (this.container.deleted !== true) {
+                    this.hardforkDisplay.empty().appendText(utils.formatEther(records.mul(10000000000)));
+                }
             }
 
             if (await InitialSaleReceiverContract.received(address) === true) {
-                this.initialSaleDisplay.empty().appendText("0");
+                if (this.container.deleted !== true) {
+                    this.initialSaleDisplay.empty().appendText("0");
+                }
             } else {
                 const bought = await InitialSaleContract.bought(address);
-                this.initialSaleDisplay.empty().appendText(utils.formatEther(bought.mul(11).div(10)));
+                if (this.container.deleted !== true) {
+                    this.initialSaleDisplay.empty().appendText(utils.formatEther(bought.mul(11).div(10)));
+                }
             }
 
             const toReceive = await YearendAirdropContract.toReceive(address);
-            if (toReceive === true) {
-                this.yearendDisplay.empty().appendText("100");
-            } else {
-                this.yearendDisplay.empty().appendText("0");
+            if (this.container.deleted !== true) {
+                if (toReceive === true) {
+                    this.yearendDisplay.empty().appendText("100");
+                } else {
+                    this.yearendDisplay.empty().appendText("0");
+                }
+            }
+
+            const withdrawable = await SInjeolmiContract.withdrawableIJM(address);
+            if (this.container.deleted !== true) {
+                this.withdrawableDisplay.empty().appendText(utils.formatEther(withdrawable));
             }
         }
     }

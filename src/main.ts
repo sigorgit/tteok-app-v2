@@ -11,6 +11,7 @@ import Classic from "./view/Classic";
 import MemeNFT from "./view/memeNFT/MemeNFT";
 import AddMemeNFT from "./view/memeNFT/AddMemeNFT";
 import SparrowHonor from "./view/SparrowHonor";
+import Sparrows from "./view/Sparrows";
 
 (async () => {
     msg.language = BrowserInfo.language;
@@ -22,6 +23,7 @@ import SparrowHonor from "./view/SparrowHonor";
     SkyRouter.route("introduce", Introduce);
     SkyRouter.route("junior", Junior);
     SkyRouter.route("classic", Classic);
+    SkyRouter.route("sparrows", Sparrows);
 
     SkyRouter.route("meme-nft", MemeNFT);
     SkyRouter.route("meme-nft/add", AddMemeNFT);

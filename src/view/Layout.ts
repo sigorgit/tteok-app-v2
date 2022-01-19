@@ -20,7 +20,7 @@ export default class Layout implements View {
                 el("footer",
                     el("", msg("COPYRIGHT_TITLE")),
                     el(".aside-container",
-                        el("a", msg("SPARROW_OF_HONOR_TITLE"), { click: () => { ViewUtil.go("sparrow-honor") } }),
+                        el("a", msg("SPARROW_OF_HONOR_TITLE"), { click: () => { ViewUtil.go("/sparrow-honor") } }),
                         select = el("select.language-select",
                             el("option", "한국어", { value: "ko" }),
                             el("option", "English", { value: "en" }),
