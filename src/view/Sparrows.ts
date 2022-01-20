@@ -41,7 +41,7 @@ export default class Sparrows implements View {
                 el(".info",
                     el("h3", "작가 정보"),
                     el("main",
-                        el("img", { src: "/images/yonee.jpg" }),
+                        el("img", { src: "/images/yonee.png" }),
                         el(".info",
                             el(".name", "Yonee (aka 초무새)"),
                             el("p.description", "illustrator/NFT artist based in korea"),
