@@ -227,7 +227,6 @@ export default class Home implements View {
                                         },
                                     })
                                 ),
-                                this.sellResult = el(".result"),
                             ),
                             el(".suggest-container",
                                 el("h3", msg("SUGGEST_TITLE")),
