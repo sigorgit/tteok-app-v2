@@ -1,15 +1,16 @@
 import msg from "msg.js";
+import { SkyRouter } from "skyrouter";
 import superagent from "superagent";
 import BrowserInfo from "./BrowserInfo";
-import { SkyRouter } from "skyrouter";
-import Layout from "./view/Layout";
 import Wallet from "./klaytn/Wallet";
+import Classic from "./view/Classic";
 import Home from "./view/Home";
 import Introduce from "./view/Introduce";
 import Junior from "./view/Junior";
-import Classic from "./view/Classic";
-import MemeNFT from "./view/memeNFT/MemeNFT";
+import Layout from "./view/Layout";
 import AddMemeNFT from "./view/memeNFT/AddMemeNFT";
+import MemeNFT from "./view/memeNFT/MemeNFT";
+import SparrowCustom from "./view/SparrowCustom";
 import SparrowHonor from "./view/SparrowHonor";
 import Sparrows from "./view/Sparrows";
 
@@ -24,6 +25,7 @@ import Sparrows from "./view/Sparrows";
     SkyRouter.route("junior", Junior);
     SkyRouter.route("classic", Classic);
     SkyRouter.route("sparrows", Sparrows);
+    SkyRouter.route("sparrows/{id}", SparrowCustom);
 
     SkyRouter.route("meme-nft", MemeNFT);
     SkyRouter.route("meme-nft/add", AddMemeNFT);

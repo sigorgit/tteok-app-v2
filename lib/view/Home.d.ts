@@ -4,6 +4,7 @@ export default class Home implements View {
     private interval;
     private priceDisplay;
     private balanceDisplay;
+    private totalStakedDisplay;
     private withdrawableDisplay;
     private hardforkDisplay;
     private initialSaleDisplay;

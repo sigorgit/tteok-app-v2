@@ -1,0 +1,1 @@
+{"version":3,"file":"SparrowCustom.d.ts","sourceRoot":"","sources":["../../src/view/SparrowCustom.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,IAAI,EAAE,UAAU,EAAE,MAAM,WAAW,CAAC;AAI7C,MAAM,CAAC,OAAO,OAAO,aAAc,YAAW,IAAI;IAE9C,OAAO,CAAC,SAAS,CAAU;;IAgBpB,YAAY,CAAC,MAAM,EAAE,UAAU,EAAE,GAAG,EAAE,MAAM,GAAG,IAAI;IAEnD,KAAK,IAAI,IAAI;CAGvB"}

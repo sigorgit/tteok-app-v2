@@ -24,6 +24,7 @@ export default class Home implements View {
 
     private priceDisplay: DomNode;
     private balanceDisplay: DomNode;
+    private totalStakedDisplay: DomNode;
     private withdrawableDisplay: DomNode;
 
     private hardforkDisplay: DomNode;
@@ -198,6 +199,7 @@ export default class Home implements View {
                             el(".form",
                                 el("h3", "절미 적금"),
                                 el(".caption", "절미를 넣어두면 수익을 나눠줘서 예치한 절미가 계속 늘어나!"),
+                                el(".caption", "총 예치한 절미: ", (this.totalStakedDisplay = el("span.price", "...")), " IJM"),
                                 el(".caption", "너가 예치한 절미: ", (this.withdrawableDisplay = el("span.price", "...")), " IJM"),
                                 el(".input-container",
                                     this.stakeInput = el("input", {
@@ -333,6 +335,11 @@ export default class Home implements View {
                 } else {
                     this.yearendDisplay.empty().appendText("0");
                 }
+            }
+            
+            const totalStaked = await InjeolmiContract.balanceOf(SInjeolmiContract.address);
+            if (this.container.deleted !== true) {
+                this.totalStakedDisplay.empty().appendText(utils.formatEther(totalStaked));
             }
 
             const withdrawable = await SInjeolmiContract.withdrawableIJM(address);
