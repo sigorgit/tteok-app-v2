@@ -18,6 +18,7 @@ export default class SparrowCustom implements View {
                     el("h1", "참새 커스터마이징"),
                 )
             ),
+            el("p", "아무래도 개발하는데 좀 더 걸릴상 싶다 하루만 더 다오"),
         ));
     }
 

@@ -1,5 +1,8 @@
 import { DomNode, el } from "@hanul/skynode";
 import { View, ViewParams } from "skyrouter";
+import SparrowItem from "../component/SparrowItem";
+import SparrowsContract from "../contracts/SparrowsContract";
+import Wallet from "../klaytn/Wallet";
 import Layout from "./Layout";
 import ViewUtil from "./ViewUtil";
 
@@ -7,6 +10,8 @@ export default class Sparrows implements View {
 
     private container: DomNode;
     private list: DomNode;
+
+    private nfts: number[] = [];
 
     constructor() {
         Layout.current.title = "참새 NFT";
@@ -52,7 +57,6 @@ export default class Sparrows implements View {
             ),
             el("main",
                 el("h2", "NFT 목록"),
-                el("p", "개발중"),
                 this.list = el(".sparrows-list"),
             ),
         ));
@@ -60,7 +64,33 @@ export default class Sparrows implements View {
     }
 
     private async loadSparrows() {
+        if (await Wallet.connected() !== true) {
+            await Wallet.connect();
+        }
+        const walletAddress = await Wallet.loadAddress();
+        if (walletAddress !== undefined) {
 
+            const balance = (await SparrowsContract.balanceOf(walletAddress)).toNumber();
+
+            const promises: Promise<void>[] = [];
+            for (let i = 0; i < balance; i += 1) {
+                const promise = async (index: number) => {
+                    const nftId = await SparrowsContract.tokenOfOwnerByIndex(walletAddress, index);
+                    this.nfts.push(nftId.toNumber());
+                };
+                promises.push(promise(i));
+            }
+            await Promise.all(promises);
+
+            this.list.empty();
+
+            for (const nftId of this.nfts) {
+                new SparrowItem(nftId).appendTo(this.list);
+            }
+
+        } else {
+            this.list.empty();
+        }
     }
 
     public changeParams(params: ViewParams, uri: string): void { }

@@ -81,25 +81,11 @@ const _abi = [
     type: "function",
   },
   {
-    constant: false,
-    inputs: [
-      {
-        name: "id",
-        type: "uint256",
-      },
-    ],
-    name: "withdrawReward",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     constant: true,
     inputs: [
       {
-        name: "id",
-        type: "uint256",
+        name: "ids",
+        type: "uint256[]",
       },
     ],
     name: "withdrawableReward",
@@ -167,6 +153,24 @@ const _abi = [
     ],
     payable: false,
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "ids",
+        type: "uint256[]",
+      },
+      {
+        name: "sIjmAmounts",
+        type: "uint256[]",
+      },
+    ],
+    name: "withdrawReward",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
     type: "function",
   },
   {

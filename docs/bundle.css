@@ -232,6 +232,105 @@ body {
   overflow-y: scroll;
   padding: 20px 0;
 }
+.sparrow-item {
+  float: left;
+  width: 50%;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  margin-top: 16px;
+}
+@media only screen and (max-width: 799px) {
+  .sparrow-item {
+    float: none;
+    width: 100%;
+  }
+}
+.sparrow-item > .content {
+  display: flex;
+  border: 1px solid #ccc;
+  padding: 10px;
+  align-items: center;
+}
+.sparrow-item > .content > .sparrow {
+  display: block;
+  position: relative;
+  width: 90px;
+  height: 90px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 20px;
+  line-height: 1em;
+}
+.sparrow-item > .content > .sparrow > .id {
+  position: absolute;
+  left: 3px;
+  bottom: 0;
+  color: white;
+  text-shadow: 3px 3px 3px #656565;
+}
+.sparrow-item > .content > .sparrow > .name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #FF00F6;
+  text-shadow: 3px 3px 3px #656565;
+}
+@media only screen and (max-width: 799px) {
+  .sparrow-item > .content > .sparrow {
+    width: 64px;
+    height: 64px;
+    font-size: 14px;
+  }
+}
+.sparrow-item > .content > .info {
+  margin-left: 10px;
+  flex-grow: 1;
+}
+.sparrow-item > .content > .info > .title {
+  margin-right: 12px;
+}
+.sparrow-item > .content > .controller {
+  padding-right: 6px;
+}
+.sparrow-item > .content > .controller > .claim-button {
+  height: 44px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+  font-weight: 700;
+  padding: 0px 12px;
+  margin-right: 8px;
+}
+.sparrow-item > .content > .controller > .claim-button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.sparrow-item > .content > .controller > .claim-button:active {
+  color: white;
+  background-color: black;
+}
+.sparrow-item > .content > .controller > .custom-button {
+  height: 44px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+  font-weight: 700;
+  padding: 0px 12px;
+}
+.sparrow-item > .content > .controller > .custom-button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.sparrow-item > .content > .controller > .custom-button:active {
+  color: white;
+  background-color: black;
+}
 .dialogue.alert {
   position: relative;
   max-width: 600px;
@@ -893,7 +992,7 @@ body {
   text-align: left;
   display: flex;
   word-break: break-all;
-  padding: 20px;
+  padding: 10px;
 }
 @media only screen and (max-width: 719px) {
   .sparrows-view > header {
@@ -933,13 +1032,19 @@ body {
   margin-right: 10px;
 }
 .sparrows-view > main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 10px;
 }
 .sparrows-view > main > h2 {
   margin-top: 16px;
   font-size: 24px;
+}
+.sparrows-view > main > .sparrows-list:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }
 .sparrow-custom-view {
   line-height: 1.5em;

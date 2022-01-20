@@ -22,7 +22,7 @@
         text-align: left;
         display   : flex;
         word-break: break-all;
-        padding   : 20px;
+        padding   : 10px;
 
         @media @phone {
             display: block;
@@ -64,15 +64,15 @@
     }
 
     >main {
-        display       : flex;
-        flex-direction: column;
-        align-items   : center;
+        padding: 10px;
 
         >h2 {
             margin-top: 16px;
             font-size : 24px;
         }
 
-        >.sparrows-list {}
+        >.sparrows-list {
+            .float-wrapper();
+        }
     }
 }

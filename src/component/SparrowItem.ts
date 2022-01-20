@@ -1,18 +1,21 @@
 import { DomNode, el } from "@hanul/skynode";
-import { BigNumber } from "ethers";
-import SparrowNFTsContract from "../contracts/SparrowNFTsContract";
+import { utils } from "ethers";
+import CommonUtil from "../CommonUtil";
+import SparrowsContract from "../contracts/SparrowsContract";
+import SparrowStakingContract from "../contracts/SparrowStakingContract";
+import SparrowStakingMixContract from "../contracts/SparrowStakingMixContract";
 import Wallet from "../klaytn/Wallet";
 import KlubsLoader from "../KlubsLoader";
-import Sparrows from "../view/Sparrows";
+import ViewUtil from "../view/ViewUtil";
 
 export default class SparrowItem extends DomNode {
 
     private sparrow: DomNode;
+    private ijmAmount: DomNode;
     private mixAmount: DomNode;
-    private claimable: BigNumber = BigNumber.from(0);
     private refreshInterval: any;
 
-    constructor(private tab: Sparrows, private id: number) {
+    constructor(private id: number) {
         super(".sparrow-item");
         this.append(
             el(".content",
@@ -20,35 +23,37 @@ export default class SparrowItem extends DomNode {
                     el("span.id", `#${id}`),
                 ),
                 el(".info",
-                    el("h5", "쌓인 IJM"),
-                    this.mixAmount = el(".amount", "Loading..."),
+                    el("span.title", "쌓인 IJM"),
+                    this.ijmAmount = el("span.amount", "Loading..."),
+                    "\n",
+                    el("span.title", "쌓인 MIX"),
+                    this.mixAmount = el("span.amount", "Loading..."),
                 ),
                 el(".controller",
-                    el("button.claim-button", "받기", {
+                    el("button.claim-button", "IJM 받기", {
                         click: async () => {
                             if (await Wallet.connected() !== true) {
                                 await Wallet.connect();
                             }
-                            /*const owner = await Wallet.loadAddress();
+                            const owner = await Wallet.loadAddress();
                             if (owner !== undefined) {
-                                const balance = await MixContract.balanceOf(owner);
-                                const fee = this.claimable.div(9);
-                                if (balance.lt(fee)) {
-                                    new Confirm("믹스 구매", "NFT로부터 MIX를 수령받기 위해서는 수령받을 MIX의 10%의 MIX를 선납해야 합니다." ,"구매", () => {
-                                        open("https://klayswap.com/exchange/swap?input=0x0000000000000000000000000000000000000000&output=0xdd483a970a7a7fef2b223c3510fac852799a88bf");
-                                    });
-                                } else {
-                                    if ((await MixContract.allowance(owner, PixelCatPoolContract.address)).lt(fee)) {
-                                        await MixContract.approve(PixelCatPoolContract.address, constants.MaxUint256);
-                                        setTimeout(async () => {
-                                            await PixelCatPoolContract.claim([this.id]);
-                                        }, 2000);
-                                    } else {
-                                        await PixelCatPoolContract.claim([this.id]);
-                                    }
-                                }
-                            }*/
+                                await SparrowStakingContract.withdrawReward([this.id]);
+                            }
                         },
+                    }),
+                    el("button.claim-button", "MIX 받기", {
+                        click: async () => {
+                            if (await Wallet.connected() !== true) {
+                                await Wallet.connect();
+                            }
+                            const owner = await Wallet.loadAddress();
+                            if (owner !== undefined) {
+                                await SparrowStakingMixContract.withdrawReward([this.id]);
+                            }
+                        },
+                    }),
+                    el("button.custom-button", "꾸미기", {
+                        click: () => ViewUtil.go(`/sparrows/${id}`),
                     }),
                 ),
             ),
@@ -59,17 +64,17 @@ export default class SparrowItem extends DomNode {
     }
 
     private async loadImage() {
-        const metadata = await KlubsLoader.loadMetadata(SparrowNFTsContract.address, this.id);
+        const metadata = await KlubsLoader.loadMetadata(SparrowsContract.address, this.id);
         this.sparrow.style({ backgroundImage: `url(${metadata.image})` });
     }
 
     private async load() {
-        /*const claimable = await PixelCatPoolContract.claimableOf(this.id);
+        const claimableIJM = await SparrowStakingContract.withdrawableReward([this.id]);
+        const claimableMix = await SparrowStakingMixContract.withdrawableReward([this.id]);
         if (this.deleted !== true) {
-            this.mixAmount.empty().appendText(CommonUtil.numberWithCommas(utils.formatEther(claimable), 5));
-            this.tab.changeMix(claimable.sub(this.claimable));
-            this.claimable = claimable;
-        }*/
+            this.ijmAmount.empty().appendText(CommonUtil.numberWithCommas(utils.formatEther(claimableIJM), 5));
+            this.mixAmount.empty().appendText(CommonUtil.numberWithCommas(utils.formatEther(claimableMix), 5));
+        }
     }
 
     public delete() {

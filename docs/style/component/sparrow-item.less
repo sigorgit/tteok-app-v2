@@ -1,0 +1,112 @@
+.sparrow-item {
+    float         : left;
+    width         : 50%;
+    padding-right : 15px;
+    padding-bottom: 15px;
+    margin-top    : 16px;
+
+    @media only screen and (max-width: 799px) {
+        float: none;
+        width: 100%;
+    }
+
+    >.content {
+        display    : flex;
+        border     : 1px solid #ccc;
+        padding    : 10px;
+        align-items: center;
+
+        >.sparrow {
+            display          : block;
+            position         : relative;
+            width            : 90px;
+            height           : 90px;
+            background-size  : contain;
+            background-repeat: no-repeat;
+            font-size        : 20px;
+            line-height      : 1em;
+
+            >.id {
+                position   : absolute;
+                left       : 3px;
+                bottom     : 0;
+                color      : white;
+                text-shadow: 3px 3px 3px #656565;
+            }
+
+            >.name {
+                position   : absolute;
+                top        : 0;
+                left       : 0;
+                width      : 100%;
+                text-align : center;
+                color      : #FF00F6;
+                text-shadow: 3px 3px 3px #656565;
+            }
+
+            @media only screen and (max-width: 799px) {
+                width    : 64px;
+                height   : 64px;
+                font-size: 14px;
+            }
+        }
+
+        >.info {
+            margin-left: 10px;
+            flex-grow  : 1;
+
+            >.title {
+                margin-right: 12px
+            }
+
+            >.amount {}
+        }
+
+        >.controller {
+            padding-right: 6px;
+
+            >.claim-button {
+                height          : 44px;
+                border          : 1px solid black;
+                box-sizing      : border-box;
+                border-radius   : 4px;
+                background-color: white;
+                color           : black;
+                font-weight     : 700;
+                padding         : 0px 12px;
+                margin-right    : 8px;
+            }
+
+            >.claim-button:hover {
+                color           : white;
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            >.claim-button:active {
+                color           : white;
+                background-color: black;
+            }
+
+            >.custom-button {
+                height          : 44px;
+                border          : 1px solid black;
+                box-sizing      : border-box;
+                border-radius   : 4px;
+                background-color: white;
+                color           : black;
+                font-weight     : 700;
+                padding         : 0px 12px;
+            }
+
+            >.custom-button:hover {
+                color           : white;
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            >.custom-button:active {
+                color           : white;
+                background-color: black;
+            }
+        }
+    }
+}

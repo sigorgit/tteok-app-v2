@@ -4,6 +4,7 @@
 export type { IInjeolmi } from "./IInjeolmi";
 export type { ISInjeolmi } from "./ISInjeolmi";
 export type { ISparrowStaking } from "./ISparrowStaking";
+export type { ISparrowStakingMix } from "./ISparrowStakingMix";
 export type { MinterRole } from "./MinterRole";
 export type { PauserRole } from "./PauserRole";
 export type { Context } from "./Context";
@@ -73,10 +74,12 @@ export type { KIP7Token } from "./KIP7Token";
 export type { KIP7TokenFull } from "./KIP7TokenFull";
 export type { SInjeolmi } from "./SInjeolmi";
 export type { SparrowStaking } from "./SparrowStaking";
+export type { SparrowStakingMix } from "./SparrowStakingMix";
 
 export { IInjeolmi__factory } from "./factories/IInjeolmi__factory";
 export { ISInjeolmi__factory } from "./factories/ISInjeolmi__factory";
 export { ISparrowStaking__factory } from "./factories/ISparrowStaking__factory";
+export { ISparrowStakingMix__factory } from "./factories/ISparrowStakingMix__factory";
 export { MinterRole__factory } from "./factories/MinterRole__factory";
 export { PauserRole__factory } from "./factories/PauserRole__factory";
 export { Context__factory } from "./factories/Context__factory";
@@ -146,3 +149,4 @@ export { KIP7Token__factory } from "./factories/KIP7Token__factory";
 export { KIP7TokenFull__factory } from "./factories/KIP7TokenFull__factory";
 export { SInjeolmi__factory } from "./factories/SInjeolmi__factory";
 export { SparrowStaking__factory } from "./factories/SparrowStaking__factory";
+export { SparrowStakingMix__factory } from "./factories/SparrowStakingMix__factory";

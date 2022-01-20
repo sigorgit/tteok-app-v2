@@ -1,1 +1,1 @@
-{"version":3,"file":"KIP17Contract.js","sourceRoot":"","sources":["../../../src/contracts/standard/KIP17Contract.ts"],"names":[],"mappings":""}
+{"version":3,"file":"KIP17Contract.js","sourceRoot":"","sources":["../../../src/contracts/standard/KIP17Contract.ts"],"names":[],"mappings":";;;;;AAAA,mCAAsD;AACtD,2DAAmC;AAEnC,MAAqB,aAAc,SAAQ,kBAAQ;IAE/C,YAAY,OAAe,EAAE,GAAsB;QAC/C,KAAK,CAAC,OAAO,EAAE,GAAG,CAAC,CAAC;IACxB,CAAC;IAEM,KAAK,CAAC,SAAS,CAAC,KAAa;QAChC,OAAO,kBAAS,CAAC,IAAI,CAAC,MAAM,IAAI,CAAC,SAAS,CAAC,WAAW,EAAE,KAAK,CAAC,CAAC,CAAC;IACpE,CAAC;CACJ;AATD,gCASC"}

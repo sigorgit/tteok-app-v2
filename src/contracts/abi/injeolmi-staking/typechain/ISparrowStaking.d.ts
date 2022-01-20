@@ -26,12 +26,12 @@ interface ISparrowStakingInterface extends ethers.utils.Interface {
     "ijm()": FunctionFragment;
     "initialized()": FunctionFragment;
     "nft()": FunctionFragment;
-    "withdrawReward(uint256)": FunctionFragment;
-    "withdrawableReward(uint256)": FunctionFragment;
+    "withdrawableReward(uint256[])": FunctionFragment;
     "initialIjmAmount()": FunctionFragment;
     "nftSIjmAmount(uint256)": FunctionFragment;
     "initialize()": FunctionFragment;
     "sIjm()": FunctionFragment;
+    "withdrawReward(uint256[],uint256[])": FunctionFragment;
     "baseDepositedIjm()": FunctionFragment;
     "nftSIjmInitialized(uint256)": FunctionFragment;
   };
@@ -48,12 +48,8 @@ interface ISparrowStakingInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "nft", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "withdrawReward",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "withdrawableReward",
-    values: [BigNumberish]
+    values: [BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "initialIjmAmount",
@@ -68,6 +64,10 @@ interface ISparrowStakingInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "sIjm", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "withdrawReward",
+    values: [BigNumberish[], BigNumberish[]]
+  ): string;
   encodeFunctionData(
     functionFragment: "baseDepositedIjm",
     values?: undefined
@@ -89,10 +89,6 @@ interface ISparrowStakingInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "nft", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "withdrawReward",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "withdrawableReward",
     data: BytesLike
   ): Result;
@@ -106,6 +102,10 @@ interface ISparrowStakingInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sIjm", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawReward",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "baseDepositedIjm",
     data: BytesLike
@@ -193,13 +193,8 @@ export class ISparrowStaking extends BaseContract {
 
     nft(overrides?: CallOverrides): Promise<[string]>;
 
-    withdrawReward(
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     withdrawableReward(
-      id: BigNumberish,
+      ids: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -215,6 +210,12 @@ export class ISparrowStaking extends BaseContract {
     ): Promise<ContractTransaction>;
 
     sIjm(overrides?: CallOverrides): Promise<[string]>;
+
+    withdrawReward(
+      ids: BigNumberish[],
+      sIjmAmounts: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     baseDepositedIjm(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -234,13 +235,8 @@ export class ISparrowStaking extends BaseContract {
 
   nft(overrides?: CallOverrides): Promise<string>;
 
-  withdrawReward(
-    id: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   withdrawableReward(
-    id: BigNumberish,
+    ids: BigNumberish[],
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -256,6 +252,12 @@ export class ISparrowStaking extends BaseContract {
   ): Promise<ContractTransaction>;
 
   sIjm(overrides?: CallOverrides): Promise<string>;
+
+  withdrawReward(
+    ids: BigNumberish[],
+    sIjmAmounts: BigNumberish[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   baseDepositedIjm(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -275,10 +277,8 @@ export class ISparrowStaking extends BaseContract {
 
     nft(overrides?: CallOverrides): Promise<string>;
 
-    withdrawReward(id: BigNumberish, overrides?: CallOverrides): Promise<void>;
-
     withdrawableReward(
-      id: BigNumberish,
+      ids: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -292,6 +292,12 @@ export class ISparrowStaking extends BaseContract {
     initialize(overrides?: CallOverrides): Promise<void>;
 
     sIjm(overrides?: CallOverrides): Promise<string>;
+
+    withdrawReward(
+      ids: BigNumberish[],
+      sIjmAmounts: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     baseDepositedIjm(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -348,13 +354,8 @@ export class ISparrowStaking extends BaseContract {
 
     nft(overrides?: CallOverrides): Promise<BigNumber>;
 
-    withdrawReward(
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     withdrawableReward(
-      id: BigNumberish,
+      ids: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -370,6 +371,12 @@ export class ISparrowStaking extends BaseContract {
     ): Promise<BigNumber>;
 
     sIjm(overrides?: CallOverrides): Promise<BigNumber>;
+
+    withdrawReward(
+      ids: BigNumberish[],
+      sIjmAmounts: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     baseDepositedIjm(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -392,13 +399,8 @@ export class ISparrowStaking extends BaseContract {
 
     nft(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    withdrawReward(
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     withdrawableReward(
-      id: BigNumberish,
+      ids: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -414,6 +416,12 @@ export class ISparrowStaking extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     sIjm(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    withdrawReward(
+      ids: BigNumberish[],
+      sIjmAmounts: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     baseDepositedIjm(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
