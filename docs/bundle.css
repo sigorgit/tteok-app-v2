@@ -166,6 +166,14 @@ input {
   visibility: hidden;
 }
 @font-face {
+  font-family: "BankGothic";
+  src: url("../fonts/bankgothic.woff2") format("woff2"), url("../fonts/bankgothic.woff") format("woff");
+}
+@font-face {
+  font-family: "DungGeunMo";
+  src: url("../fonts/neodgm.woff2") format("woff2"), url("../fonts/neodgm.woff") format("woff");
+}
+@font-face {
   font-family: 'ChosunGs';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGs.woff') format('woff');
   font-weight: normal;
@@ -330,6 +338,20 @@ body {
 .sparrow-item > .content > .controller > .custom-button:active {
   color: white;
   background-color: black;
+}
+.sparrow-preview {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+.sparrow-preview > .ment {
+  position: absolute;
+  left: 0;
+  top: 66px;
+  width: 100%;
+  font-size: 24px;
+  font-family: DungGeunMo;
+  text-align: center;
 }
 .dialogue.alert {
   position: relative;
@@ -1048,6 +1070,7 @@ body {
 }
 .sparrow-custom-view {
   line-height: 1.5em;
+  text-align: left;
 }
 .sparrow-custom-view > .gnb {
   height: 52px;
@@ -1063,6 +1086,53 @@ body {
   width: 100%;
   margin: auto;
   text-align: left;
+}
+.sparrow-custom-view > main {
+  display: flex;
+}
+.sparrow-custom-view > main > .form {
+  padding: 10px;
+}
+.sparrow-custom-view > main > .form > .change-ment > input {
+  border: 1px solid #ccc;
+  width: 100%;
+  padding: 8px;
+}
+.sparrow-custom-view > main > .form > .change-ment > button {
+  width: 100%;
+  font-family: 'ChosunGs';
+  display: block;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  padding: 8px 0;
+  margin-top: 5px;
+}
+.sparrow-custom-view > main > .form > .change-ment > button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.sparrow-custom-view > main > .form > .change-parts {
+  margin-top: 10px;
+}
+.sparrow-custom-view > main > .form > .change-parts > .select-wrapper {
+  display: flex;
+  margin-top: 5px;
+}
+.sparrow-custom-view > main > .form > .change-parts > .select-wrapper > span {
+  width: 120px;
+}
+.sparrow-custom-view > main > .form > .change-parts > button {
+  width: 100%;
+  font-family: 'ChosunGs';
+  display: block;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  padding: 8px 0;
+  margin-top: 5px;
+}
+.sparrow-custom-view > main > .form > .change-parts > button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 .junior-view {
   line-height: 1.5em;

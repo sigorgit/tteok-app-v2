@@ -1,5 +1,6 @@
 .sparrow-custom-view {
     line-height: 1.5em;
+    text-align : left;
 
     >.gnb {
         height          : 52px;
@@ -15,6 +16,65 @@
             width      : 100%;
             margin     : auto;
             text-align : left;
+        }
+    }
+
+    >main {
+        display: flex;
+
+        >.form {
+            padding: 10px;
+
+            >.change-ment {
+                >input {
+                    border : 1px solid #ccc;
+                    width  : 100%;
+                    padding: 8px;
+                }
+
+                >button {
+                    width                : 100%;
+                    font-family          : 'ChosunGs';
+                    display              : block;
+                    -webkit-border-radius: 2px;
+                    border-radius        : 2px;
+                    text-align           : center;
+                    padding              : 8px 0;
+                    margin-top           : 5px;
+                }
+
+                >button:hover {
+                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                }
+            }
+
+            >.change-parts {
+                margin-top: 10px;
+
+                >.select-wrapper {
+                    display   : flex;
+                    margin-top: 5px;
+
+                    >span {
+                        width: 120px;
+                    }
+                }
+
+                >button {
+                    width                : 100%;
+                    font-family          : 'ChosunGs';
+                    display              : block;
+                    -webkit-border-radius: 2px;
+                    border-radius        : 2px;
+                    text-align           : center;
+                    padding              : 8px 0;
+                    margin-top           : 5px;
+                }
+
+                >button:hover {
+                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                }
+            }
         }
     }
 }

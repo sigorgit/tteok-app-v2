@@ -1,0 +1,1 @@
+{"version":3,"file":"ItemStoreContract copy.d.ts","sourceRoot":"","sources":["../../src/contracts/ItemStoreContract copy.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,YAAY,EAAE,MAAM,0BAA0B,CAAC;AAEnE,OAAO,QAAQ,MAAM,YAAY,CAAC;AAElC,cAAM,iBAAkB,SAAQ,QAAQ;;IAMvB,UAAU,CAAC,EAAE,EAAE,YAAY,GAAG,OAAO,CAAC,SAAS,CAAC;IAIhD,QAAQ,CAAC,GAAG,EAAE,YAAY,EAAE;CAG5C;;AAED,wBAAuC"}

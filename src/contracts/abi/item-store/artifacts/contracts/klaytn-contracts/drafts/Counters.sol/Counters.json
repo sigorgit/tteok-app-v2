@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Counters",
+  "sourceName": "contracts/klaytn-contracts/drafts/Counters.sol",
+  "abi": [],
+  "bytecode": "0x604c6023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a723058202c76ac4dbdddc8ddfc5b96ce956dbf1a13f07988ab8466fcc5186dacd8dadfb10029",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a723058202c76ac4dbdddc8ddfc5b96ce956dbf1a13f07988ab8466fcc5186dacd8dadfb10029",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

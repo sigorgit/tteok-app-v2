@@ -6,6 +6,10 @@ class KlubsLoader {
         let result = await superagent.get(`https://api.klu.bs/v2/pfp/${addr}/${id}/metadata`);
         return result.body;
     }
+
+    public async refreshMetadata(addr: string, id: number) {
+        await superagent.post(`https://api.klu.bs/v2/pfp/${addr}/${id}/metadata/cache`);
+    }
 }
 
 export default new KlubsLoader();

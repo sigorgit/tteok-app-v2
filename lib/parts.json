@@ -1,0 +1,1395 @@
+[{
+        "name": "Background",
+        "parts": [{
+                "name": "IJM beige",
+                "images": [{
+                        "path": "sparrows-parts/1.BG/IJM beige.png",
+                        "order": 100
+                    }]
+            }, {
+                "name": "Light green",
+                "images": [{
+                        "path": "sparrows-parts/1.BG/Light green.png",
+                        "order": 100
+                    }]
+            }, {
+                "name": "Light steel blue",
+                "images": [{
+                        "path": "sparrows-parts/1.BG/Light steel blue.png",
+                        "order": 100
+                    }]
+            }, {
+                "name": "Pastel green",
+                "images": [{
+                        "path": "sparrows-parts/1.BG/Pastel green.png",
+                        "order": 100
+                    }]
+            }, {
+                "name": "Rainbow",
+                "images": [{
+                        "path": "sparrows-parts/1.BG/Rainbow.png",
+                        "order": 100
+                    }]
+            }, {
+                "name": "Sky blue",
+                "images": [{
+                        "path": "sparrows-parts/1.BG/Sky blue.png",
+                        "order": 100
+                    }]
+            }, {
+                "name": "White",
+                "images": [{
+                        "path": "sparrows-parts/1.BG/White.png",
+                        "order": 100
+                    }]
+            }]
+    }, {
+        "name": "Tail",
+        "parts": [{
+                "name": "Cock",
+                "images": [{
+                        "path": "sparrows-parts/2.TAIL/Cock.png",
+                        "order": 200
+                    }]
+            }, {
+                "name": "Duck",
+                "images": [{
+                        "path": "sparrows-parts/2.TAIL/Duck.png",
+                        "order": 200
+                    }]
+            }, {
+                "name": "Eagle",
+                "images": [{
+                        "path": "sparrows-parts/2.TAIL/Eagle.png",
+                        "order": 200
+                    }]
+            }, {
+                "name": "Ostrich",
+                "images": [{
+                        "path": "sparrows-parts/2.TAIL/Ostrich.png",
+                        "order": 200
+                    }]
+            }, {
+                "name": "Phoenix",
+                "images": [{
+                        "path": "sparrows-parts/2.TAIL/Phoenix.png",
+                        "order": 200
+                    }]
+            }, {
+                "name": "Pigeon",
+                "images": [{
+                        "path": "sparrows-parts/2.TAIL/Pigeon.png",
+                        "order": 200
+                    }]
+            }, {
+                "name": "Sparrow",
+                "images": [{
+                        "path": "sparrows-parts/2.TAIL/Sparrow.png",
+                        "order": 200
+                    }]
+            }, {
+                "name": "Turkey",
+                "images": [{
+                        "path": "sparrows-parts/2.TAIL/Turkey.png",
+                        "order": 200
+                    }]
+            }]
+    }, {
+        "name": "Body",
+        "parts": [{
+                "name": "Brown",
+                "images": [{
+                        "path": "sparrows-parts/3.BODY/Brown.png",
+                        "order": 300
+                    }]
+            }, {
+                "name": "Brown without cheek",
+                "images": [{
+                        "path": "sparrows-parts/3.BODY/Brown-without cheek.png",
+                        "order": 300
+                    }]
+            }, {
+                "name": "Dark brown",
+                "images": [{
+                        "path": "sparrows-parts/3.BODY/Dark brown.png",
+                        "order": 300
+                    }]
+            }, {
+                "name": "Dark brown without cheek",
+                "images": [{
+                        "path": "sparrows-parts/3.BODY/Dark brown-without cheek.png",
+                        "order": 300
+                    }]
+            }]
+    }, {
+        "name": "Back",
+        "parts": [{
+                "name": "A bag of rice",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/A bag of rice.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Apples",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/apples.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Cracked egg",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Cracked egg.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Ddong Young Jae",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Ddong Young Jae.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "JOKER",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/JOKER.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Dinosaur Egg",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Dinosaur Egg.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Empty Basket",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Empty Basket.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Green apples",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Green apples.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "None",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/None.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Powdered soybean",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Powdered soybean.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Rock Young Jae",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Rock Young Jae.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Rock",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Rock.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Sweet potato",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Sweet potato.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Tangerine",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Tangerine.png",
+                        "order": 400
+                    }]
+            }, {
+                "name": "Tomatos",
+                "images": [{
+                        "path": "sparrows-parts/4.BACK/Tomatos.png",
+                        "order": 400
+                    }]
+            }]
+    }, {
+        "name": "Eye",
+        "parts": [{
+                "name": "Brave eyes",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Brave eyes.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Cock",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Cock.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Doge",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Doge.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Duck",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Duck.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Eagle",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Eagle.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Heart",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Heart.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "IJM",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/IJM.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Indifferent eyes",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Indifferent eyes.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Kind eye",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Kind eye.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Mad eyes",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Mad eyes.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Naive eyes",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Naive eyes.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Ostrich",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Ostrich.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Owl",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Owl.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Parrot",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Parrot.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Penguin",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Penguin.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Pigeon",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Pigeon.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Registered eyes",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Registered eyes.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Seagull",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Seagull.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Sparrow",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Sparrow.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Tearful eyes",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Tearful eyes.png",
+                        "order": 500
+                    }]
+            }, {
+                "name": "Turkey",
+                "images": [{
+                        "path": "sparrows-parts/5.EYES/Turkey.png",
+                        "order": 500
+                    }]
+            }]
+    }, {
+        "name": "Beak",
+        "parts": [{
+                "name": "Bald Eagle",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Bald Eagle.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Cock",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Cock.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Duck",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Duck.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Eagle",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Eagle.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Ostrich",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Ostrich.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Owl",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Owl.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Parrot",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Parrot.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Penguin",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Penguin.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Pigeon",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Pigeon.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Seagull",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Seagull.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Sparrow",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Sparrow.png",
+                        "order": 600
+                    }]
+            }, {
+                "name": "Turkey",
+                "images": [{
+                        "path": "sparrows-parts/6.BEAK/Turkey.png",
+                        "order": 600
+                    }]
+            }]
+    }, {
+        "name": "Shoes",
+        "parts": [{
+                "name": "2didas",
+                "images": [{
+                        "path": "sparrows-parts/7.SHOES/2didas.png",
+                        "order": 700
+                    }]
+            }, {
+                "name": "Duck",
+                "images": [{
+                        "path": "sparrows-parts/7.SHOES/Duck.png",
+                        "order": 700
+                    }]
+            }, {
+                "name": "Eagle",
+                "images": [{
+                        "path": "sparrows-parts/7.SHOES/Eagle.png",
+                        "order": 700
+                    }]
+            }, {
+                "name": "None",
+                "images": [{
+                        "path": "sparrows-parts/7.SHOES/None.png",
+                        "order": 700
+                    }]
+            }, {
+                "name": "Rabbit",
+                "images": [{
+                        "path": "sparrows-parts/7.SHOES/Rabbit.png",
+                        "order": 700
+                    }]
+            }, {
+                "name": "Rubber shoe B",
+                "images": [{
+                        "path": "sparrows-parts/7.SHOES/Rubber shoe B.png",
+                        "order": 700
+                    }]
+            }, {
+                "name": "Rubber shoe W",
+                "images": [{
+                        "path": "sparrows-parts/7.SHOES/Rubber shoe W.png",
+                        "order": 700
+                    }]
+            }, {
+                "name": "Sneakers",
+                "images": [{
+                        "path": "sparrows-parts/7.SHOES/Sneakers.png",
+                        "order": 700
+                    }]
+            }]
+    }, {
+        "name": "Text Balloon",
+        "parts": [{
+                "name": "Innermost feelings",
+                "images": [{
+                        "path": "sparrows-parts/8.TEXT BALLOON/Innermost feelings.png",
+                        "order": 800
+                    }]
+            }, {
+                "name": "Shout out",
+                "images": [{
+                        "path": "sparrows-parts/8.TEXT BALLOON/Shout out.png",
+                        "order": 800
+                    }]
+            }, {
+                "name": "Talk",
+                "images": [{
+                        "path": "sparrows-parts/8.TEXT BALLOON/Talk.png",
+                        "order": 800
+                    }]
+            }]
+    }, {
+        "name": "Wings",
+        "parts": [{
+                "name": "Fighting",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.BROWN WINGS/Fighting.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "Greet",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.BROWN WINGS/Greet.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "Hold item",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.BROWN WINGS/Hold item.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "Hug item",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.BROWN WINGS/Hug item.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "None",
+                "images": [{
+                        "path": "sparrows-parts/9.BROWN WINGS/None.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "Scold",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.BROWN WINGS/Scold.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "Fighting",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.DARK BROWN WINGS/Fighting.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "Greet",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.DARK BROWN WINGS/Greet.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "Hold item",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.DARK BROWN WINGS/Hold item.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "Hug item",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.DARK BROWN WINGS/Hug item.png",
+                        "order": 900
+                    }]
+            }, {
+                "name": "Scold",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/9.DARK BROWN WINGS/Scold.png",
+                        "order": 900
+                    }]
+            }]
+    }, {
+        "name": "Hold Item",
+        "condition": {
+            "trait": "Wings",
+            "values": ["Hold item"]
+        },
+        "parts": [{
+                "name": "A glass of water",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/A glass of water.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Brush",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Brush.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Carrot",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Carrot.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Corn",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Corn.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Lily of the valley",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Lily of the valley.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Magic wand",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Magic wand.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Microphone",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Microphone.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Poop stick",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Poop stick.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Potato",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Potato.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Rice",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Rice.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Spoon",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Spoon.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Spring onion",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Spring onion.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Sweet potato",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Sweet potato.png",
+                        "order": 1000
+                    }]
+            }, {
+                "name": "Towel",
+                "images": [{
+                        "path": "sparrows-parts/10.HOLD ITEM/Towel.png",
+                        "order": 1000
+                    }]
+            }]
+    }, {
+        "name": "Hug Item",
+        "condition": {
+            "trait": "Wings",
+            "values": ["Hug item"]
+        },
+        "parts": [{
+                "name": "Beach ball",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Beach ball.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Bouquet",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Bouquet.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Camera",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Camera.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Ethereum",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Ethereum.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Gift box",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Gift box.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Injeolmi",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Injeolmi.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Kkultteok",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Kkultteok.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Klaytn",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Klaytn.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Mujigaetteok",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Mujigaetteok.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Pencil and notebook",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Pencil and notebook.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Polygon ETH",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Polygon ETH.png",
+                        "order": 1100
+                    }]
+            }, {
+                "name": "Pot-Injeolmi",
+                "images": [{
+                        "path": "sparrows-parts/11.HUG ITEM/Pot-Injeolmi.png",
+                        "order": 1100
+                    }]
+            }]
+    }, {
+        "name": "Hair Accessory",
+        "parts": [{
+                "name": "A roasted chestnut hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/A roasted chestnut hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Ant hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Ant hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Blue ribbon",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Blue ribbon.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Bump",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Bump.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Camellia",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Camellia.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Chef's hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Chef's hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Chestnut haircut",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Chestnut haircut.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Cockscomb",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Cockscomb.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Cone-gratulation",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Cone-gratulation.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Detective hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Detective hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Disheveled hair",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Disheveled hair.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Drunken tie",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Drunken tie.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Frog hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Frog hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Gentleman hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Gentleman hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Graduation cap",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Graduation cap.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Green ribbon",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Green ribbon.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Hair point",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Hair point.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Horn",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Horn.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Jokduri",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Jokduri.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Katydid hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Katydid hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Kindergarten hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Kindergarten hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Korea perm",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Korea perm.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "None",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/None.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Police hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Police hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Powdered soybean",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Powdered soybean.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Rabbit hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Rabbit hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Red hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Red hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Red ribbon",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Red ribbon.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Rice bowl",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Rice bowl.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Satgat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Satgat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Straw hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Brown", "Brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.BROWN HAIR ACCESSORY/Straw hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "A roasted chestnut hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/A roasted chestnut hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Ant hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Ant hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Blue ribbon",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Blue ribbon.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Bump",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Bump.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Camellia",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Camellia.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Chef's hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Chef's hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Chestnut haircut",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Chestnut haircut.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Cockscomb",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Cockscomb.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Cone-gratulation",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Cone-gratulation.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Detective hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Detective hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Disheveled hair",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Disheveled hair.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Drunken tie",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Drunken tie.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Frog hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Frog hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Gentleman hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Gentleman hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Graduation cap",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Graduation cap.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Green ribbon",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Green ribbon.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Hair point",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Hair point.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Horn",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Horn.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Jokduri",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Jokduri.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Katydid hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Katydid hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Kindergarten hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Kindergarten hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Korea perm",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Korea perm.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "None",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/None.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Police hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Police hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Powdered soybean",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Powdered soybean.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Rabbit hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Rabbit hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Red hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Red hat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Red ribbon",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Red ribbon.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Rice bowl",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Rice bowl.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Satgat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Satgat.png",
+                        "order": 1200
+                    }]
+            }, {
+                "name": "Straw hat",
+                "condition": {
+                    "trait": "Body",
+                    "values": ["Dark brown", "Dark brown without cheek"]
+                },
+                "images": [{
+                        "path": "sparrows-parts/12.DARK BROWN HAIR ACCESSORY/Straw hat.png",
+                        "order": 1200
+                    }]
+            }]
+    }]

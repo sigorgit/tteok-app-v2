@@ -69,6 +69,7 @@ export type { KIP7Pausable } from "./KIP7Pausable";
 export type { KIP7Token } from "./KIP7Token";
 export type { KIP7TokenFull } from "./KIP7TokenFull";
 export type { TteokmillSparrows } from "./TteokmillSparrows";
+export type { TteokmillSparrowsMentor } from "./TteokmillSparrowsMentor";
 export type { TteokmillSparrowsMinter } from "./TteokmillSparrowsMinter";
 export type { TteokmillSparrowsWhitelist } from "./TteokmillSparrowsWhitelist";
 
@@ -140,5 +141,6 @@ export { KIP7Pausable__factory } from "./factories/KIP7Pausable__factory";
 export { KIP7Token__factory } from "./factories/KIP7Token__factory";
 export { KIP7TokenFull__factory } from "./factories/KIP7TokenFull__factory";
 export { TteokmillSparrows__factory } from "./factories/TteokmillSparrows__factory";
+export { TteokmillSparrowsMentor__factory } from "./factories/TteokmillSparrowsMentor__factory";
 export { TteokmillSparrowsMinter__factory } from "./factories/TteokmillSparrowsMinter__factory";
 export { TteokmillSparrowsWhitelist__factory } from "./factories/TteokmillSparrowsWhitelist__factory";
