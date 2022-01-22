@@ -59,28 +59,30 @@ export default class Sparrows implements View {
             ),
             el("main",
                 el("h2", "NFT 목록"),
-                el("button", "한방에 절미 수령", {
-                    click: async () => {
-                        if (await Wallet.connected() !== true) {
-                            await Wallet.connect();
-                        }
-                        const owner = await Wallet.loadAddress();
-                        if (owner !== undefined) {
-                            await SparrowStakingContract.withdrawReward(this.nfts);
-                        }
-                    },
-                }),
-                el("button", "한방에 믹스 수령", {
-                    click: async () => {
-                        if (await Wallet.connected() !== true) {
-                            await Wallet.connect();
-                        }
-                        const owner = await Wallet.loadAddress();
-                        if (owner !== undefined) {
-                            await SparrowStakingMixContract.withdrawReward(this.nfts);
-                        }
-                    },
-                }),
+                el(".button-container",
+                    el("button", "한방에 절미 수령", {
+                        click: async () => {
+                            if (await Wallet.connected() !== true) {
+                                await Wallet.connect();
+                            }
+                            const owner = await Wallet.loadAddress();
+                            if (owner !== undefined) {
+                                await SparrowStakingContract.withdrawReward(this.nfts);
+                            }
+                        },
+                    }),
+                    el("button", "한방에 믹스 수령", {
+                        click: async () => {
+                            if (await Wallet.connected() !== true) {
+                                await Wallet.connect();
+                            }
+                            const owner = await Wallet.loadAddress();
+                            if (owner !== undefined) {
+                                await SparrowStakingMixContract.withdrawReward(this.nfts);
+                            }
+                        },
+                    }),
+                ),
                 this.list = el(".sparrows-list"),
             ),
         ));

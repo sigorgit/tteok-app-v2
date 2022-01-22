@@ -28,8 +28,6 @@ export default class SparrowCustom implements View {
                     el("h1", "참새 커스터마이징"),
                 ),
             ),
-            el("p.warning", "자산 사용 허락을 받기 위해 트랜잭션이 두번씩 발생할 수 있음"),
-            el("p.warning", "말풍선에 특수 문자는 깨질 수 있으니 주의해!!"),
         ));
         this.load(parseInt(params.id, 10));
     }
@@ -43,54 +41,11 @@ export default class SparrowCustom implements View {
         let input: DomNode<HTMLInputElement>;
 
         this.container.append(
-            el("h2", "꾸미기 폼"),
             el("main",
-                preview = new SparrowPreview(metadata.attributes, ment),
+                el("p.warning", "자산 사용 허락을 받기 위해 트랜잭션이 두번씩 발생할 수 있어!! \n 말풍선에 특수 문자는 깨질 수 있으니 주의해!!"),
+                el("h2", "꾸미기 폼"),
                 el(".form",
-                    el(".change-ment",
-                        el("p", "말풍선을 변경하는데는 100 IJM이 필요합니다."),
-                        input = el("input", {
-                            placeholder: "말풍선 멘트",
-                            value: ment,
-                            keyup: () => {
-                                preview.changeMent(input.domElement.value);
-                            },
-                        }),
-                        el("button", "100 절미로 변경하기", {
-                            click: async () => {
-                                const owner = await Wallet.loadAddress();
-                                if (owner !== undefined) {
-                                    if ((await InjeolmiContract.balanceOf(owner)).lt(await SparrowsMentorContract.price())) {
-                                        alert("절미 부족");
-                                    } else {
-                                        await SparrowsMentorContract.changeMent(id, input.domElement.value);
-                                        setTimeout(async () => {
-                                            await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
-                                            await KlubsLoader.refreshMetadata(SparrowsContract.address, id);
-                                            SkyRouter.refresh();
-                                        }, 2000);
-                                    }
-                                }
-                            },
-                        }),
-                        el("button", "티겟으로 변경하기", {
-                            click: async () => {
-                                const owner = await Wallet.loadAddress();
-                                if (owner !== undefined) {
-                                    if ((await TicketContract.balanceOf(owner, 0)).lt(1)) {
-                                        alert("티켓 부족");
-                                    } else {
-                                        await SparrowsMentorContract.changeMentUsingTicket(id, input.domElement.value);
-                                        setTimeout(async () => {
-                                            await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
-                                            await KlubsLoader.refreshMetadata(SparrowsContract.address, id);
-                                            SkyRouter.refresh();
-                                        }, 2000);
-                                    }
-                                }
-                            },
-                        }),
-                    ),
+                    preview = new SparrowPreview(metadata.attributes, ment),
                     el(".change-parts",
                         el("p", "모습을 변경하는데는 100 IJM이 필요합니다."),
                         ...parts.map((p) => {
@@ -174,18 +129,62 @@ export default class SparrowCustom implements View {
                         }),
                     ),
                 ),
-            ),
-            el("h2", "실제 이미지"),
-            el(".real",
-                el("img", { src: metadata.image }),
-                el(".form",
-                    el("p", "실제 이미지가 달라?"),
-                    el("button", "실제 이미지 재생성", {
-                        click: async () => {
-                            await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
-                            SkyRouter.refresh();
+                el(".change-ment",
+                    el("p", "말풍선을 변경하는데는 100 IJM이 필요합니다."),
+                    input = el("input", {
+                        placeholder: "말풍선 멘트",
+                        value: ment,
+                        keyup: () => {
+                            preview.changeMent(input.domElement.value);
                         },
                     }),
+                    el("button", "100 절미로 변경하기", {
+                        click: async () => {
+                            const owner = await Wallet.loadAddress();
+                            if (owner !== undefined) {
+                                if ((await InjeolmiContract.balanceOf(owner)).lt(await SparrowsMentorContract.price())) {
+                                    alert("절미 부족");
+                                } else {
+                                    await SparrowsMentorContract.changeMent(id, input.domElement.value);
+                                    setTimeout(async () => {
+                                        await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
+                                        await KlubsLoader.refreshMetadata(SparrowsContract.address, id);
+                                        SkyRouter.refresh();
+                                    }, 2000);
+                                }
+                            }
+                        },
+                    }),
+                    el("button", "티겟으로 변경하기", {
+                        click: async () => {
+                            const owner = await Wallet.loadAddress();
+                            if (owner !== undefined) {
+                                if ((await TicketContract.balanceOf(owner, 0)).lt(1)) {
+                                    alert("티켓 부족");
+                                } else {
+                                    await SparrowsMentorContract.changeMentUsingTicket(id, input.domElement.value);
+                                    setTimeout(async () => {
+                                        await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
+                                        await KlubsLoader.refreshMetadata(SparrowsContract.address, id);
+                                        SkyRouter.refresh();
+                                    }, 2000);
+                                }
+                            }
+                        },
+                    }),
+                ),
+                el("h2", "실제 이미지"),
+                el(".real",
+                    el("img", { src: metadata.image }),
+                    el(".form",
+                        el("p", "실제 이미지가 달라?"),
+                        el("button", "실제 이미지 재생성", {
+                            click: async () => {
+                                await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
+                                SkyRouter.refresh();
+                            },
+                        }),
+                    ),
                 ),
             ),
         );

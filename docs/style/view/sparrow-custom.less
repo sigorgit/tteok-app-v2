@@ -19,93 +19,160 @@
         }
     }
 
-    >h2 {
-        padding  : 10px;
-        font-size: 20px;
-    }
-
     >main {
-        display: flex;
+        display       : flex;
+        flex-direction: column;
+        max-width     : 1240px;
+        margin        : auto;
+
+        @media @phone {
+            padding: 8px;
+        }
+
+        >.warning {
+            margin-top      : 16px;
+            padding         : 8px;
+            border          : 1px solid;
+            border-radius   : 8px;
+            background-color: rgba(190, 159, 100, 0.7);
+        }
+
+        >h2 {
+            font-size     : 24px;
+            padding-top   : 16px;
+            padding-bottom: 16px;
+            font-weight   : 700;
+        }
 
         >.form {
-            padding: 10px;
+            display: flex;
 
-            >.change-ment {
-                >input {
-                    border : 1px solid #ccc;
-                    width  : 100%;
-                    padding: 8px;
-                }
-
-                >button {
-                    width                : 100%;
-                    font-family          : 'ChosunGs';
-                    display              : block;
-                    -webkit-border-radius: 2px;
-                    border-radius        : 2px;
-                    text-align           : center;
-                    padding              : 8px 0;
-                    margin-top           : 5px;
-                }
-
-                >button:hover {
-                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-                }
+            @media @phone {
+                flex-direction: column;
             }
 
             >.change-parts {
-                margin-top: 10px;
+                margin-left: 32px;
+
+                @media @phone {
+                    margin-left: 0px;
+                }
 
                 >.select-wrapper {
                     display   : flex;
-                    margin-top: 5px;
+                    width     : 100%;
+                    margin-top: 8px;
 
                     >span {
-                        width: 120px;
+                        min-width: 120px;
                     }
                 }
 
                 >button {
                     width                : 100%;
+                    min-width            : 100px;
                     font-family          : 'ChosunGs';
                     display              : block;
+                    margin-top           : 11px;
                     -webkit-border-radius: 2px;
                     border-radius        : 2px;
                     text-align           : center;
-                    padding              : 8px 0;
-                    margin-top           : 5px;
-                }
+                    padding              : 8px 16px;
+                    margin               : auto;
+                    margin-top           : 8px;
 
-                >button:hover {
-                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                    @media @phone {
+                        margin-left: 0px;
+                    }
+
+                    &:hover {
+                        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                    }
+
+                    &:active {
+                        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+                    }
                 }
             }
         }
-    }
 
-    >.real {
-        display: flex;
+        >.change-ment {
+            margin-top: 8px;
 
-        >img {
-            width: 400px;
-        }
-
-        >.form {
-            padding: 10px;
+            >input {
+                border    : 1px solid #ccc;
+                width     : 100%;
+                padding   : 8px;
+                margin-top: 8px;
+            }
 
             >button {
                 width                : 100%;
+                min-width            : 100px;
                 font-family          : 'ChosunGs';
                 display              : block;
+                margin-top           : 11px;
                 -webkit-border-radius: 2px;
                 border-radius        : 2px;
                 text-align           : center;
-                padding              : 8px 0;
-                margin-top           : 5px;
+                padding              : 8px 16px;
+                margin               : auto;
+                margin-top           : 8px;
+
+                @media @phone {
+                    margin-left: 0px;
+                }
+
+                &:hover {
+                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                }
+
+                &:active {
+                    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+
+        >.real {
+            display       : flex;
+            flex-direction: column;
+            max-width     : 1240px;
+
+            >img {
+                width: 445px;
             }
 
-            >button:hover {
-                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+            >.form {
+
+                >p {
+                    margin-top: 8px;
+                }
+
+                >button {
+                    width                : 100%;
+                    min-width            : 100px;
+                    font-family          : 'ChosunGs';
+                    display              : block;
+                    margin-top           : 11px;
+                    -webkit-border-radius: 2px;
+                    border-radius        : 2px;
+                    text-align           : center;
+                    padding              : 8px 16px;
+                    margin               : auto;
+                    margin-top           : 8px;
+
+                    @media @phone {
+                        margin-left: 0px;
+                    }
+
+                    &:hover {
+                        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                    }
+
+                    &:active {
+                        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+                    }
+                }
             }
         }
     }

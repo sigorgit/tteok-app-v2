@@ -108,7 +108,7 @@ export default class SparrowHonor implements View {
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/a342b011-d332-4b6e-8efa-29ce61f9b648.png" }),
-                    el(".title", "전설의 프리젠테이터#412"),
+                    el(".title", "전설의 프리젠테이터#142"),
                     el("p", "부끄러...")
                 ),
                 el(".card",

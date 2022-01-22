@@ -30,7 +30,7 @@ export default class SparrowItem extends DomNode {
                     this.mixAmount = el("span.amount", "Loading..."),
                 ),
                 el(".controller",
-                    el("button.claim-button", "IJM 받기", {
+                    el("button", "IJM 받기", {
                         click: async () => {
                             if (await Wallet.connected() !== true) {
                                 await Wallet.connect();
@@ -41,7 +41,7 @@ export default class SparrowItem extends DomNode {
                             }
                         },
                     }),
-                    el("button.claim-button", "MIX 받기", {
+                    el("button", "MIX 받기", {
                         click: async () => {
                             if (await Wallet.connected() !== true) {
                                 await Wallet.connect();
@@ -52,7 +52,7 @@ export default class SparrowItem extends DomNode {
                             }
                         },
                     }),
-                    el("button.custom-button", "꾸미기", {
+                    el("button", "꾸미기", {
                         click: () => ViewUtil.go(`/sparrows/${id}`),
                     }),
                 ),
