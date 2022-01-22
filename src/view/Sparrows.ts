@@ -43,7 +43,7 @@ export default class Sparrows implements View {
                 el(".info",
                     el("h3", "작가 정보"),
                     el("main",
-                        el("img", { src: "/images/yonee.png" }),
+                        el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/47826dd1-6b4c-4164-9524-2b5337eb85e2.png" }),
                         el(".info",
                             el(".name", "Yonee (aka 초무새)"),
                             el("p.description", "illustrator/NFT artist based in korea"),

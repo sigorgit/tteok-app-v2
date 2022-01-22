@@ -34,7 +34,7 @@ export default class SparrowHonor implements View {
                     el("p", "참새들의 형아")
                 ),
                 el(".card",
-                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/564de77e-071d-40ad-bfbe-3f376450d19f.png" }),
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/47826dd1-6b4c-4164-9524-2b5337eb85e2.png" }),
                     el(".title", "초무새#6130"),
                     el("p", "참새들의 어머니")
                 )
