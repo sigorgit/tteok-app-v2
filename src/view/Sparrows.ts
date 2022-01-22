@@ -2,6 +2,8 @@ import { DomNode, el } from "@hanul/skynode";
 import { View, ViewParams } from "skyrouter";
 import SparrowItem from "../component/SparrowItem";
 import SparrowsContract from "../contracts/SparrowsContract";
+import SparrowStakingContract from "../contracts/SparrowStakingContract";
+import SparrowStakingMixContract from "../contracts/SparrowStakingMixContract";
 import Wallet from "../klaytn/Wallet";
 import Layout from "./Layout";
 import ViewUtil from "./ViewUtil";
@@ -57,6 +59,28 @@ export default class Sparrows implements View {
             ),
             el("main",
                 el("h2", "NFT 목록"),
+                el("button", "한방에 절미 수령", {
+                    click: async () => {
+                        if (await Wallet.connected() !== true) {
+                            await Wallet.connect();
+                        }
+                        const owner = await Wallet.loadAddress();
+                        if (owner !== undefined) {
+                            await SparrowStakingContract.withdrawReward(this.nfts);
+                        }
+                    },
+                }),
+                el("button", "한방에 믹스 수령", {
+                    click: async () => {
+                        if (await Wallet.connected() !== true) {
+                            await Wallet.connect();
+                        }
+                        const owner = await Wallet.loadAddress();
+                        if (owner !== undefined) {
+                            await SparrowStakingMixContract.withdrawReward(this.nfts);
+                        }
+                    },
+                }),
                 this.list = el(".sparrows-list"),
             ),
         ));
