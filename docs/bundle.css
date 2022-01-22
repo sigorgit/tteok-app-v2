@@ -1087,6 +1087,10 @@ body {
   margin: auto;
   text-align: left;
 }
+.sparrow-custom-view > h2 {
+  padding: 10px;
+  font-size: 20px;
+}
 .sparrow-custom-view > main {
   display: flex;
 }
@@ -1132,6 +1136,28 @@ body {
   margin-top: 5px;
 }
 .sparrow-custom-view > main > .form > .change-parts > button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.sparrow-custom-view > .real {
+  display: flex;
+}
+.sparrow-custom-view > .real > img {
+  width: 400px;
+}
+.sparrow-custom-view > .real > .form {
+  padding: 10px;
+}
+.sparrow-custom-view > .real > .form > button {
+  width: 100%;
+  font-family: 'ChosunGs';
+  display: block;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  padding: 8px 0;
+  margin-top: 5px;
+}
+.sparrow-custom-view > .real > .form > button:hover {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 .junior-view {
