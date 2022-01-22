@@ -6,6 +6,7 @@ import InjeolmiContract from "../contracts/InjeolmiContract";
 import ItemStoreContract from "../contracts/ItemStoreContract";
 import SparrowsContract from "../contracts/SparrowsContract";
 import SparrowsMentorContract from "../contracts/SparrowsMentorContract";
+import TicketContract from "../contracts/TicketContract";
 import Wallet from "../klaytn/Wallet";
 import KlubsLoader from "../KlubsLoader";
 import parts from "../parts.json";
@@ -27,6 +28,8 @@ export default class SparrowCustom implements View {
                     el("h1", "참새 커스터마이징"),
                 ),
             ),
+            el("p.warning", "자산 사용 허락을 받기 위해 트랜잭션이 두번씩 발생할 수 있음"),
+            el("p.warning", "말풍선에 특수 문자는 깨질 수 있으니 주의해!!"),
         ));
         this.load(parseInt(params.id, 10));
     }
@@ -53,14 +56,31 @@ export default class SparrowCustom implements View {
                                 preview.changeMent(input.domElement.value);
                             },
                         }),
-                        el("button", "변경하기", {
+                        el("button", "100 절미로 변경하기", {
                             click: async () => {
                                 const owner = await Wallet.loadAddress();
                                 if (owner !== undefined) {
-                                    if ((await InjeolmiContract.balanceOf(owner)).lte(await SparrowsMentorContract.price())) {
+                                    if ((await InjeolmiContract.balanceOf(owner)).lt(await SparrowsMentorContract.price())) {
                                         alert("절미 부족");
                                     } else {
                                         await SparrowsMentorContract.changeMent(id, input.domElement.value);
+                                        setTimeout(async () => {
+                                            await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
+                                            await KlubsLoader.refreshMetadata(SparrowsContract.address, id);
+                                            SkyRouter.refresh();
+                                        }, 2000);
+                                    }
+                                }
+                            },
+                        }),
+                        el("button", "티겟으로 변경하기", {
+                            click: async () => {
+                                const owner = await Wallet.loadAddress();
+                                if (owner !== undefined) {
+                                    if ((await TicketContract.balanceOf(owner, 0)).lt(1)) {
+                                        alert("티켓 부족");
+                                    } else {
+                                        await SparrowsMentorContract.changeMentUsingTicket(id, input.domElement.value);
                                         setTimeout(async () => {
                                             await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
                                             await KlubsLoader.refreshMetadata(SparrowsContract.address, id);
@@ -119,7 +139,7 @@ export default class SparrowCustom implements View {
                             click: async () => {
                                 const owner = await Wallet.loadAddress();
                                 if (owner !== undefined) {
-                                    if ((await InjeolmiContract.balanceOf(owner)).lte(await ItemStoreContract.itemPrices(0))) {
+                                    if ((await InjeolmiContract.balanceOf(owner)).lt(await ItemStoreContract.itemPrices(0))) {
                                         alert("절미 부족");
                                     } else {
                                         const result = await fetch("https://api.tteok.org/sparrows/checkattributesexists", {

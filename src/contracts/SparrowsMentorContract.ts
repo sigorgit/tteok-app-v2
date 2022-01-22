@@ -4,11 +4,12 @@ import Wallet from "../klaytn/Wallet";
 import SparrowsMentorArtifact from "./abi/sparrows/artifacts/contracts/TteokmillSparrowsMentor.sol/TteokmillSparrowsMentor.json";
 import Contract from "./Contract";
 import InjeolmiContract from "./InjeolmiContract";
+import TicketContract from "./TicketContract";
 
 class SparrowsMentorContract extends Contract {
 
     constructor() {
-        super("0xbfbA156d43B72aF662C0D7dAd56477a25E6AC9Cd", SparrowsMentorArtifact.abi);
+        super("0x51BdD69128e591375C2b9f7395422EB1cb74356F", SparrowsMentorArtifact.abi);
     }
 
     public async price(): Promise<BigNumber> {
@@ -30,6 +31,16 @@ class SparrowsMentorContract extends Contract {
             } else {
                 await this.runWalletMethod("changeMent", id, ment);
             }
+        }
+    }
+
+    public async changeMentUsingTicket(id: BigNumberish, ment: string) {
+        const owner = await Wallet.loadAddress();
+        if (owner !== undefined) {
+            if (await TicketContract.isApprovedForAll(owner, this.address) !== true) {
+                await TicketContract.setApprovalForAll(this.address, true);
+            }
+            await this.runWalletMethod("changeMentUsingTicket", id, ment);
         }
     }
 }

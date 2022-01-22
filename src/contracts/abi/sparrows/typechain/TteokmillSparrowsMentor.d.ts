@@ -26,6 +26,8 @@ interface TteokmillSparrowsMentorInterface extends ethers.utils.Interface {
     "changeMent(uint256,string)": FunctionFragment;
     "ijm()": FunctionFragment;
     "nft()": FunctionFragment;
+    "changeMentUsingTicket(uint256,string)": FunctionFragment;
+    "ticket()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "owner()": FunctionFragment;
     "isOwner()": FunctionFragment;
@@ -42,6 +44,11 @@ interface TteokmillSparrowsMentorInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "ijm", values?: undefined): string;
   encodeFunctionData(functionFragment: "nft", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "changeMentUsingTicket",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(functionFragment: "ticket", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
@@ -63,6 +70,11 @@ interface TteokmillSparrowsMentorInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "changeMent", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ijm", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nft", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "changeMentUsingTicket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "ticket", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
@@ -121,6 +133,22 @@ export class TteokmillSparrowsMentor extends Contract {
     nft(overrides?: CallOverrides): Promise<[string]>;
 
     "nft()"(overrides?: CallOverrides): Promise<[string]>;
+
+    changeMentUsingTicket(
+      id: BigNumberish,
+      ment: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "changeMentUsingTicket(uint256,string)"(
+      id: BigNumberish,
+      ment: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    ticket(overrides?: CallOverrides): Promise<[string]>;
+
+    "ticket()"(overrides?: CallOverrides): Promise<[string]>;
 
     renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
 
@@ -193,6 +221,22 @@ export class TteokmillSparrowsMentor extends Contract {
 
   "nft()"(overrides?: CallOverrides): Promise<string>;
 
+  changeMentUsingTicket(
+    id: BigNumberish,
+    ment: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "changeMentUsingTicket(uint256,string)"(
+    id: BigNumberish,
+    ment: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  ticket(overrides?: CallOverrides): Promise<string>;
+
+  "ticket()"(overrides?: CallOverrides): Promise<string>;
+
   renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
 
   "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
@@ -260,6 +304,22 @@ export class TteokmillSparrowsMentor extends Contract {
     nft(overrides?: CallOverrides): Promise<string>;
 
     "nft()"(overrides?: CallOverrides): Promise<string>;
+
+    changeMentUsingTicket(
+      id: BigNumberish,
+      ment: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "changeMentUsingTicket(uint256,string)"(
+      id: BigNumberish,
+      ment: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    ticket(overrides?: CallOverrides): Promise<string>;
+
+    "ticket()"(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -334,6 +394,22 @@ export class TteokmillSparrowsMentor extends Contract {
 
     "nft()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    changeMentUsingTicket(
+      id: BigNumberish,
+      ment: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "changeMentUsingTicket(uint256,string)"(
+      id: BigNumberish,
+      ment: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    ticket(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "ticket()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     renounceOwnership(overrides?: Overrides): Promise<BigNumber>;
 
     "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
@@ -399,6 +475,22 @@ export class TteokmillSparrowsMentor extends Contract {
     nft(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "nft()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    changeMentUsingTicket(
+      id: BigNumberish,
+      ment: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "changeMentUsingTicket(uint256,string)"(
+      id: BigNumberish,
+      ment: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    ticket(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "ticket()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>;
 
