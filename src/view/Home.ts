@@ -41,6 +41,7 @@ export default class Home implements View {
     private unstakeInput: DomNode<HTMLInputElement>;
 
     constructor() {
+        let select: DomNode<HTMLSelectElement>;
         Layout.current.title = msg("HOME");
         Layout.current.content.append(
             (this.container = el(".home-view",
@@ -66,6 +67,21 @@ export default class Home implements View {
                         el("a.item", msg("MEME_NFT"), { click: () => { ViewUtil.go("/meme-nft") } }),
                         el("a.item", msg("JUNIOR_MENU"), { click: () => { ViewUtil.go("/junior") } }),
                         el("a.item", msg("CLASSIC"), { click: () => { ViewUtil.go("/classic") } }),
+                        select = el("select.language-select",
+                            el("option", "한국어", { value: "ko" }),
+                            el("option", "English", { value: "en" }),
+                            el("option", "日本語", { value: "jp" }),
+                            el("option", "繁体字", { value: "zh-CN" }),
+                            el("option", "簡體字", { value: "zh-TW" }),
+                            el("option", "Tiếng Việt", { value: "vn" }),
+                            el("option", "ภาษาไทย", { value: "TH" }),
+                            el("option", "짹짹어", { value: "짹짹어" }),
+                            {
+                                change: () => {
+                                    BrowserInfo.changeLanguage(select.domElement.value);
+                                },
+                            },
+                        ),
                     )
                 ),
                 el("section",
@@ -282,6 +298,7 @@ export default class Home implements View {
             )),
         );
 
+        select.domElement.value = BrowserInfo.language.substring(0, 2);
         this.refresh();
         this.interval = setInterval(() => this.refresh(), 2000);
     }
@@ -335,7 +352,7 @@ export default class Home implements View {
                     this.yearendDisplay.empty().appendText("0");
                 }
             }
-            
+
             const totalStaked = await InjeolmiContract.balanceOf(SInjeolmiContract.address);
             if (this.container.deleted !== true) {
                 this.totalStakedDisplay.empty().appendText(utils.formatEther(totalStaked));

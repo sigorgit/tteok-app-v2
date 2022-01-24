@@ -28,8 +28,8 @@ export default class SparrowPreview extends DomNode {
         this.canvas?.delete();
 
         this.canvas = el<HTMLCanvasElement>("canvas").appendTo(this);
-        this.canvas.domElement.width = 400;
-        this.canvas.domElement.height = 400;
+        this.canvas.domElement.width = 445;
+        this.canvas.domElement.height = 445;
 
         const context = this.canvas.domElement.getContext("2d")!;
 
@@ -41,7 +41,7 @@ export default class SparrowPreview extends DomNode {
         images.sort((a, b) => a.order - b.order);
 
         for (const image of images) {
-            context.drawImage(await this.addImageProcess(`https://storage.googleapis.com/tteokmill/${image.path}`), 0, 0, 400, 400);
+            context.drawImage(await this.addImageProcess(`https://storage.googleapis.com/tteokmill/${image.path}`), 0, 0, 445, 445);
         }
     }
 

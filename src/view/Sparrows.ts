@@ -43,7 +43,7 @@ export default class Sparrows implements View {
                 el(".info",
                     el("h3", "작가 정보"),
                     el("main",
-                        el("img", { src: "/images/yonee.png" }),
+                        el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/47826dd1-6b4c-4164-9524-2b5337eb85e2.png" }),
                         el(".info",
                             el(".name", "Yonee (aka 초무새)"),
                             el("p.description", "illustrator/NFT artist based in korea"),
@@ -59,28 +59,30 @@ export default class Sparrows implements View {
             ),
             el("main",
                 el("h2", "NFT 목록"),
-                el("button", "한방에 절미 수령", {
-                    click: async () => {
-                        if (await Wallet.connected() !== true) {
-                            await Wallet.connect();
-                        }
-                        const owner = await Wallet.loadAddress();
-                        if (owner !== undefined) {
-                            await SparrowStakingContract.withdrawReward(this.nfts);
-                        }
-                    },
-                }),
-                el("button", "한방에 믹스 수령", {
-                    click: async () => {
-                        if (await Wallet.connected() !== true) {
-                            await Wallet.connect();
-                        }
-                        const owner = await Wallet.loadAddress();
-                        if (owner !== undefined) {
-                            await SparrowStakingMixContract.withdrawReward(this.nfts);
-                        }
-                    },
-                }),
+                el(".button-container",
+                    el("button", "한방에 절미 수령", {
+                        click: async () => {
+                            if (await Wallet.connected() !== true) {
+                                await Wallet.connect();
+                            }
+                            const owner = await Wallet.loadAddress();
+                            if (owner !== undefined) {
+                                await SparrowStakingContract.withdrawReward(this.nfts);
+                            }
+                        },
+                    }),
+                    el("button", "한방에 믹스 수령", {
+                        click: async () => {
+                            if (await Wallet.connected() !== true) {
+                                await Wallet.connect();
+                            }
+                            const owner = await Wallet.loadAddress();
+                            if (owner !== undefined) {
+                                await SparrowStakingMixContract.withdrawReward(this.nfts);
+                            }
+                        },
+                    }),
+                ),
                 this.list = el(".sparrows-list"),
             ),
         ));

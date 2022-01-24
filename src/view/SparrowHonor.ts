@@ -34,7 +34,7 @@ export default class SparrowHonor implements View {
                     el("p", "참새들의 형아")
                 ),
                 el(".card",
-                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/564de77e-071d-40ad-bfbe-3f376450d19f.png" }),
+                    el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/47826dd1-6b4c-4164-9524-2b5337eb85e2.png" }),
                     el(".title", "초무새#6130"),
                     el("p", "참새들의 어머니")
                 )
@@ -108,7 +108,7 @@ export default class SparrowHonor implements View {
                 ),
                 el(".card",
                     el("img", { src: "https://storage.googleapis.com/tteokmill/sparrows/a342b011-d332-4b6e-8efa-29ce61f9b648.png" }),
-                    el(".title", "전설의 프리젠테이터#412"),
+                    el(".title", "전설의 프리젠테이터#142"),
                     el("p", "부끄러...")
                 ),
                 el(".card",
