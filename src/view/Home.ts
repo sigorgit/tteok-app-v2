@@ -139,15 +139,15 @@ export default class Home implements View {
                             el(".group-issue",
                                 el(".issue_area", msg("SPARROW_NEWS_TITLE")),
                                 el("a.issue", msg("SPARROW_NEWS_DESC1"), {
-                                    href: "https://w.namu.la/s/0e4f61a6fc7b16d00ce2db04a7775a601c489c6cfe3cbd24c674619c8ddb32e72fa1f7a2b91ba09b8dedb28d2e0fbad4b6fcb141224e999aa698343dc0ec0315bd0d79b35ddfc7490f5be8a206e3d2dae929b1ed1a629de301cf76d0f0f2fec7",
+                                    href: "https://res.cloudinary.com/drznekqaq/image/upload/v1643110626/fishing1_plte9l.jpg",
                                     target: "_blank"
                                 }),
                                 el("a.issue", msg("SPARROW_NEWS_DESC2"), {
-                                    href: "https://w.namu.la/s/518022bb341cb7e5fae54943759c6011298f551c1b77ef108dd888ff08ca4a41286fcef3b9d90d5d81e646b1482b9ce98da14e940e2a4dd956635a6d0b0ab55744666997086e5a081476b097acfd1720ade2bbd903203b1a1cd9993af75759db",
+                                    href: "https://res.cloudinary.com/drznekqaq/image/upload/v1643110626/fishing2_kner5x.jpg",
                                     target: "_blank"
                                 }),
                                 el("a.issue", msg("SPARROW_NEWS_DESC3"), {
-                                    href: "https://w.namu.la/s/c9b951140de72f66425f2f5523cd2a4aa0a796a5c67e4c8363782e249d58f9d4fbbd977b1c6fd8d0fcecf5ee70a146619ee15c502a074c547f931384a97d69e55f6df0a69665e426abb196329c39487ee6007803c94733c87a40c1d0ee24b436",
+                                    href: "https://res.cloudinary.com/drznekqaq/image/upload/v1643110626/fishing3_ab4ftd.jpg",
                                     target: "_blank"
                                 }),
                             ),
