@@ -35,17 +35,19 @@ export default class SparrowCustom implements View {
     private async load(id: number) {
 
         const ment = await SparrowsContract.ments(id);
-        const metadata = (await superagent.get(`https://api.tteok.org/sparrows/${id}`)).body;
+        const metadata = await KlubsLoader.loadMetadata(SparrowsContract.address, id);
+        const pixel = (await superagent.get(`https://api.tteok.org/sparrows/${id}/checkpixel`)).body.pixel;
 
         let preview: SparrowPreview;
         let input: DomNode<HTMLInputElement>;
+        let pixelatePreview: SparrowPreview;
 
         this.container.append(
             el("main",
                 el("p.warning", "자산 사용 허락을 받기 위해 트랜잭션이 두번씩 발생할 수 있어!! \n 말풍선에 특수 문자는 깨질 수 있으니 주의해!!"),
                 el("h2", "꾸미기 폼"),
                 el(".form",
-                    preview = new SparrowPreview(metadata.attributes, ment),
+                    preview = new SparrowPreview(metadata.attributes, ment, pixel),
                     el(".change-parts",
                         el("p", "모습을 변경하는데는 100 IJM이 필요합니다."),
                         ...parts.map((p) => {
@@ -70,6 +72,7 @@ export default class SparrowCustom implements View {
                                                         a.value = value;
                                                     }
                                                     preview.changeAttributes(metadata.attributes);
+                                                    pixelatePreview.changeAttributes(metadata.attributes);
                                                     break;
                                                 }
                                             }
@@ -136,6 +139,7 @@ export default class SparrowCustom implements View {
                         value: ment,
                         keyup: () => {
                             preview.changeMent(input.domElement.value);
+                            pixelatePreview.changeMent(input.domElement.value);
                         },
                     }),
                     el("button", "100 절미로 변경하기", {
@@ -175,13 +179,48 @@ export default class SparrowCustom implements View {
                 ),
                 el("h2", "실제 이미지"),
                 el(".real",
-                    el("img", { src: metadata.image }),
+                    el(`img${pixel === true ? ".pixel" : ""}`, { src: metadata.image }),
                     el(".form",
                         el("p", "실제 이미지가 달라?"),
                         el("button", "실제 이미지 재생성", {
                             click: async () => {
                                 await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
                                 SkyRouter.refresh();
+                            },
+                        }),
+                    ),
+                ),
+                el("h2", pixel !== true ? "도트화" : "비도트화"),
+                el(".pixelate",
+                    pixelatePreview = new SparrowPreview(metadata.attributes, ment, pixel !== true),
+                    el(".form",
+                        el("p", pixel !== true ? "도트화 하면 멘트는 숨겨짐 ㅠ" : ""),
+                        el("p", "도트화/비도트화 하는데는 100 IJM이 필요합니다."),
+                        el("button", pixel !== true ? "도트화" : "비도트화", {
+                            click: async () => {
+                                const owner = await Wallet.loadAddress();
+                                if (owner !== undefined) {
+                                    if ((await InjeolmiContract.balanceOf(owner)).lt(await ItemStoreContract.itemPrices(pixel !== true ? 1 : 2))) {
+                                        alert("절미 부족");
+                                    } else {
+                                        const nonce = await ItemStoreContract.nonces(owner);
+                                        await ItemStoreContract.buyItems([pixel !== true ? 1 : 2]);
+                                        setTimeout(async () => {
+                                            await fetch(`https://api.tteok.org/sparrows/${id}/${pixel !== true ? "pixelate" : "depixelate"}`, {
+                                                method: "POST",
+                                                body: JSON.stringify({
+                                                    address: owner,
+                                                    nonce: nonce.toNumber(),
+                                                    itemId: pixel !== true ? 1 : 2,
+                                                    attributes: metadata.attributes,
+                                                }),
+                                            });
+                                            await superagent.get(`https://api.tteok.org/sparrows/${id}/refresh`);
+                                            await KlubsLoader.refreshMetadata(SparrowsContract.address, id);
+                                            SkyRouter.refresh();
+                                        }, 2000);
+                                    }
+                                }
                             },
                         }),
                     ),

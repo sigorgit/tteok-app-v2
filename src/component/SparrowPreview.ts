@@ -9,9 +9,10 @@ export default class SparrowPreview extends DomNode {
     constructor(
         private attributes: { trait_type: string, value: string }[],
         ment: string,
+        private pixel?: boolean,
     ) {
-        super(".sparrow-preview");
-        this.mentDisplay = el(".ment", ment).appendTo(this);
+        super(`.sparrow-preview${pixel === true ? ".pixel" : ""}`);
+        this.mentDisplay = el(".ment", this.pixel !== true ? ment : undefined).appendTo(this);
         this.load();
     }
 
@@ -21,15 +22,22 @@ export default class SparrowPreview extends DomNode {
     }
 
     public changeMent(ment: string) {
-        this.mentDisplay.empty().appendText(ment);
+        if (this.pixel !== true) {
+            this.mentDisplay.empty().appendText(ment);
+        }
     }
 
     private async load() {
         this.canvas?.delete();
 
         this.canvas = el<HTMLCanvasElement>("canvas").appendTo(this);
-        this.canvas.domElement.width = 445;
-        this.canvas.domElement.height = 445;
+        if (this.pixel === true) {
+            this.canvas.domElement.width = 100;
+            this.canvas.domElement.height = 100;
+        } else {
+            this.canvas.domElement.width = 445;
+            this.canvas.domElement.height = 445;
+        }
 
         const context = this.canvas.domElement.getContext("2d")!;
 
@@ -41,7 +49,13 @@ export default class SparrowPreview extends DomNode {
         images.sort((a, b) => a.order - b.order);
 
         for (const image of images) {
-            context.drawImage(await this.addImageProcess(`https://storage.googleapis.com/tteokmill/${image.path}`), 0, 0, 445, 445);
+            if (this.pixel === true) {
+                if (image.path.indexOf("8.TEXT BALLOON") === -1) {
+                    context.drawImage(await this.addImageProcess(`https://storage.googleapis.com/tteokmill/${image.path.replace(/sparrows\-parts\//g, "sparrows-parts-pixel/")}`), 0, 0, 100, 100);
+                }
+            } else {
+                context.drawImage(await this.addImageProcess(`https://storage.googleapis.com/tteokmill/${image.path}`), 0, 0, 445, 445);
+            }
         }
     }
 
@@ -49,7 +63,7 @@ export default class SparrowPreview extends DomNode {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.onload = () => resolve(img);
-            img.onerror = reject;
+            img.onerror = () => { console.log(src); reject(); };
             img.src = src;
         })
     }

@@ -133,13 +133,18 @@
             }
         }
 
-        >.real {
+        >.real,
+        >.pixelate {
             display       : flex;
             flex-direction: column;
             max-width     : 1240px;
 
             >img {
                 width: 445px;
+
+                &.pixel {
+                    width: 100px;
+                }
             }
 
             >.form {
