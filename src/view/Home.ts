@@ -278,9 +278,9 @@ export default class Home implements View {
                                 el(".caption", msg("CONNECT_WALLET_DESC")),
                                 new UserInfo()
                             ),
-                            el("a.ad-banner", { href: "https://klayfox.com", target: "_blank" },
+                            el("a.ad-banner", { href: "https://www.klaybrag.com/", target: "_blank" },
                                 el("img", {
-                                    src: "/images/ad-banner/klayfox.jpeg"
+                                    src: "/images/ad-banner/klaybrag.gif"
                                 })
                             ),
                             el(".community",
