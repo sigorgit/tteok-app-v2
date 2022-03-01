@@ -30,7 +30,7 @@ export default class Housedeeds implements View {
                 el(".info",
                     el("h3", "NFT 정보"),
                     el("main",
-                        el("img", { src: "https://storage.cloud.google.com/sigor/housedeed.png" }),
+                        el("img", { src: "https://storage.googleapis.com/sigor/housedeed.png" }),
                         el(".info",
                             el(".name", "시고르 집문서 NFT"),
                             el("p.description", "시고르에 살려면 소지해야 하는 NFT입니다."),

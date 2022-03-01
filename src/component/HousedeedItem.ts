@@ -58,7 +58,7 @@ export default class HousedeedItem extends DomNode {
     }
 
     private async loadImage() {
-        this.image.style({ backgroundImage: `url(https://storage.cloud.google.com/sigor/housedeed.png)` });
+        this.image.style({ backgroundImage: `url(https://storage.googleapis.com/sigor/housedeed.png)` });
     }
 
     private async load() {
