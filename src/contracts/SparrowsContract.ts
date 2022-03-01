@@ -5,7 +5,7 @@ import KIP17Contract from "./standard/KIP17Contract";
 class SparrowsContract extends KIP17Contract {
 
     constructor() {
-        super("0x29d05593116C443da54DaBFB4e5322DEA2fff8Cd", SparrowsArtifact.abi);
+        super("0x17c4758C973d0F850A8E1910BD9649699e056cb6", SparrowsArtifact.abi);
     }
 
     public async tokenOfOwnerByIndex(owner: string, index: number): Promise<BigNumber> {

@@ -9,7 +9,7 @@ import TicketContract from "./TicketContract";
 class SparrowsMentorContract extends Contract {
 
     constructor() {
-        super("0x51BdD69128e591375C2b9f7395422EB1cb74356F", SparrowsMentorArtifact.abi);
+        super("0xF37229479d61F8e0fbB71b7AD542fc6EC7046375", SparrowsMentorArtifact.abi);
     }
 
     public async price(): Promise<BigNumber> {

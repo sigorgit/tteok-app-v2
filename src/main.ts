@@ -5,6 +5,7 @@ import BrowserInfo from "./BrowserInfo";
 import Wallet from "./klaytn/Wallet";
 import Classic from "./view/Classic";
 import Home from "./view/Home";
+import Housedeeds from "./view/Housedeeds";
 import Introduce from "./view/Introduce";
 import Junior from "./view/Junior";
 import Layout from "./view/Layout";
@@ -26,6 +27,7 @@ import Sparrows from "./view/Sparrows";
     SkyRouter.route("classic", Classic);
     SkyRouter.route("sparrows", Sparrows);
     SkyRouter.route("sparrows/{id}", SparrowCustom);
+    SkyRouter.route("housedeeds", Housedeeds);
 
     SkyRouter.route("meme-nft", MemeNFT);
     SkyRouter.route("meme-nft/add", AddMemeNFT);

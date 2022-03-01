@@ -1,0 +1,98 @@
+.housedeed-item {
+    float         : left;
+    width         : 50%;
+    padding-right : 15px;
+    padding-bottom: 15px;
+    margin-top    : 16px;
+
+    @media only screen and (max-width: 799px) {
+        float: none;
+        width: 100%;
+    }
+
+    >.content {
+        display      : flex;
+        border       : 1px solid #ccc;
+        border-radius: 4px;
+        padding      : 10px;
+        align-items  : center;
+
+        >.housedeed {
+            display          : block;
+            position         : relative;
+            width            : 90px;
+            height           : 90px;
+            background-size  : contain;
+            background-repeat: no-repeat;
+            font-size        : 20px;
+            line-height      : 1em;
+            border-radius    : 4px;
+
+            >.id {
+                position   : absolute;
+                left       : 3px;
+                bottom     : 0;
+                color      : white;
+                text-shadow: 3px 3px 3px #656565;
+            }
+
+            >.name {
+                position   : absolute;
+                top        : 0;
+                left       : 0;
+                width      : 100%;
+                text-align : center;
+                color      : #FF00F6;
+                text-shadow: 3px 3px 3px #656565;
+            }
+
+            @media only screen and (max-width: 799px) {
+                width    : 64px;
+                height   : 64px;
+                font-size: 14px;
+            }
+        }
+
+        >.info {
+            margin-left: 10px;
+            flex-grow  : 1;
+
+            >.title {
+                margin-right: 12px
+            }
+
+            >.amount {}
+        }
+
+        >.controller {
+            display        : flex;
+            justify-content: space-around;
+            padding-right  : 6px;
+
+            >button {
+                min-width            : 100px;
+                font-family          : 'ChosunGs';
+                display              : block;
+                margin-top           : 11px;
+                margin-left          : 8px;
+                -webkit-border-radius: 2px;
+                border-radius        : 2px;
+                text-align           : center;
+                padding              : 8px 16px;
+                margin               : auto;
+
+                @media @phone {
+                    margin-left: 0px;
+                }
+
+                &:hover {
+                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                }
+
+                &:active {
+                    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+    }
+}

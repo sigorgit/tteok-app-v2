@@ -329,6 +329,95 @@ body {
 .sparrow-item > .content > .controller > button:active {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
 }
+.housedeed-item {
+  float: left;
+  width: 50%;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  margin-top: 16px;
+}
+@media only screen and (max-width: 799px) {
+  .housedeed-item {
+    float: none;
+    width: 100%;
+  }
+}
+.housedeed-item > .content {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  align-items: center;
+}
+.housedeed-item > .content > .housedeed {
+  display: block;
+  position: relative;
+  width: 90px;
+  height: 90px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 20px;
+  line-height: 1em;
+  border-radius: 4px;
+}
+.housedeed-item > .content > .housedeed > .id {
+  position: absolute;
+  left: 3px;
+  bottom: 0;
+  color: white;
+  text-shadow: 3px 3px 3px #656565;
+}
+.housedeed-item > .content > .housedeed > .name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #FF00F6;
+  text-shadow: 3px 3px 3px #656565;
+}
+@media only screen and (max-width: 799px) {
+  .housedeed-item > .content > .housedeed {
+    width: 64px;
+    height: 64px;
+    font-size: 14px;
+  }
+}
+.housedeed-item > .content > .info {
+  margin-left: 10px;
+  flex-grow: 1;
+}
+.housedeed-item > .content > .info > .title {
+  margin-right: 12px;
+}
+.housedeed-item > .content > .controller {
+  display: flex;
+  justify-content: space-around;
+  padding-right: 6px;
+}
+.housedeed-item > .content > .controller > button {
+  min-width: 100px;
+  font-family: 'ChosunGs';
+  display: block;
+  margin-top: 11px;
+  margin-left: 8px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  padding: 8px 16px;
+  margin: auto;
+}
+@media only screen and (max-width: 719px) {
+  .housedeed-item > .content > .controller > button {
+    margin-left: 0px;
+  }
+}
+.housedeed-item > .content > .controller > button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.housedeed-item > .content > .controller > button:active {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+}
 .sparrow-preview {
   position: relative;
   width: 445px;
@@ -1121,6 +1210,119 @@ body {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 .sparrows-view > main .button-container > button:active {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+}
+.housedeeds-view {
+  line-height: 1.5em;
+}
+.housedeeds-view > .gnb {
+  height: 52px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  background-color: #F7DEA5;
+}
+.housedeeds-view > .gnb > .inner-gnb {
+  display: flex;
+  align-items: center;
+  max-width: 1240px;
+  width: 100%;
+  margin: auto;
+  text-align: left;
+}
+.housedeeds-view > header {
+  max-width: 1240px;
+  margin: auto;
+  text-align: left;
+  display: flex;
+  word-break: break-all;
+  padding: 10px;
+}
+@media only screen and (max-width: 719px) {
+  .housedeeds-view > header {
+    display: block;
+  }
+}
+.housedeeds-view > header > .info {
+  width: 50%;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  padding: 10px;
+}
+@media only screen and (max-width: 719px) {
+  .housedeeds-view > header > .info {
+    width: auto;
+    margin-bottom: 10px;
+  }
+}
+.housedeeds-view > header > .info > h3 {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+.housedeeds-view > header > .info > main {
+  display: flex;
+  margin-top: 8px;
+}
+@media only screen and (max-width: 719px) {
+  .housedeeds-view > header > .info > main {
+    display: block;
+    text-align: center;
+  }
+}
+.housedeeds-view > header > .info > main > img {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.housedeeds-view > header > .info > main > button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.housedeeds-view > main {
+  padding: 10px;
+  max-width: 1240px;
+  margin: auto;
+}
+.housedeeds-view > main > h2 {
+  margin-top: 16px;
+  font-size: 24px;
+}
+.housedeeds-view > main > .housedeeds-list:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.housedeeds-view > main .button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px;
+}
+.housedeeds-view > main .button-container > button {
+  width: 45%;
+  min-width: 100px;
+  font-family: 'ChosunGs';
+  display: block;
+  margin-top: 11px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  padding: 8px 16px;
+  margin: auto;
+  margin-bottom: 16px;
+}
+@media only screen and (max-width: 719px) {
+  .housedeeds-view > main .button-container > button {
+    margin-left: 0px;
+  }
+}
+.housedeeds-view > main .button-container > button:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+.housedeeds-view > main .button-container > button:active {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
 }
 .sparrow-custom-view {

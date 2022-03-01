@@ -2,7 +2,7 @@ import { BigNumber, BigNumberish, constants } from "ethers";
 import SparrowStakingArtifact from "./abi/injeolmi-staking/artifacts/contracts/SparrowStaking.sol/SparrowStaking.json";
 import Contract from "./Contract";
 
-class SparrowStakingContract extends Contract {
+class HousedeedStakingContract extends Contract {
 
     constructor() {
         super("0xE93c6A2A537773479A49A27563Eb0975C690440E", SparrowStakingArtifact.abi);
@@ -21,4 +21,4 @@ class SparrowStakingContract extends Contract {
     }
 }
 
-export default new SparrowStakingContract();
+export default new HousedeedStakingContract();

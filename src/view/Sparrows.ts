@@ -2,7 +2,6 @@ import { DomNode, el } from "@hanul/skynode";
 import { View, ViewParams } from "skyrouter";
 import SparrowItem from "../component/SparrowItem";
 import SparrowsContract from "../contracts/SparrowsContract";
-import SparrowStakingContract from "../contracts/SparrowStakingContract";
 import SparrowStakingMixContract from "../contracts/SparrowStakingMixContract";
 import Wallet from "../klaytn/Wallet";
 import Layout from "./Layout";
@@ -35,7 +34,7 @@ export default class Sparrows implements View {
                             el(".name", "떡방앗간 참새 NFT"),
                             el("p.description", "떡방앗간 참새들의 아이덴티티를 표현하는 NFT입니다. 짹짹!"),
                             el("ul",
-                                el("li", el("a", "https://klu.bs/pfp/0x29d05593116C443da54DaBFB4e5322DEA2fff8Cd", { href: "https://klu.bs/pfp/0x29d05593116C443da54DaBFB4e5322DEA2fff8Cd", target: "_blank" })),
+                                el("li", el("a", "https://klu.bs/pfp/0x17c4758C973d0F850A8E1910BD9649699e056cb6", { href: "https://klu.bs/pfp/0x29d05593116C443da54DaBFB4e5322DEA2fff8Cd", target: "_blank" })),
                             ),
                         ),
                     ),
@@ -75,17 +74,6 @@ export default class Sparrows implements View {
             el("main",
                 el("h2", "NFT 목록"),
                 el(".button-container",
-                    el("button", "한방에 절미 수령", {
-                        click: async () => {
-                            if (await Wallet.connected() !== true) {
-                                await Wallet.connect();
-                            }
-                            const owner = await Wallet.loadAddress();
-                            if (owner !== undefined) {
-                                await SparrowStakingContract.withdrawReward(this.nfts);
-                            }
-                        },
-                    }),
                     el("button", "한방에 믹스 수령", {
                         click: async () => {
                             if (await Wallet.connected() !== true) {

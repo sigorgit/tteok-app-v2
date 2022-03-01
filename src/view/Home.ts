@@ -63,6 +63,7 @@ export default class Home implements View {
                     el(".item-container",
                         el("a.item", msg("INTRODUCTION_MENU"), { click: () => { ViewUtil.go("/introduce") } }),
                         el("a.item", msg("SIGOR"), { click: () => { new Alert(msg("SIGRO_POPUP_TITLE"), msg("SIGRO_POPUP_DESC")); } }),
+                        el("a.item", "집문서 NFT", { click: () => { ViewUtil.go("/housedeeds") } }),
                         el("a.item", msg("SPARROW_NFT"), { click: () => { ViewUtil.go("/sparrows") } }),
                         el("a.item", msg("MEME_NFT"), { click: () => { ViewUtil.go("/meme-nft") } }),
                         el("a.item", msg("JUNIOR_MENU"), { click: () => { ViewUtil.go("/junior") } }),

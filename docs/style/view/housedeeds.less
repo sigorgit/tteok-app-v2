@@ -1,0 +1,119 @@
+.housedeeds-view {
+    line-height: 1.5em;
+
+    >.gnb {
+        height          : 52px;
+        font-size       : 18px;
+        display         : flex;
+        align-items     : center;
+        background-color: @brand-primary;
+
+        >.inner-gnb {
+            display    : flex;
+            align-items: center;
+            max-width  : 1240px;
+            width      : 100%;
+            margin     : auto;
+            text-align : left;
+        }
+    }
+
+    >header {
+        max-width : 1240px;
+        margin    : auto;
+        text-align: left;
+        display   : flex;
+        word-break: break-all;
+        padding   : 10px;
+
+        @media @phone {
+            display: block;
+        }
+
+        >.info {
+            width       : 50%;
+            border      : 1px solid #ccc;
+            margin-right: 10px;
+            padding     : 10px;
+
+            @media @phone {
+                width        : auto;
+                margin-bottom: 10px;
+            }
+
+            >h3 {
+                font-size  : 18px;
+                font-weight: bold;
+                text-align : center;
+            }
+
+            >main {
+                display   : flex;
+                margin-top: 8px;
+
+                @media @phone {
+                    display   : block;
+                    text-align: center;
+                }
+
+                >img {
+                    width        : 100px;
+                    height       : 100px;
+                    margin-right : 10px;
+                    border-radius: 4px;
+                }
+
+                >button:hover {
+                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+    }
+
+    >main {
+        padding  : 10px;
+        max-width: 1240px;
+        margin   : auto;
+
+        >h2 {
+            margin-top: 16px;
+            font-size : 24px;
+        }
+
+        >.housedeeds-list {
+            .float-wrapper();
+        }
+
+        .button-container {
+            display        : flex;
+            justify-content: space-around;
+            margin-top     : 16px;
+
+            >button {
+                width                : 45%;
+                min-width            : 100px;
+                font-family          : 'ChosunGs';
+                display              : block;
+                margin-top           : 11px;
+                -webkit-border-radius: 2px;
+                border-radius        : 2px;
+                text-align           : center;
+                padding              : 8px 16px;
+                margin               : auto;
+                margin-bottom        : 16px;
+
+                @media @phone {
+                    margin-left: 0px;
+                }
+
+                &:hover {
+                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                }
+
+                &:active {
+                    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+    }
+}

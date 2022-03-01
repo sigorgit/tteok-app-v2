@@ -5,7 +5,7 @@ import Contract from "./Contract";
 class SparrowStakingMixContract extends Contract {
 
     constructor() {
-        super("0x052e7df5868dF854571880FC4DEF7F80622F80E8", SparrowStakingMixArtifact.abi);
+        super("0xf11E3FEE02236A57657c92963F4187D6ad92807b", SparrowStakingMixArtifact.abi);
     }
 
     public async withdrawReward(ids: BigNumberish[]) {
