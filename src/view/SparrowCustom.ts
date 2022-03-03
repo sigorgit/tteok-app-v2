@@ -93,7 +93,7 @@ export default class SparrowCustom implements View {
                             }
                             return dom;
                         }),
-                        el("button", "변경하기", {
+                        el("button", "100 절미로 파츠 변경하기", {
                             click: async () => {
                                 const owner = await Wallet.loadAddress();
                                 if (owner !== undefined) {
@@ -142,7 +142,7 @@ export default class SparrowCustom implements View {
                             pixelatePreview.changeMent(input.domElement.value);
                         },
                     }),
-                    el("button", "100 절미로 변경하기", {
+                    el("button", "100 절미로 말풍선 변경하기", {
                         click: async () => {
                             const owner = await Wallet.loadAddress();
                             if (owner !== undefined) {
