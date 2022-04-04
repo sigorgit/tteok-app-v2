@@ -279,11 +279,11 @@ export default class Home implements View {
                                 el(".caption", msg("CONNECT_WALLET_DESC")),
                                 new UserInfo()
                             ),
-                            el("a.ad-banner", { href: "https://www.klaybrag.com/", target: "_blank" },
-                                el("img", {
-                                    src: "/images/ad-banner/klaybrag.gif"
-                                })
-                            ),
+                            // el("a.ad-banner", { href: "https://www.klaybrag.com/", target: "_blank" },
+                            //     el("img", {
+                            //         src: "/images/ad-banner/klaybrag.gif"
+                            //     })
+                            // ),
                             el(".community",
                                 el("h3", msg("COMMUNITY_TITLE")),
                                 // el("a", msg("OPENKAKAO_BUTTON"), { href: "https://open.kakao.com/o/g1nYzIHd", target: "_blank" }),
