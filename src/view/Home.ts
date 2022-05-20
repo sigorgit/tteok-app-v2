@@ -158,29 +158,29 @@ export default class Home implements View {
                                     href: "https://klayswap.com/",
                                     target: "_blank",
                                 })),
-                                el(".input-container",
-                                    this.buyInput = el("input", {
-                                        placeholder: msg("IJM_ACCOUNT_INPUT"),
-                                        keyup: () => setTimeout(async () => {
-                                            if (this.buyInput.domElement.value.trim() === "") {
-                                                this.buyResult.empty();
-                                            } else {
-                                                const amount = utils.parseEther(this.buyInput.domElement.value);
-                                                const klay = await InjeolmiPriceEstimatorContract.estimatePos(amount);
-                                                this.buyResult.empty().appendText(`${utils.formatEther(klay.mul(100).div(99))} KLAY`);
-                                            }
-                                        }),
-                                    }),
-                                    el("button", msg("BUY_BUTTON"), {
-                                        click: async () => {
-                                            await KlayswapContract.buy(
-                                                utils.parseEther(this.buyInput.domElement.value)
-                                            );
-                                            ViewUtil.waitTransactionAndRefresh();
-                                        },
-                                    })
-                                ),
-                                this.buyResult = el(".result"),
+                                // el(".input-container",
+                                //     this.buyInput = el("input", {
+                                //         placeholder: msg("IJM_ACCOUNT_INPUT"),
+                                //         keyup: () => setTimeout(async () => {
+                                //             if (this.buyInput.domElement.value.trim() === "") {
+                                //                 this.buyResult.empty();
+                                //             } else {
+                                //                 const amount = utils.parseEther(this.buyInput.domElement.value);
+                                //                 const klay = await InjeolmiPriceEstimatorContract.estimatePos(amount);
+                                //                 this.buyResult.empty().appendText(`${utils.formatEther(klay.mul(100).div(99))} KLAY`);
+                                //             }
+                                //         }),
+                                //     }),
+                                //     el("button", msg("BUY_BUTTON"), {
+                                //         click: async () => {
+                                //             await KlayswapContract.buy(
+                                //                 utils.parseEther(this.buyInput.domElement.value)
+                                //             );
+                                //             ViewUtil.waitTransactionAndRefresh();
+                                //         },
+                                //     })
+                                // ),
+                                // this.buyResult = el(".result"),
                             ),
                             el(".form",
                                 el("h3", msg("SELL_TITLE")),
@@ -188,30 +188,30 @@ export default class Home implements View {
                                     href: "https://klayswap.com/",
                                     target: "_blank",
                                 })),
-                                el(".caption", msg("SELL_DESC2")),
-                                el(".input-container",
-                                    this.sellInput = el("input", {
-                                        placeholder: msg("IJM_ACCOUNT_INPUT"),
-                                        keyup: () => setTimeout(async () => {
-                                            if (this.sellInput.domElement.value.trim() === "") {
-                                                this.sellResult.empty();
-                                            } else {
-                                                const amount = utils.parseEther(this.sellInput.domElement.value);
-                                                const klay = await InjeolmiPriceEstimatorContract.estimatePos(amount);
-                                                this.sellResult.empty().appendText(`${utils.formatEther(klay)} KLAY`);
-                                            }
-                                        }),
-                                    }),
-                                    el("button", msg("SELL_BUTTON"), {
-                                        click: async () => {
-                                            await KlayswapContract.sell(
-                                                utils.parseEther(this.sellInput.domElement.value)
-                                            );
-                                            ViewUtil.waitTransactionAndRefresh();
-                                        },
-                                    })
-                                ),
-                                this.sellResult = el(".result"),
+                                // el(".caption", msg("SELL_DESC2")),
+                                // el(".input-container",
+                                //     this.sellInput = el("input", {
+                                //         placeholder: msg("IJM_ACCOUNT_INPUT"),
+                                //         keyup: () => setTimeout(async () => {
+                                //             if (this.sellInput.domElement.value.trim() === "") {
+                                //                 this.sellResult.empty();
+                                //             } else {
+                                //                 const amount = utils.parseEther(this.sellInput.domElement.value);
+                                //                 const klay = await InjeolmiPriceEstimatorContract.estimatePos(amount);
+                                //                 this.sellResult.empty().appendText(`${utils.formatEther(klay)} KLAY`);
+                                //             }
+                                //         }),
+                                //     }),
+                                //     el("button", msg("SELL_BUTTON"), {
+                                //         click: async () => {
+                                //             await KlayswapContract.sell(
+                                //                 utils.parseEther(this.sellInput.domElement.value)
+                                //             );
+                                //             ViewUtil.waitTransactionAndRefresh();
+                                //         },
+                                //     })
+                                // ),
+                                // this.sellResult = el(".result"),
                             ),
                             el(".form",
                                 el("h3", "절미 적금"),
