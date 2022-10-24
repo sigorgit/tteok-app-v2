@@ -91,7 +91,7 @@ export default class Home implements View {
                             el(".price-container",
                                 el(".content",
                                     el("h3", msg("IJM_PRICE")),
-                                    el(".price", (this.priceDisplay = el("span.price", "...")), " KLAY"),
+                                    el(".price", (this.priceDisplay = el("span.price", "...")), ""),
                                     el("button", msg("CHART_BUTTON"), {
                                         click: () => {
                                             window.open("https://dexata.kr/?tokenA=0x0268dbed3832b87582b1fa508acf5958cbb1cd74&tokenB=")
@@ -153,6 +153,11 @@ export default class Home implements View {
                                 }),
                             ),
                             el(".form",
+                                el("p", "인절미와 시고르 집문서가 가이아 프로토콜로 통합 과정 중에 있습니다."),
+                                el("p", "곧 해당 내용에 대해 공지드리겠습니다."),
+                                el("p", "자산들에 대해 끝까지 책임지겠습니다."),
+                            ),
+                            /*el(".form",
                                 el("h3", msg("BUY_TITLE")),
                                 el(".caption", el("a", msg("BUY_DESC"), {
                                     href: "https://klayswap.com/",
@@ -212,7 +217,7 @@ export default class Home implements View {
                                 //     })
                                 // ),
                                 // this.sellResult = el(".result"),
-                            ),
+                            ),*/
                             el(".form",
                                 el("h3", "절미 적금"),
                                 el(".caption", "절미를 넣어두면 수익을 나눠줘서 예치한 절미가 계속 늘어나!"),
@@ -310,9 +315,9 @@ export default class Home implements View {
 
     private async load() {
 
-        const price = await InjeolmiPriceEstimatorContract.estimatePos(utils.parseEther("1"));
+        //const price = await InjeolmiPriceEstimatorContract.estimatePos(utils.parseEther("1"));
         if (this.container.deleted !== true) {
-            this.priceDisplay.empty().appendText(utils.formatEther(price));
+            this.priceDisplay.empty().appendText("0.004791 $");
         }
 
         const address = await Wallet.loadAddress();
