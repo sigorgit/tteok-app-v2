@@ -92,10 +92,10 @@ export default class Home implements View {
                                 el(".content",
                                     el("h3", msg("IJM_PRICE")),
                                     el(".price", (this.priceDisplay = el("span.price", "...")), ""),
-                                    el("button", msg("CHART_BUTTON"), {
-                                        click: () => {
-                                            window.open("https://dexata.kr/?tokenA=0x0268dbed3832b87582b1fa508acf5958cbb1cd74&tokenB=")
-                                        }
+                                    el("p", "위 가격은 인절미 코인의 마지막 거래 최종가이며, 현재 인절미 거래가 중단되었습니다. 곧 출시할 가이아 덱스에서 거래가 다시 가능해질 예정입니다. 자세한 내용은 커뮤니티를 참조해주시기 바랍니다.", {
+                                        style: {
+                                            width: 450,
+                                        },
                                     }),
                                 ),
                                 el(".content",
