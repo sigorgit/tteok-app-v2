@@ -22,7 +22,6 @@ export default class Home implements View {
     private container: DomNode;
     private interval: any;
 
-    private priceDisplay: DomNode;
     private balanceDisplay: DomNode;
     private totalStakedDisplay: DomNode;
     private withdrawableDisplay: DomNode;
@@ -30,12 +29,6 @@ export default class Home implements View {
     private hardforkDisplay: DomNode;
     private initialSaleDisplay: DomNode;
     private yearendDisplay: DomNode;
-
-    private buyInput: DomNode<HTMLInputElement>;
-    private buyResult: DomNode;
-
-    private sellInput: DomNode<HTMLInputElement>;
-    private sellResult: DomNode;
 
     private stakeInput: DomNode<HTMLInputElement>;
     private unstakeInput: DomNode<HTMLInputElement>;
@@ -90,12 +83,9 @@ export default class Home implements View {
                         el(".left-container",
                             el(".price-container",
                                 el(".content",
-                                    el("h3", msg("IJM_PRICE")),
-                                    el(".price", (this.priceDisplay = el("span.price", "...")), ""),
-                                    el("p", "위 가격은 인절미 코인의 마지막 거래 최종가이며, 현재 인절미 거래가 중단되었습니다. 곧 출시할 가이아 덱스에서 거래가 다시 가능해질 예정입니다. 자세한 내용은 커뮤니티를 참조해주시기 바랍니다.", {
-                                        style: {
-                                            width: 450,
-                                        },
+                                    el("h3", "인절미 거래하기"),
+                                    el("button", "가이아 덱스로 이동", {
+                                        click: () => open("https://gaiadex.com/klaytn/shigor-injeolmi/trade"),
                                     }),
                                 ),
                                 el(".content",
@@ -317,7 +307,7 @@ export default class Home implements View {
 
         //const price = await InjeolmiPriceEstimatorContract.estimatePos(utils.parseEther("1"));
         if (this.container.deleted !== true) {
-            this.priceDisplay.empty().appendText("0.004791 $");
+           // this.priceDisplay.empty().appendText("0.004791 $");
         }
 
         const address = await Wallet.loadAddress();
