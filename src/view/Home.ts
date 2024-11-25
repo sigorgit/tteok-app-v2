@@ -84,8 +84,8 @@ export default class Home implements View {
                             el(".price-container",
                                 el(".content",
                                     el("h3", "인절미 거래하기"),
-                                    el("button", "가이아 덱스로 이동", {
-                                        click: () => open("https://gaiadex.com/klaytn/shigor-injeolmi/trade"),
+                                    el("button", "KLAYSwap으로 이동", {
+                                        click: () => open("https://klayswap.com/ko/swap?outputCurrency=0x0268dbed3832b87582B1FA508aCF5958cbb1cd74"),
                                     }),
                                 ),
                                 el(".content",
