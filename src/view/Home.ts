@@ -210,7 +210,7 @@ export default class Home implements View {
                             ),*/
                             el(".form",
                                 el("h3", "절미 적금"),
-                                el(".caption", "절미를 넣어두면 수익을 나눠줘서 예치한 절미가 계속 늘어나!"),
+                                el(".caption", "절미 적금이 종료되었습니다 ㅜㅜ"),
                                 el(".caption", "총 예치한 절미: ", (this.totalStakedDisplay = el("span.price", "...")), " IJM"),
                                 el(".caption", "너가 예치한 절미: ", (this.withdrawableDisplay = el("span.price", "...")), " IJM"),
                                 el(".input-container",
