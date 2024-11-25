@@ -285,7 +285,7 @@ export default class Home implements View {
                                 // el("a", msg("DISCORD_BUTTON"), { href: "https://discord.gg/YgdruRMFtJ", target: "_blank" }),
                                 // el("a", msg("TELEGRAM_BUTTON"), { href: "https://t.me/ricecakemill3", target: "_blank" }),
                                 el("a", msg("TWITTER_BUTTON"), { href: "https://twitter.com/SigorWorld", target: "_blank" }),
-                                el("a", msg("MEDIUM_BUTTON"), { href: "https://medium.com/tteok", target: "_blank" }),
+                                //el("a", msg("MEDIUM_BUTTON"), { href: "https://medium.com/tteok", target: "_blank" }),
                                 el("a", msg("GITHUB_BUTTON"), { href: "https://github.com/sigorgit", target: "_blank" }),
                             ),
                         ),
