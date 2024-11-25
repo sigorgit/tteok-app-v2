@@ -12,7 +12,8 @@ CLASSIC,클래식,Classic,クラシック,,,Classic,คลาสสิค,까악
 IJM_PRICE,인절미 가격,Injeolmi Price,インジョルミ価格,,,Giá Injeolmi,"ค่าอินจอลมี
 ",짹?짹!
 CHART_BUTTON,차트 보기,View Chart,チャートを見る,,,Xem biểu đồ,ชาร์ตอินจอลมี,쨱!
-YOUR_IJM_DESC,너의 인절미,Your Injeolmi,あなたのインジョルミ,,,Injeolmi của bạn,"อินจอลมีของคุณ",째잭?
+YOUR_IJM_DESC,너의 인절미,Your Injeolmi,あなたのインジョルミ,,,Injeolmi của bạn,"อินจอลมีของคุณ
+",째잭?
 ADD_IJM_BUTTON,인절미 지갑에 추가,Add Injeolmi to wallet,ウォレットにインジョルミを追加する,,,Thêm Injeolmi vào ví,เพิ่มอินจอลมีใน Kaikas,아..짹!
 GET_HARD_FORK_IJM_TITLE,하드포크 물량 받기,Receive the HARDFORK amount,ハードフォークした分をもらう,,,Nhận số lượng Hardfork,รับอินจอลมีของ Hardfork,쨲쨲ㄲ쨲
 GET_HARD_FORK_IJM_DESC,2월 16일까지 받을 수 있음,"Available until 16th, FEB.",２月１６日までもらえる,,,Có thể nhận được đến ngày 16 tháng 2,สามารถรับได้ภายในวันที่ 16 กุมภาพันธ์,
@@ -44,7 +45,7 @@ COPYRIGHT_TITLE,ⓒ 떡방앗간 참새들,ⓒ Tteokmill Sparrows,,,,Những chi
 CONNECT_WALLET_DESC,따뜻한 정과 훈훈한 인심의 세계로,To the universe of warmth-sharing,,,,Đến một thế giới của tình cảm và trái tim ấm áp,ความรักและความเมตตาของโลก,
 CONNECT_WALLET_BUTTON,지갑 연결,Connect wallet,コネクト・ウォレット,,,Kết nối ví,เชื่อมต่อ kaikas,
 COMMUNITY_TITLE,떡방앗간 커뮤니티,Tteokmill community,お餅屋コミュニティ,,,Cộng đồng cối xay bánh gạo,โรงสีเค้กข้าวชุมชน,
-OPENKAKAO_BUTTON,오카방\n오픈 카카오톡 방,Openchat Kakaotalk,オープンチャット（カカオトーク）,,,SNS (kakaotalk),SNS (kakaotalk),
+OPENKAKAO_BUTTON,오픈 카카오톡 방,Openchat Kakaotalk,オープンチャット（カカオトーク）,,,SNS (kakaotalk),SNS (kakaotalk),
 DISCORD_BUTTON,디스코드,Discord,ディスコード,,,Discord,Discord,
 TELEGRAM_BUTTON,텔레그램,Telegram,テレグラム,,,Telegram,Telegram,
 TWITTER_BUTTON,트위터,Twitter,ツイッター,,,Twitter,Twitter,
